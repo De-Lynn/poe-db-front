@@ -1,31 +1,27 @@
 import { ChangeEvent } from "react"
 import { FilterGroupHeaderPropsType } from "./SearchPanel"
+import { changeFiltersVisibility } from "./redux/filterGroupHeaderReducer"
+import { cleanCategoriesInputValue } from "./redux/categoryFilterReducer"
+import { cleanRangeValues } from "./redux/rangeFilterReducer"
 
 
 export function FilterGroupHeader(props: FilterGroupHeaderPropsType) {
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      props.changeFilterVisibility(e.currentTarget.checked, props.id)
+      props.dispatch(changeFiltersVisibility(e.currentTarget.checked, props.id))
     }
   
     const onClickHandler = () => {
       if (props.filterTitle === 'Фильтр по типу') {
-        props.setTypeFiltersValue('Все')
+        props.dispatch(cleanCategoriesInputValue('Все'))
       }
-      if (props.filterTitle === 'Фильтры оружия') {
-        props.setRangeFiltersValue('', props.filterTitle)
-      }
-      if (props.filterTitle === 'Фильтры защиты') {
-        props.setRangeFiltersValue('', props.filterTitle)
-      }
-      if (props.filterTitle === 'Требования') {
-        props.setRangeFiltersValue('', props.filterTitle)
+      if (props.filterTitle === 'Фильтры оружия' || props.filterTitle === 'Фильтры защиты' || props.filterTitle === 'Требования') {
+        props.dispatch(cleanRangeValues('', props.filterTitle))
       }
     }
   
     return (
       <div className='filter-group-header'>
         <span className='input-group-btn'>
-          {/* <button className='btn toggle-btn'></button> */}
           <input type="checkbox" checked={props.filterVisibility} 
                 onChange={onChangeHandler}/>
         </span>

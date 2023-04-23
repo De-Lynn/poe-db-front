@@ -1,15 +1,14 @@
 import { useState, ChangeEvent } from "react"
 import { CategoryFilterPropsType } from "./SearchPanel"
+import { changeCategoriesInputValue, changeCategoriesState } from "./redux/categoryFilterReducer"
 
 export function CategoryFilter(props: CategoryFilterPropsType) {
-    const [newInputValue, setNewInputValue] = useState('')
-  
-    const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      setNewInputValue(e.currentTarget.value)
-    }
-  
+    // const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //   setNewInputValue(e.currentTarget.value)
+    // }
+
     const onButtonClickHandler = () => {
-      props.setState(!props.state, props.id)
+      props.dispatch(changeCategoriesState(!props.state, props.id))
     }
   
     return (
@@ -18,8 +17,8 @@ export function CategoryFilter(props: CategoryFilterPropsType) {
           <div className='filter-title'>{props.filterTitle}</div>
           <div className='multiselect filter-select'>
             <input className='multiselect_tags' type="text" value={props.filterValue}/>
-            <input className='multiselect_tags' type="text" value={newInputValue} 
-                  onChange={onInputChangeHandler}/>
+            {/* <input className='multiselect_tags' type="text" value={newInputValue} 
+                  onChange={onInputChangeHandler}/> */}
             <button className='multiselect_select' 
                   onClick={onButtonClickHandler}>Развернуть</button>
             <div className='multiselect_content-wrapper'>
@@ -28,8 +27,8 @@ export function CategoryFilter(props: CategoryFilterPropsType) {
                   {
                     props.content.map( (el) => {
                       const onSelectOptionClickHandler = () => {
-                        props.setFilterValue(el.option, props.id)
-                        props.setState(!props.state, props.id)
+                        props.dispatch(changeCategoriesInputValue(el.option, props.id))
+                        props.dispatch(changeCategoriesState(!props.state, props.id))
                       }
                       return (
                         <option className='multiselect_element' 

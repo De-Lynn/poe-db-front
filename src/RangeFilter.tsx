@@ -1,23 +1,33 @@
 import { useState, ChangeEvent } from "react"
 import { RangeFilterPropsType } from "./SearchPanel"
+import { changeRangeMaxValue, changeRangeMinValue, setNewMaxInputValue, setNewMinInputValue } from "./redux/rangeFilterReducer"
 
 export function RangeFilter(props: RangeFilterPropsType) {
-    const [newMinInputValue, setNewMinInputValue] = useState('')
-    const [newMaxInputValue, setNewMaxInputValue] = useState('')
-  
+    //debugger
+    // const onMinInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //   props.dispatch(setNewMinInputValue(e.currentTarget.value, props.id))
+    // }
+    // const onMaxInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //   props.dispatch(setNewMaxInputValue(e.currentTarget.value, props.id))
+    // }
+    // const onMinBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //   props.dispatch(changeRangeMinValue(e.currentTarget.value, props.id))
+    // }
+    // const onMaxBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    //   props.dispatch(changeRangeMaxValue(e.currentTarget.value, props.id))
+    // }
+
     const onMinInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      setNewMinInputValue(e.currentTarget.value)
+      props.setNewMinInputValue(e.currentTarget.value, props.id)
     }
     const onMaxInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      setNewMaxInputValue(e.currentTarget.value)
+      props.setNewMaxInputValue(e.currentTarget.value, props.id)
     }
-    const onMinDropHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      props.setMinValue(e.currentTarget.value, props.id)
-      setNewMinInputValue('')
+    const onMinBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      props.changeRangeMinValue(e.currentTarget.value, props.id)
     }
-    const onMaxDropHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      props.setMaxValue(e.currentTarget.value, props.id)
-      setNewMaxInputValue('')
+    const onMaxBlurHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      props.changeRangeMaxValue(e.currentTarget.value, props.id)
     }
     
     return (
@@ -25,11 +35,11 @@ export function RangeFilter(props: RangeFilterPropsType) {
         <span className='filter-body'>
           <div className='filter-title'>{props.filterTitle}</div>
           <input className='form-control minmax' type="number" placeholder='мин' 
-                maxLength={4} inputMode='numeric' value={props.minValue !== '' ? props.minValue : newMinInputValue}
-                onChange={onMinInputChangeHandler} onBlur={onMinDropHandler}/>
+                maxLength={4} inputMode='numeric' value={props.newMinInputValue}
+                onChange={onMinInputChangeHandler} onBlur={onMinBlurHandler}/>
           <input className='form-control minmax' type="number" placeholder='макс' 
-                maxLength={4} inputMode='numeric' value={props.maxValue !== '' ? props.maxValue : newMaxInputValue}
-                onChange={onMaxInputChangeHandler} onBlur={onMaxDropHandler}/>
+                maxLength={4} inputMode='numeric' value={props.newMaxInputValue}
+                onChange={onMaxInputChangeHandler} onBlur={onMaxBlurHandler}/>
         </span>
       </div>
     )
