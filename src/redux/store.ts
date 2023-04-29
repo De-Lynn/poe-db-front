@@ -79,10 +79,10 @@ export let store = {
         this._callSubsrciber = observer
     },
     dispatch(action: any) {
-        // this._state.filterGroupHeader = filterGroupHeaderReducer(this._state.filterGroupHeader, action)
-        // this._state.categoryFilter = categoryFilterReducer(this._state.categoryFilter, action)
-        // this._state.rangeFilter = rangeFilterReducer(this._state.rangeFilter, action)
+        this._state.filterGroupHeader = filterGroupHeaderReducer(this._state.filterGroupHeader, action)
+        this._state.categoryFilter = categoryFilterReducer(this._state.categoryFilter, action)
+        this._state.rangeFilter = rangeFilterReducer(this._state.rangeFilter, action)
 
-        // this._callSubsrciber(this._state)
+        this._callSubsrciber(this._state)
     }
 }

@@ -1,6 +1,22 @@
 import { useState, ChangeEvent } from "react"
-import { CategoryFilterPropsType } from "./SearchPanel"
 import { changeCategoriesInputValue, changeCategoriesState } from "./redux/categoryFilterReducer"
+import { StringLiteralType } from "typescript"
+
+type ContentType = {
+  id: string
+  option: string
+  category: string
+  type: string
+}
+
+type CategoryFilterPropsType = {
+  id: string
+  filterTitle: string
+  content: Array<ContentType>
+  state: boolean
+  filterValue: string
+  dispatch: (action: any) => void
+}
 
 export function CategoryFilter(props: CategoryFilterPropsType) {
     // const onInputChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +43,7 @@ export function CategoryFilter(props: CategoryFilterPropsType) {
                   {
                     props.content.map( (el) => {
                       const onSelectOptionClickHandler = () => {
-                        props.dispatch(changeCategoriesInputValue(el.option, props.id))
+                        props.dispatch(changeCategoriesInputValue(el.option, props.id, el.category, el.type))
                         props.dispatch(changeCategoriesState(!props.state, props.id))
                       }
                       return (

@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
-import { store } from './redux/redux-store';
+//import store from './redux/redux-store';
+import store from './redux/redux-store';
 import { Provider } from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -17,7 +18,7 @@ let rerenderEntireTree = (state: any) => {
       <Provider store={store}>
         <App 
         //state={useSelector(state)} dispatch={useDispatch()}
-        // dispatch={store.dispatch.bind(store)} 
+        //state={state} dispatch={store.dispatch.bind(store)} 
         // changeFiltersVisibility={store.changeFiltersVisibility.bind(store)} 
         // changeCategoriesState={store.changeCategoriesState.bind(store)} changeCategoriesInputValue={store.changeCategoriesInputValue.bind(store)} 
         // cleanCategoriesInputValue={store.cleanCategoriesInputValue.bind(store)}
@@ -31,6 +32,12 @@ let rerenderEntireTree = (state: any) => {
 }
 
 rerenderEntireTree(store.getState())
+
+// store.subscribe( () => {
+//   rerenderEntireTree()
+// })
+
+// rerenderEntireTree(store.getState())
 
 store.subscribe( () => {
   let state = store.getState()
