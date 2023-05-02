@@ -2,8 +2,12 @@ export const getFilterHeaders = (state: any) => {
     return state.filterGroupHeader.filterHeaders
 }
 
-export const getTypeFilters = (state: any) => {
+export const getCategoryFilters = (state: any) => {
     return state.categoryFilter.typeFilters
+}
+
+export const getCategoryFiltersVisibility = (state: any) => {
+    return state.categoryFilter.categoryFilterVisibility
 }
 
 export const getRangeFilters = (state: any) => {

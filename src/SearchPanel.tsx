@@ -1,15 +1,14 @@
-import { useState } from 'react';
-import { v1 } from 'uuid';
 import { FilterGroupHeader } from './FilterGroupHeader';
 import { CategoryFilter } from './CategoryFilter';
 import { FilterHeadersType } from './App';
-import { RangeFilterContainer } from './RangeFilterContainer';
 import { RangeFilter } from './RangeFilter';
-import { getFilterHeaders, getRangeFilters, getTypeFilters } from './redux/searchPanel-selector';
+import { getFilterHeaders, getRangeFilters, getCategoryFilters, getCategoryFiltersVisibility } from './redux/searchPanel-selector';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
-import { setResults } from './redux/resultsReducer';
 import { Controls } from './Controls';
+import { WeaponsFilters } from './WeaponsFilters';
+import { ArmourFilters } from './ArmourFilters';
+import { Route, Routes } from 'react-router-dom';
+import { RequirementFilters } from './RequirementFilters';
 
 // export type FilterGroupHeaderPropsType = {
 //   id: string
@@ -65,9 +64,10 @@ export type SearchPanelPropsType = {
 }
 
 function SearchPanel(props: any) {
-  const filterHeaders = useSelector(getFilterHeaders)  
-  const typeFilters = useSelector(getTypeFilters)
-  const rangeFilters = useSelector(getRangeFilters)
+  //const filterHeaders = useSelector(getFilterHeaders)  
+  const categoryFilters = useSelector(getCategoryFilters)
+  //const rangeFilters = useSelector(getRangeFilters)
+  let categoryFiltersVisibility = useSelector(getCategoryFiltersVisibility)
   const dispatch = useDispatch()
   // axios.get('http://localhost:3003/api/weapon').then(response => {
   //   //debugger
@@ -83,55 +83,77 @@ function SearchPanel(props: any) {
       </div>
       <div className='search-bar search-advanced'>
         <div className='search-advanced-pane blue'>
-          {
+          {/* {
             // props.state.filterGroupHeader.filterHeaders.map( (fh: any) => {
             filterHeaders.map( (fh: any) => {  
               return (
                 <div className='filter-group expanded'>
-                  <FilterGroupHeader
-                    id={fh.id} filterTitle={fh.title} filterVisibility={fh.visibility} dispatch={dispatch}/>
                   {
-                      fh.visibility && <div className='filter-group-body'>
+                    fh.title === 'Фильтр по типу' && 
+                      <FilterGroupHeader
+                        key={fh.id} id={fh.id} filterTitle={fh.title} filterVisibility={fh.visibility} dispatch={dispatch}
+                      />
+                      {
+                        fh.visibility && <div className='filter-group-body'>
+                          {
+                            fh.title === 'Фильтр по типу' && typeFilters.map( (af: any) => {
+                              return (
+                                <CategoryFilter 
+                                  key={af.id} id={af.id} filterTitle={af.title} content={af.content} state={af.state} filterValue={af.filterValue} dispatch={dispatch}/>
+                              )
+                            })
+                          }
+                        </div>
+                      }
+                      // <div>
                         {
-                          // fh.title === 'Фильтр по типу' && props.state.categoryFilter.typeFilters.map( (af: any) => {
-                          fh.title === 'Фильтр по типу' && typeFilters.map( (af: any) => {
-                            return (
-                              <CategoryFilter 
-                                id={af.id} filterTitle={af.title} content={af.content} state={af.state} filterValue={af.filterValue} dispatch={dispatch}/>
-                            )
-                          })
-                        }
-                        {
-                          // (fh.title === 'Фильтры оружия' || fh.title === 'Фильтры защиты' || fh.title === 'Требования') && props.state.rangeFilter.rangeFilters.map( (rf: any) => {
+                          (fh.title === 'Фильтры оружия' || fh.title === 'Фильтры защиты' || fh.title === 'Требования') && props.state.rangeFilter.rangeFilters.map( (rf: any) => {
                           (fh.title === 'Фильтры оружия' || fh.title === 'Фильтры защиты' || fh.title === 'Требования') && rangeFilters.map( (rf: any) => {
-                          //debugger
+                          debugger
                             return (
                               fh.title === rf.header &&
-                                // <RangeFilter />
-                                // <RangeFilterContainer /> 
-                                // <RangeFilterContainer id={rf.id} filterTitle={rf.title} minValue={rf.minValue} newMinInputValue={rf.newMinInputValue} 
-                                // maxValue={rf.maxValue} newMaxInputValue={rf.newMaxInputValue} dispatch={props.dispatch}
-                                // />
                                 <RangeFilter 
-                                  id={rf.id} filterTitle={rf.title} newMinInputValue={rf.newMinInputValue} dispatch={dispatch}
-                                  newMaxInputValue={rf.newMaxInputValue}/>
+                                  key={rf.id} id={rf.id} filterTitle={rf.title} newMinInputValue={rf.newMinInputValue} dispatch={dispatch}
+                                  newMaxInputValue={rf.newMaxInputValue} minName={rf.minName} maxName={rf.maxName}/>
                             )
                           })
-                        }
-                      </div>  
-                    } 
+                        } 
+                      // </div>  
+                  }  
                 </div>
               )
             })
-          }
+          } */}
+          {/* {
+            categoryFiltersVisibility && <div className='filter-group-body'>
+              {
+                categoryFilters.map( (af: any) => {
+                  return (
+                    <CategoryFilter 
+                      key={af.id} id={af.id} filterTitle={af.title} content={af.content} 
+                      state={af.state} filterValue={af.filterValue} dispatch={dispatch}
+                      filterVisibility={categoryFiltersVisibility}/>
+                  )
+                })
+              }
+            </div>
+          } */}
+          <CategoryFilter/>
+          <WeaponsFilters/>
+          <ArmourFilters/>
+          <RequirementFilters/>
           <div className='filter-group expanded'></div>
           <div className='filter-group expanded'></div>
         </div>
         <div className='search-advanced-pane brown'></div>
       </div>
-      <div className='controls'>
-        <Controls />
-      </div>
+      {/* <Routes> */}
+        <div className='controls'>
+        {/* <Route path='/' element={<Controls />}/> */}
+          <Controls />
+        </div>
+      {/* </Routes> */}
+      
     </div>
   )
 }

@@ -1,4 +1,3 @@
-import { createSlice } from "@reduxjs/toolkit"
 import { v1 } from "uuid"
 
 const  SET_FILTER_HEADERS = 'SET-FILTER-HEADERS'
@@ -14,41 +13,8 @@ let initialState = {
     ],
 }
 
-// export const  filterGroupHeaderSlice = createSlice({
-//     name: 'filterGroupHeader',
-//     initialState,
-//     reducers: { 
-//         filterGroupHeaderReducer: (state: any, action: any) => {
-//             switch (action.type) {
-//                 // case SET_FILTER_HEADERS: {
-//                 //     state.filterHeaders = action.newFilterHeaders
-//                 //     return state
-//                 // }
-//                 case CHANGE_FILTERS_VISIBILITY: {
-//                     let filter = state.filterHeaders.find( (f: { id: any }) => f.id === action.filterId)
-//                     if (filter) {
-//                         filter.visibility = action.visibility
-//                         // this.dispatch({type: 'SET-FILTER-HEADERS', newFilterHeaders:[...state.filterHeaders]})
-//                     }
-//                     return state
-//                 }
-//                 default:
-//                     return state
-//             }
-//         }
-//     }
-// })
-
-// export const {filterGroupHeaderReducer} = filterGroupHeaderSlice.actions
-
-// export default filterGroupHeaderSlice.reducer
-
 export const filterGroupHeaderReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
-        // case SET_FILTER_HEADERS: {
-        //     state.filterHeaders = action.newFilterHeaders
-        //     return state
-        // }
         case CHANGE_FILTERS_VISIBILITY: {
             const updatedFilterId = action.filterId
             let stateCopy = {...state}
@@ -58,12 +24,6 @@ export const filterGroupHeaderReducer = (state: any = initialState, action: any)
                 }
                 return f
             })
-            // stateCopy.filterHeaders = [...state.filterHeaders]
-            // let filter = stateCopy.filterHeaders.find( (f: { id: any }) => f.id === action.filterId)
-            // if (filter) {
-            //     filter.visibility = action.visibility
-            //     // this.dispatch({type: 'SET-FILTER-HEADERS', newFilterHeaders:[...state.filterHeaders]})
-            // }
             return stateCopy
         }
         default:

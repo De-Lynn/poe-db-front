@@ -1,4 +1,3 @@
-import { createSlice } from "@reduxjs/toolkit"
 import { v1 } from "uuid"
 
 const  SET_RANGE_FILTERS = 'SET-RANGE-FILTERS'
@@ -10,102 +9,28 @@ const  CLEAN_RANGE_VALUES = 'CLEAN-RANGE-VALUES'
 
 let initialState = {
     rangeFilters: [
-        {id: v1(), title: 'Урон', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Шанс критического удара', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Атак в секунду', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Урон в секунду', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Броня', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Уклонение', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Энергетический щит', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Блок', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Уровень', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Сила', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Ловкость', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
-        {id: v1(), title: 'Интеллект', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: ''},
+        {id: v1(), title: 'Урон', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"damageMinValue", maxName:"damageMinValue"},
+        {id: v1(), title: 'Шанс критического удара', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"critMinValue", maxName:"critMinValue"},
+        {id: v1(), title: 'Атак в секунду', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"apsMinValue", maxName:"apsMinValue"},
+        {id: v1(), title: 'Урон в секунду', header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"dpsMinValue", maxName:"dpsMinValue"},
+        {id: v1(), title: 'Броня', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"armourMinValue", maxName:"armourMinValue"},
+        {id: v1(), title: 'Уклонение', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"evasionMinValue", maxName:"evasionMinValue"},
+        {id: v1(), title: 'Энергетический щит', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"esMinValue", maxName:"esMinValue"},
+        {id: v1(), title: 'Блок', header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"blockMinValue", maxName:"blockMinValue"},
+        {id: v1(), title: 'Уровень', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"lvlMinValue", maxName:"lvlMinValue"},
+        {id: v1(), title: 'Сила', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"strMinValue", maxName:"strMinValue"},
+        {id: v1(), title: 'Ловкость', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"dexMinValue", maxName:"dexMinValue"},
+        {id: v1(), title: 'Интеллект', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"intMinValue", maxName:"intMinValue"},
     ],
+    // activeRangeFilters: {
+    //     minDamage: '', maxDamage: '', minCrit: '', maxCrit: '', minAps: '', maxAps: '', minDps: '', maxDps: '',
+    //     minArmour: '', maxArmour: '', minEvasion: '', maxEvasion: '', minEs: '', maxEs: '', minBlock: '', maxBlock: '',
+    //     minLvl: '', maxLvl: '', minStr: '', maxStr: '', minDex: '', maxDex: '', minInt: '', maxInt: '', 
+    // }
 }
-
-// export const  rangeFilterSlice = createSlice({
-//     name: 'rangeFilter',
-//     initialState,
-//     reducers: {
-//         rangeFilterReducer: (state: any, action: any) => {
-//             switch (action.type) {
-//                 // case SET_RANGE_FILTERS: {
-//                 //     state.rangeFilters = action.newRangeFilters
-//                 //     return state
-//                 // }
-//                 case CHANGE_RANGE_MIN_VALUE: {
-//                     let filter = state.rangeFilters.find( (f: { id: any }) => f.id === action.filterId)
-//                     if (filter) {
-//                         filter.minValue = action.newValue
-//                         // this.dispatch({type: 'SET-RANGE-FILTERS', newRangeFilters: [...state.rangeFilters]})
-//                     }
-//                     return {...state}
-//                 }
-//                 case CHANGE_RANGE_MAX_VALUE: {
-//                     let filter = state.rangeFilters.find( (f: { id: any }) => f.id === action.filterId)
-//                     if (filter) {
-//                         filter.maxValue = action.newValue
-//                         // this.dispatch({type: 'SET-RANGE-FILTERS', newRangeFilters: [...state.rangeFilters]})
-//                     }
-//                     return {...state}
-//                 }
-//                 case SET_NEW_MIN_INPUT_VALUE: {
-//                     // let filter = state.rangeFilters.find( (f: { id: any }) => f.id === action.filterId)
-//                     // if (filter) {
-//                     //     filter.newMinInputValue = action.newValue
-//                     //     // this.dispatch({type: 'SET-RANGE-FILTERS', newRangeFilters: [...state.rangeFilters]})
-//                     // }
-//                     // return state
-//                     const updatedFilterId = action.filterId
-//                     const newFilters = state.rangeFilters.map( (f: { id: any }) => {
-//                         if (f.id === updatedFilterId) {
-//                             return {...f, newMinInputValue: action.newValue}
-//                         }
-//                         return f
-//                     })
-                    
-//                     return newFilters
-//                 }
-//                 case SET_NEW_MAX_INPUT_VALUE: {
-//                     let filter = state.rangeFilters.find( (f: { id: any }) => f.id === action.filterId)
-//                     if (filter) {
-//                         filter.newMaxInputValue = action.newValue
-//                         // this.dispatch({type: 'SET-RANGE-FILTERS', newRangeFilters: [...state.rangeFilters]})
-//                     }
-//                     return {...state}
-//                 }
-//                 case CLEAN_RANGE_VALUES: {
-//                     let newArray = state.rangeFilters.map( (el: { header: any; minValue: any; maxValue: any; newMinInputValue: any; newMaxInputValue: any }) => {
-//                         if (el.header === action.header) {
-//                           el.minValue = action.newValue
-//                           el.maxValue = action.newValue
-//                           el.newMinInputValue = action.newValue
-//                           el.newMaxInputValue = action.newValue
-//                         }
-//                         return el
-//                     })
-//                     // this.dispatch({type: 'SET-RANGE-FILTERS', newRangeFilters: newArray})
-//                     return {...state}
-//                 }
-//                 default:
-//                     return state
-//             }
-//         }
-//     }
-// })
-
-// export const {rangeFilterReducer} = rangeFilterSlice.actions
-
-// export default rangeFilterSlice.reducer
 
 export const rangeFilterReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
-        // case SET_RANGE_FILTERS: {
-        //     state.rangeFilters = action.newRangeFilters
-        //     return state
-        // }
         case CHANGE_RANGE_MIN_VALUE: {
             let stateCopy = {...state}
             stateCopy.rangeFilters = state.rangeFilters.map( (f: { id: any }) => {
@@ -155,15 +80,6 @@ export const rangeFilterReducer = (state: any = initialState, action: any) => {
                 }
                 return el
             })
-            // let newArray = state.rangeFilters.map( (el: { header: any; minValue: any; maxValue: any; newMinInputValue: any; newMaxInputValue: any }) => {
-            //     if (el.header === action.header) {
-            //       el.minValue = action.newValue
-            //       el.maxValue = action.newValue
-            //       el.newMinInputValue = action.newValue
-            //       el.newMaxInputValue = action.newValue
-            //     }
-            //     return el
-            // })
             return stateCopy
         }
         default:

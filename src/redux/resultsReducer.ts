@@ -1,18 +1,41 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { v1 } from "uuid"
 
-const  SET_RESULTS= 'SET-RESULTS'
+const  SET_RESULTS = 'SET-RESULTS'
+const  CLEAN_RESULTS = 'CLEAN-RESULTS'
 
 let initialState = {
-    results: [],
+    // results: [
+    //     // {id: v1(), title: 'baseWeapons', content: []},
+    //     // {id: v1(), title: 'uniqueWeapons', content: []}
+    // ]
+    baseWeaponsResults: [],
+    uniqueWeaponsResults: [],
 }
 
 export const resultsReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
         case SET_RESULTS: {
+            // let stateCopy = {...state}
+            // if(action.newResults.baseWeapons) {
+            //     stateCopy.baseWeaponsResults = action.newResults.baseWeaponsResults
+            // } else if(action.newResults.uniqueWeapons) {
+            //     stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeaponsResults
+            // }
             let stateCopy = {...state}
-            stateCopy.results = action.newResults
+            if(action.newResults.baseWeapons) {
+                stateCopy.baseWeaponsResults = action.newResults.baseWeapons
+            }
+            if(action.newResults.uniqueWeapons) {
+                stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeapons
+            }
             return stateCopy
+        }
+        case CLEAN_RESULTS: {
+            let stateCopy = {...state}
+            // stateCopy.baseWeaponsResults=[]
+            // stateCopy.uniqueWeaponsResults=[]
+            return {...state, baseWeaponsResults: [], uniqueWeaponsResults: []}
         }
         // case CHANGE_RANGE_MIN_VALUE: {
         //     let stateCopy = {...state}
@@ -71,6 +94,7 @@ export const resultsReducer = (state: any = initialState, action: any) => {
 }
 
 export const setResults = (newResults: any) => ({type: SET_RESULTS, newResults: newResults})
+export const cleanResults = () => ({type: CLEAN_RESULTS})
 // export const changeRangeMinValue = (newValue: string, filterId: string) => 
 //     ({type: CHANGE_RANGE_MIN_VALUE, newValue: newValue, filterId: filterId})
 // export const changeRangeMaxValue = (newValue: string, filterId: string) => 
