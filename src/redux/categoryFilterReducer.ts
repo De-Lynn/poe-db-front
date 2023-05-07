@@ -12,6 +12,7 @@ let initialState = {
             id: v1(), title: 'Item Category', header: 'Type Filters', 
             content: [
                 {id: v1(), option: 'Any', category: 'any', type: 'default'},
+
                 {id: v1(), option: 'Any weapon', category: 'weapon', type: 'default'},
                 {id: v1(), option: 'One-Handed Weapon', category: 'weapon', type: 'one_hand_weapon'},
                 {id: v1(), option: 'Bow', category: 'weapon', type: 'bow'},
@@ -19,7 +20,6 @@ let initialState = {
                 {id: v1(), option: 'Any Dagger', category: 'weapon', type: 'dagger'},
                 {id: v1(), option: 'Base Dagger', category: 'weapon', type: 'base_dagger'},
                 {id: v1(), option: 'Rune Dagger', category: 'weapon', type: 'rune_dagger'},
-
                 {id: v1(), option: 'One-Handed Axe', category: 'weapon', type: 'one_hand_axe'},
                 {id: v1(), option: 'One-Handed Sword', category: 'weapon', type: 'one_hand_sword'},
                 {id: v1(), option: 'Any One-Handed Mace', category: 'weapon', type: 'one_hand_mace'},
@@ -34,17 +34,17 @@ let initialState = {
                 {id: v1(), option: 'Wand', category: 'weapon', type: 'wand'},
                 {id: v1(), option: 'Quiver', category: 'weapon', type: 'quiver'},
 
-                {id: v1(), option: 'Any Armour', category: 'armour', type: 'rune_dagger'},
-                {id: v1(), option: 'Body Armour', category: 'armour', type: 'rune_dagger'},
-                {id: v1(), option: 'Boots', category: 'armour', type: 'rune_dagger'},
-                {id: v1(), option: 'Gloves', category: 'armour', type: 'rune_dagger'},
-                {id: v1(), option: 'Helmet', category: 'armour', type: 'rune_dagger'},
-                {id: v1(), option: 'Shield', category: 'armour', type: 'rune_dagger'},
+                {id: v1(), option: 'Any Armour', category: 'armour', type: 'armour'},
+                {id: v1(), option: 'Body Armour', category: 'armour', type: 'body_armour'},
+                {id: v1(), option: 'Boots', category: 'armour', type: 'boots'},
+                {id: v1(), option: 'Gloves', category: 'armour', type: 'gloves'},
+                {id: v1(), option: 'Helmet', category: 'armour', type: 'helmet'},
+                {id: v1(), option: 'Shield', category: 'armour', type: 'shield'},
                 
-                {id: v1(), option: 'Any Accessory', category: 'jewellery', type: 'rune_dagger'},
-                {id: v1(), option: 'Amulet', category: 'jewellery', type: 'default'},
-                {id: v1(), option: 'Belt', category: 'jewellery', type: 'gloves'},
-                {id: v1(), option: 'Ring', category: 'jewellery', type: 'rune_dagger'},
+                {id: v1(), option: 'Any Accessory', category: 'jewellery', type: 'default'},
+                {id: v1(), option: 'Amulet', category: 'jewellery', type: 'amulet'},
+                {id: v1(), option: 'Belt', category: 'jewellery', type: 'belt'},
+                {id: v1(), option: 'Ring', category: 'jewellery', type: 'ring'},
 
                 {id: v1(), option: 'Any Jewel', category: 'jewel', type: 'default'},
                 {id: v1(), option: 'Base Jewel', category: 'jewel', type: 'gloves'},

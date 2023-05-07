@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { getItemsCategory, getItemsRarity, getItemsType } from "./redux/activeFilters-selector"
 import axios from "axios"
-import { cleanResults, setResults } from "./redux/resultsReducer"
+import { setResults } from "./redux/resultsReducer"
 import { useDispatch } from "react-redux"
 import { getBaseWeaponsResults, getResults, getUniqueWeaponsResults } from "./redux/results-selector"
 import { getWeaponsFiltersValues } from "./redux/weaponsFilter-selectors"
@@ -22,7 +22,7 @@ export function Controls(props: any) {
     let armourFiltersValues = useSelector(getArmourFiltersValues)
     let requirementFiltersValues = useSelector(getRequirementFiltersValues)
     //const navigate = useNavigate()
-    let request = `http://localhost:8080/api/${category}?`
+    // let request = `http://localhost:8080/api/${category}?`
     let searchParams
 
     // useEffect(() => {
@@ -33,6 +33,7 @@ export function Controls(props: any) {
     // }, [weaponsFiltersValues])
 
     const onSearchClickHandler = () => {
+        let request = `http://localhost:8080/api/${category}?`
         if(category==='weapon') {
             searchParams = new URLSearchParams(rarity)
             request += `${searchParams.toString()}&`
@@ -53,11 +54,27 @@ export function Controls(props: any) {
             searchParams = new URLSearchParams(requirementFiltersValues)
             request += searchParams.toString()
         }
-        //alert(request)
-        
-        if (baseWeaponsResults.length !== 0 || uniqueWeaponsResults.length !== 0) {
-            dispatch(cleanResults())
+        if(category==='jewellery') {
+            searchParams = new URLSearchParams(rarity)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(type)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(requirementFiltersValues)
+            request += searchParams.toString()
         }
+        if(category==='flask') {
+            searchParams = new URLSearchParams(rarity)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(type)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(requirementFiltersValues)
+            request += searchParams.toString()
+        }
+        alert(request)
+        
+        // if (baseWeaponsResults.length !== 0 || uniqueWeaponsResults.length !== 0) {
+        //     dispatch(cleanResults())
+        // }
         axios.get(request).then(response => {
             // dispatch(setResults(response.data.baseWeapons))
             dispatch(setResults(response.data))
@@ -69,8 +86,7 @@ export function Controls(props: any) {
         <div className='controls'>
             <div className='controls-center'>
             <button className='btn search-btn' type='button' 
-                onClick={onSearchClickHandler}
-            >
+                onClick={onSearchClickHandler}>
                 <span>Поиск</span>
             </button>
             </div>

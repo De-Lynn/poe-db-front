@@ -5,12 +5,14 @@ const  SET_RESULTS = 'SET-RESULTS'
 const  CLEAN_RESULTS = 'CLEAN-RESULTS'
 
 let initialState = {
-    // results: [
-    //     // {id: v1(), title: 'baseWeapons', content: []},
-    //     // {id: v1(), title: 'uniqueWeapons', content: []}
-    // ]
     baseWeaponsResults: [],
     uniqueWeaponsResults: [],
+    baseArmourResults: [],
+    uniqueArmourResults: [],
+    baseJewelleryResults: [],
+    uniqueJewelleryResults: [],
+    baseFlasksResults: [],
+    uniqueFlasksResults: [],
 }
 
 export const resultsReducer = (state: any = initialState, action: any) => {
@@ -22,71 +24,42 @@ export const resultsReducer = (state: any = initialState, action: any) => {
             // } else if(action.newResults.uniqueWeapons) {
             //     stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeaponsResults
             // }
-            let stateCopy = {...state}
-            if(action.newResults.baseWeapons) {
-                stateCopy.baseWeaponsResults = action.newResults.baseWeapons
+            // let stateCopy = {...state}
+            // stateCopy.baseWeaponsResults = {...state.baseWeaponsResults}
+            // if(action.newResults.baseWeapons) {
+            //     stateCopy.baseWeaponsResults = action.newResults.baseWeapons
+            // }
+            // if(action.newResults.uniqueWeapons) {
+            //     stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeapons
+            // }
+            // if(action.newResults.baseWeapons) {
+            //     stateCopy.baseWeaponsResults = action.newResults.baseWeapons
+            // }
+            // if(action.newResults.uniqueWeapons) {
+            //     stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeapons
+            // }
+            return {
+                ...state, 
+                baseWeaponsResults: action.newResults.baseWeapons ? action.newResults.baseWeapons : [],
+                uniqueWeaponsResults: action.newResults.uniqueWeapons ? action.newResults.uniqueWeapons : [],
+                baseArmourResults: action.newResults.baseArmour ? action.newResults.baseArmour : [],
+                uniqueArmourResults: action.newResults.uniqueArmour ? action.newResults.uniqueArmour : [],
+                baseJewelleryResults: action.newResults.baseJewellery ? action.newResults.baseJewellery : [],
+                uniqueJewelleryResults: action.newResults.uniqueJewellery ? action.newResults.uniqueJewellery : [],
+                baseFlasksResults: action.newResults.baseFlasks ? action.newResults.baseFlasks : [],
+                uniqueFlasksResults: action.newResults.uniqueFlasks ? action.newResults.uniqueFlasks : [],
             }
-            if(action.newResults.uniqueWeapons) {
-                stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeapons
-            }
-            return stateCopy
+            // return stateCopy
         }
-        case CLEAN_RESULTS: {
-            let stateCopy = {...state}
-            // stateCopy.baseWeaponsResults=[]
-            // stateCopy.uniqueWeaponsResults=[]
-            return {...state, baseWeaponsResults: [], uniqueWeaponsResults: []}
-        }
-        // case CHANGE_RANGE_MIN_VALUE: {
-        //     let stateCopy = {...state}
-        //     stateCopy.rangeFilters = state.rangeFilters.map( (f: { id: any }) => {
-        //         if (f.id === action.filterId) {
-        //             return {...f, minValue: action.newValue}
-        //         }
-        //         return f
-        //     })
-        //     return stateCopy
-        // }
-        // case CHANGE_RANGE_MAX_VALUE: {
-        //     let stateCopy = {...state}
-        //     stateCopy.rangeFilters = state.rangeFilters.map((f: { id: any }) => {
-        //         if (f.id === action.filterId) {
-        //             return {...f, maxValue: action.newValue}
-        //         }
-        //         return f
-        //     })
-        //     return stateCopy
-        // }
-        // case SET_NEW_MIN_INPUT_VALUE: {
-        //     let stateCopy = {...state}
-        //     stateCopy.rangeFilters = state.rangeFilters.map( (f: { id: any }) => {
-        //         if (f.id === action.filterId) {
-        //             return {...f, newMinInputValue: action.newValue}
-        //         }
-        //         return f
-        //     })
-            
-        //     return stateCopy
-        // }
-        // case SET_NEW_MAX_INPUT_VALUE: {
-        //     let stateCopy = {...state}
-        //     stateCopy.rangeFilters = state.rangeFilters.map( (f: { id: any }) => {
-        //         if (f.id === action.filterId) {
-        //             return {...f, newMaxInputValue: action.newValue}
-        //         }
-        //         return f
-        //     })
-        //     return stateCopy
-        // }
-        // case CLEAN_RANGE_VALUES: {
-        //     let stateCopy = {...state}
-        //     stateCopy.rangeFilters = state.rangeFilters.map( (el: { header: any; minValue: any; maxValue: any; newMinInputValue: any; newMaxInputValue: any }) => {
-        //         if (el.header === action.header) {
-        //             return {...el, minValue: action.newValue, maxValue: action.newValue, newMinInputValue: action.newValue, newMaxInputValue: action.newValue}
-        //         }
-        //         return el
-        //     })
-        //     return stateCopy
+        // case CLEAN_RESULTS: {
+        //     // let stateCopy = {...state}
+        //     // stateCopy.baseWeaponsResults=[]
+        //     // stateCopy.uniqueWeaponsResults=[]
+        //     return {
+        //         ...state, baseWeaponsResults: [], uniqueWeaponsResults: [], 
+        //         baseArmourResults: [], uniqueArmourResults: [],
+        //         baseJewelleryResults: [], uniqueJewelleryResults: [],
+        //     }
         // }
         default:
             return state
@@ -94,13 +67,4 @@ export const resultsReducer = (state: any = initialState, action: any) => {
 }
 
 export const setResults = (newResults: any) => ({type: SET_RESULTS, newResults: newResults})
-export const cleanResults = () => ({type: CLEAN_RESULTS})
-// export const changeRangeMinValue = (newValue: string, filterId: string) => 
-//     ({type: CHANGE_RANGE_MIN_VALUE, newValue: newValue, filterId: filterId})
-// export const changeRangeMaxValue = (newValue: string, filterId: string) => 
-//     ({type: CHANGE_RANGE_MAX_VALUE, newValue: newValue, filterId: filterId})
-// export const cleanRangeValues = (newValue: string, header: string) => ({type: CLEAN_RANGE_VALUES, newValue: newValue, header: header})
-// export const setNewMinInputValue = (newValue: string, filterId: string) => 
-// ({type: SET_NEW_MIN_INPUT_VALUE, newValue: newValue, filterId: filterId})
-// export const setNewMaxInputValue = (newValue: string, filterId: string) => 
-//     ({type: SET_NEW_MAX_INPUT_VALUE, newValue: newValue, filterId: filterId})
+//export const cleanResults = () => ({type: CLEAN_RESULTS})
