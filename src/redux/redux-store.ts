@@ -8,6 +8,9 @@ import { reducer as formReducer } from 'redux-form'
 import { weaponsFilterReducer } from './weaponsFilterReducer'
 import { armourFilterReducer } from './armourFilterReducer'
 import { requirementFilterReducer } from './requirementFilterReducer'
+import { statsFilterReducer } from './statsFilterReducer'
+import { dropdownReducer } from './dropdownReducer'
+import { searchPanelReducer } from './searchPanelReducer'
 
 const rootReducer = combineReducers({
     //filterGroupHeader: filterGroupHeaderReducer,
@@ -18,6 +21,9 @@ const rootReducer = combineReducers({
     weaponsFilter: weaponsFilterReducer,
     armourFilter: armourFilterReducer,
     requirementFilter: requirementFilterReducer,
+    statsFilter: statsFilterReducer,
+    dropdown: dropdownReducer,
+    searchPanel: searchPanelReducer,
 })
 
 const store = configureStore({

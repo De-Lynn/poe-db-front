@@ -3,10 +3,12 @@ import { useSelector } from "react-redux";
 import { useEffect, useRef } from "react";
 //import { setSearchValue, setSelectedValue, setShowMenu } from "./redux/dropdownReducer";
 import { useDispatch } from "react-redux";
+import axios from "axios";
+import { setStats } from "./redux/statsFilterReducer";
 //import { getShowMenu } from "./redux/categoryFilter-selectors";
 
 
-const Dropdown = (props: any) => {
+const StatsDropdown = (props: any) => {
   // const showMenu = useSelector(getShowMenu)
   // const selectedValue = useSelector(getSelectedValue)
   // const searchValue = useSelector(getSearchValue)
@@ -32,7 +34,7 @@ const Dropdown = (props: any) => {
     // const handler = () => setShowMenu(false)
     const handler = (e: any) => {
       if (inputRef.current && !inputRef.current.contains(e.target)) {
-        dispatch(props.setShowMenu(false, props.id))
+        dispatch(props.setShowMenu(false))
       }
     }
     window.addEventListener("click", handler)
@@ -43,16 +45,23 @@ const Dropdown = (props: any) => {
 
   useEffect(() => {
     // dispatch(setSearchValue(''))
-    dispatch(props.setSearchValue('', props.id))
+    dispatch(props.setSearchValue(''))
     if (showMenu && searchRef.current) {
       searchRef.current.focus()
     }
   }, [showMenu])
 
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/stats?stat=${searchValue}`).then(response => {
+      // dispatch(setResults(response.data.baseWeapons))
+      dispatch(setStats(response.data.stats))
+    })
+  }, [searchValue])
+
   const handleInputClick = (e: React.MouseEvent<HTMLDivElement>) => {
     //e.stopPropagation()
     // dispatch(setShowMenu(!showMenu))
-    dispatch(props.setShowMenu(!showMenu, props.id))
+    dispatch(props.setShowMenu(!showMenu))
   }
   const getDisplay = () => {
     if (selectedValue) {
@@ -61,27 +70,27 @@ const Dropdown = (props: any) => {
     return props.placeHolder;
   }
 
-  const onItemClick = (option: string, type: string, category: string) => {
-    dispatch(props.setSelectedValue(option, props.id, type, category))
+  const onItemClick = (stat: string, statOrder: number) => {
+    dispatch(props.setSelectedValue(stat, statOrder))
   }
 
-  const isSelected = (option: string) => {
+  const isSelected = (stat: string) => {
     if (!selectedValue) {
       return false
     }
-    return selectedValue === option
+    return selectedValue === stat
   }
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     // dispatch(setSearchValue(e.target.value))
-    dispatch(props.setSearchValue(e.target.value, props.id))
+    dispatch(props.setSearchValue(e.target.value))
   }
 
   const getOptions = () => {
     if (!searchValue) {
-      return props.options
+      return props.stats
     }
-    return props.options.filter((option: any) => option.option.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0)
+    return props.stats.filter((stat: any) => stat.stat.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0)
   }
 
   return (
@@ -100,10 +109,10 @@ const Dropdown = (props: any) => {
               <input onChange={onSearch} value={searchValue} ref={searchRef}/>
             </div>
           )}
-          {getOptions().map((op: any) => (
-            <div onClick={() => onItemClick(op.option, op.type, op.category)} 
-              key={op.id} className={`dropdown-item ${isSelected(op.option) && "selected"}`}>
-              {op.option}
+          {getOptions().slice(0, 100).map((s: any) => (
+            <div onClick={() => onItemClick(s.stat, s.stat_order)} 
+              key={s.id} className={`dropdown-item ${isSelected(s.stat) && "selected"}`}>
+              {s.stat}
             </div>
           ))}
         </div>
@@ -113,4 +122,4 @@ const Dropdown = (props: any) => {
   )
 }
 
-export default Dropdown
+export default StatsDropdown

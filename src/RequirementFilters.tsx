@@ -64,7 +64,7 @@ export function RequirementFilters(props: any) {
                 </span>
                 <span className='filter-body'>
                     <span className='filter-title filter-title-clickable'>
-                        <span>Требования</span>
+                        <span>Requirements</span>
                     </span>
                     <span className='input-group-btn'>
                         <button className='btn remove-btn' title='Очистить группу фильтра' 

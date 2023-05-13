@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { getItemsCategory, getItemsRarity, getItemsType } from "./redux/activeFilters-selector"
+import { getItemName, getItemsCategory, getItemsRarity, getItemsType } from "./redux/activeFilters-selector"
 import axios from "axios"
 import { setResults } from "./redux/resultsReducer"
 import { useDispatch } from "react-redux"
@@ -9,12 +9,15 @@ import { createSearchParams, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { getArmourFiltersValues } from "./redux/armourFilter-selectors"
 import { getRequirementFiltersValues } from "./redux/requirementFilter-selectors"
+import { getSelectedStatOrder } from "./redux/statsFilter-selector"
 
 export function Controls(props: any) {
     let dispatch = useDispatch()
     let category = useSelector(getItemsCategory)
     let type = useSelector(getItemsType)
     let rarity = useSelector(getItemsRarity)
+    let stat_order = useSelector(getSelectedStatOrder)
+    let name = useSelector(getItemName)
     let results = useSelector(getResults)
     let baseWeaponsResults = useSelector(getBaseWeaponsResults)
     let uniqueWeaponsResults = useSelector(getUniqueWeaponsResults)
@@ -42,6 +45,10 @@ export function Controls(props: any) {
             searchParams = new URLSearchParams(weaponsFiltersValues)
             request += `${searchParams.toString()}&`
             searchParams = new URLSearchParams(requirementFiltersValues)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(stat_order)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(name)
             request += searchParams.toString()
         }
         if(category==='armour') {
@@ -52,6 +59,10 @@ export function Controls(props: any) {
             searchParams = new URLSearchParams(armourFiltersValues)
             request += `${searchParams.toString()}&`
             searchParams = new URLSearchParams(requirementFiltersValues)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(stat_order)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(name)
             request += searchParams.toString()
         }
         if(category==='jewellery') {
@@ -60,6 +71,10 @@ export function Controls(props: any) {
             searchParams = new URLSearchParams(type)
             request += `${searchParams.toString()}&`
             searchParams = new URLSearchParams(requirementFiltersValues)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(stat_order)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(name)
             request += searchParams.toString()
         }
         if(category==='flask') {
@@ -68,6 +83,10 @@ export function Controls(props: any) {
             searchParams = new URLSearchParams(type)
             request += `${searchParams.toString()}&`
             searchParams = new URLSearchParams(requirementFiltersValues)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(stat_order)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(name)
             request += searchParams.toString()
         }
         alert(request)

@@ -1,11 +1,13 @@
 import { ChangeEvent } from "react"
-import { changeCategoriesInputValue, changeCategoriesState, changeFilterVisibility, cleanCategoriesInputValue } from "./redux/categoryFilterReducer"
+import { changeFilterVisibility, cleanCategoriesInputValue, setSearchValue, setSelectedValue, setShowMenu } from "./redux/categoryFilterReducer"
 import { useSelector } from "react-redux"
 import { getCategoryFiltersVisibility, getCategoryFilters } from "./redux/searchPanel-selector"
 import { useDispatch } from "react-redux"
 import { getWeaponsFilterVisibility } from "./redux/weaponsFilter-selectors"
 import { getArmourFilterVisibility } from "./redux/armourFilter-selectors"
 import { getRequirementFilterVisibility } from "./redux/requirementFilter-selectors"
+import Dropdown from "./Dropdown"
+import { getSearchValue, getSelectedValue, getShowMenu } from "./redux/categoryFilter-selectors"
 
 type ContentType = {
   id: string
@@ -54,7 +56,7 @@ export function CategoryFilter(props: any) {
         </span>
         <span className='filter-body'>
           <span className='filter-title filter-title-clickable'>
-            <span>Фильтр по типу</span>
+            <span>Type Filters</span>
           </span>
           <span className='input-group-btn'>
             <button className='btn remove-btn' title='Очистить группу фильтра'
@@ -63,44 +65,50 @@ export function CategoryFilter(props: any) {
         </span>
       </div>
       {categoryFilterVisibility && categoryFilters.map((cf: any) => {
-        const onButtonClickHandler = () => {
-          dispatch(changeCategoriesState(!cf.state, cf.id))
-        }
+        // const onButtonClickHandler = () => {
+        //   dispatch(changeCategoriesState(!cf.state, cf.id))
+        // }
         return (
           <div className='filter filter-property full-span'>
             <span className='filter-body'>
               <div className='filter-title'>{cf.filterTitle}</div>
               <div className='multiselect filter-select'>
-                <input className='multiselect_tags' type="text" value={cf.filterValue} 
+                <span>{cf.title}</span>
+                {/* <input className='multiselect_tags' type="text" value={cf.filterValue} 
                   // value={props.filterValue}
                 />
-                {/* <input className='multiselect_tags' type="text" value={newInputValue} 
-                      onChange={onInputChangeHandler}/> */}
+                <input className='multiselect_tags' type="text" value={newInputValue} 
+                      onChange={onInputChangeHandler}/>
                 <button className='multiselect_select' 
-                      onClick={onButtonClickHandler}>Развернуть</button>
-                <div className='multiselect_content-wrapper'>
+                      onClick={onButtonClickHandler}>Развернуть</button> */}
+                <span><div className='multiselect_content-wrapper'>
                   {
-                    cf.state && 
-                      <select name="" id="">
-                        {
-                          cf.content.map( (el: any) => {
-                            const onSelectOptionClickHandler = () => {
-                              dispatch(changeCategoriesInputValue(el.option, cf.id, el.category, el.type))
-                              dispatch(changeCategoriesState(!cf.state, cf.id))
-                            }
-                            return (
-                              <option className='multiselect_element' 
-                                      onClick={onSelectOptionClickHandler} key={el.id}>
-                                <span className='multiselect_option'>
-                                  <span>{el.option}</span>
-                                </span>
-                              </option>
-                            )
-                          })
-                        }
-                      </select>
+                    // cf.state && 
+                      <Dropdown placeHolder='Any' id={cf.id} options={cf.content} isSearchable={true}
+                        //getShowMenu={getShowMenu} getSelectedValue={getSelectedValue} getSearchValue={getSearchValue}
+                        setSearchValue={setSearchValue} setShowMenu={setShowMenu} setSelectedValue={setSelectedValue}
+                        showMenu={cf.showMenu} selectedValue={cf.selectedValue} searchValue={cf.searchValue}
+                      />
+                      // <select name="" id="">
+                      //   {
+                      //     cf.content.map( (el: any) => {
+                      //       const onSelectOptionClickHandler = () => {
+                      //         dispatch(changeCategoriesInputValue(el.option, cf.id, el.category, el.type))
+                      //         dispatch(changeCategoriesState(!cf.state, cf.id))
+                      //       }
+                      //       return (
+                      //         <option className='multiselect_element' 
+                      //                 onClick={onSelectOptionClickHandler} key={el.id}>
+                      //           <span className='multiselect_option'>
+                      //             <span>{el.option}</span>
+                      //           </span>
+                      //         </option>
+                      //       )
+                      //     })
+                      //   }
+                      // </select>
                   } 
-                </div>
+                </div></span>
               </div>
             </span>
           </div>

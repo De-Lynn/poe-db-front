@@ -2,7 +2,7 @@ import { v1 } from "uuid"
 
 const CLEAN_FILTER_VALUES = 'CLEAN-FILTER-VALUES'
 const CHANGE_ARMOUR_FILTERS_VALUE = 'CHANGE-ARMOUR-FILTERS-VALUE'
-const CHANGE_FILTER_VISIBILITY = 'CHANGE-FILTER-VISIBILITY'
+const CHANGE_ARMOUR_FILTER_VISIBILITY = 'CHANGE-ARMOUR-FILTER-VISIBILITY'
 
 let initialState = {
     armourFilters: [
@@ -54,7 +54,7 @@ export const armourFilterReducer = (state: any = initialState, action: any) => {
             }
             return stateCopy
         }
-        case CHANGE_FILTER_VISIBILITY: {
+        case CHANGE_ARMOUR_FILTER_VISIBILITY: {
             let stateCopy = {...state}
             stateCopy.armourFilterVisibility = {...state.armourFilterVisibility}
             stateCopy.armourFilterVisibility = action.visibility
@@ -68,4 +68,4 @@ export const armourFilterReducer = (state: any = initialState, action: any) => {
 export const cleanArmourFilterValues = () => ({type: CLEAN_FILTER_VALUES})
 export const changeArmourFiltersValue = (values: object) => ({type: CHANGE_ARMOUR_FILTERS_VALUE, values: values})
 export const changeArmourFilterVisibility = (visibility: boolean) => 
-    ({type: CHANGE_FILTER_VISIBILITY, visibility: visibility})
+    ({type: CHANGE_ARMOUR_FILTER_VISIBILITY, visibility: visibility})

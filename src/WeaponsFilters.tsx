@@ -72,7 +72,7 @@ export function WeaponsFilters(props: any) {
                 <span className='filter-body'>
                     <span className='filter-title filter-title-clickable'>
                         {/* <span>{props.filterTitle}</span> */}
-                        <span>Фильтры оружия</span>
+                        <span>Weapon Filters</span>
                     </span>
                     <span className='input-group-btn'>
                         <button className='btn remove-btn' title='Очистить группу фильтра' 

@@ -2,13 +2,18 @@ import { FilterGroupHeader } from './FilterGroupHeader';
 import { CategoryFilter } from './CategoryFilter';
 import { FilterHeadersType } from './App';
 import { RangeFilter } from './RangeFilter';
-import { getFilterHeaders, getRangeFilters, getCategoryFilters, getCategoryFiltersVisibility } from './redux/searchPanel-selector';
+import { getFilterHeaders, getRangeFilters, getCategoryFilters, getCategoryFiltersVisibility, getNamesPool, getNameShowMenu, getNameSelectedValue, getNameSearchValue } from './redux/searchPanel-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls } from './Controls';
 import { WeaponsFilters } from './WeaponsFilters';
 import { ArmourFilters } from './ArmourFilters';
 import { Route, Routes } from 'react-router-dom';
 import { RequirementFilters } from './RequirementFilters';
+import { StatsFilter } from './StatsFilter';
+import ComboboxPage from './Combobox';
+import Dropdown from './Dropdown';
+import NameDropdown from './NameDropdown';
+import { setNameSearchValue, setNameSelectedValue, setNameShowMenu } from './redux/searchPanelReducer';
 
 // export type FilterGroupHeaderPropsType = {
 //   id: string
@@ -64,6 +69,10 @@ export type SearchPanelPropsType = {
 }
 
 function SearchPanel(props: any) {
+  const namesPool = useSelector(getNamesPool)
+  const nameShowMenu = useSelector(getNameShowMenu)
+  const nameSelectedValu = useSelector(getNameSelectedValue)
+  const nameSearchValue = useSelector(getNameSearchValue)
   //const filterHeaders = useSelector(getFilterHeaders)  
   const categoryFilters = useSelector(getCategoryFilters)
   //const rangeFilters = useSelector(getRangeFilters)
@@ -77,8 +86,11 @@ function SearchPanel(props: any) {
     <div className='search-panel'>
       <div className='search-bar'>
         <div className='multiselect search-select'>
-          <input className='multiselect_tags' type="text" placeholder='Поиск предметов...' />
-          <button className='multiselect_select'>Развернуть</button>
+          {/* <input className='multiselect_tags' type="text" placeholder='Поиск предметов...' />
+          <button className='multiselect_select'>Развернуть</button> */}
+          <NameDropdown placeHolder='Search Items...' names={namesPool} isSearchable={true}
+            setSearchValue={setNameSearchValue} setShowMenu={setNameShowMenu} setSelectedValue={setNameSelectedValue}
+            showMenu={nameShowMenu} selectedValue={nameSelectedValu} searchValue={nameSearchValue}/>
         </div>
       </div>
       <div className='search-bar search-advanced'>
@@ -142,6 +154,9 @@ function SearchPanel(props: any) {
           <WeaponsFilters/>
           <ArmourFilters/>
           <RequirementFilters/>
+          <StatsFilter />
+
+          {/* <ComboboxPage /> */}
           <div className='filter-group expanded'></div>
           <div className='filter-group expanded'></div>
         </div>

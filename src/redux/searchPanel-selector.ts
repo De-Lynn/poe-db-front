@@ -13,3 +13,19 @@ export const getCategoryFiltersVisibility = (state: any) => {
 export const getRangeFilters = (state: any) => {
     return state.rangeFilter.rangeFilters
 }
+
+export const getNamesPool = (state: any) => {
+    return state.searchPanel.namesPool
+}
+
+export const getNameShowMenu = (state: any) => {
+    return state.searchPanel.nameShowMenu
+}
+
+export const getNameSelectedValue = (state: any) => {
+    return state.searchPanel.nameSelectedValue
+}
+
+export const getNameSearchValue = (state: any) => {
+    return state.searchPanel.nameSearchValue
+}

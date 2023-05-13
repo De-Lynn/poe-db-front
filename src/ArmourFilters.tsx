@@ -65,7 +65,7 @@ export function ArmourFilters(props: any) {
                 </span>
                 <span className='filter-body'>
                     <span className='filter-title filter-title-clickable'>
-                        <span>Фильтры защиты</span>
+                        <span>Armour Filters</span>
                     </span>
                     <span className='input-group-btn'>
                         <button className='btn remove-btn' title='Очистить группу фильтра' 

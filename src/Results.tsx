@@ -176,28 +176,28 @@ export function Results(props:any) {
                                 <ItemDiv>
                                     <div>{r.name} {r.base}</div>
                                     {r.subtype==='Utility' && <div>Lasts 
-                                        {r.min_duration==r.max_duration 
+                                        {r.min_duration===r.max_duration 
                                         ? <span> {r.min_duration}</span>
                                         : <span> ({r.min_duration}-{r.max_duration})</span>} Seconds</div>}
                                     {r.min_mana_rec && <div>Recovers 
-                                        {r.min_mana_rec==r.max_mana_rec
+                                        {r.min_mana_rec===r.max_mana_rec
                                         ? <span> {r.min_mana_rec}</span>
                                         : <span> ({r.min_mana_rec}-{r.max_mana_rec})</span>} Mana over 
-                                        {r.min_duration==r.max_duration 
+                                        {r.min_duration===r.max_duration 
                                         ? <span> {r.min_duration}</span>
                                         : <span> ({r.min_duration}-{r.max_duration})</span>} Seconds</div>}
                                     {r.min_life_rec && <div>Recovers 
-                                        {r.min_life_rec==r.max_life_rec
+                                        {r.min_life_rec===r.max_life_rec
                                         ? <span> {r.min_life_rec}</span>
                                         : <span> ({r.min_life_rec}-{r.max_life_rec})</span>} Life over 
-                                        {r.min_duration==r.max_duration 
+                                        {r.min_duration===r.max_duration 
                                         ? <span> {r.min_duration}</span>
                                         : <span> ({r.min_duration}-{r.max_duration})</span>} Seconds</div>}
                                     <div>Consumes 
-                                        {r.min_usage==r.max_usage
+                                        {r.min_usage===r.max_usage
                                         ? <span> {r.min_usage}</span>
                                         :<span> ({r.min_usage}-{r.max_usage})</span>} of 
-                                        {r.min_capacity==r.max_capacity
+                                        {r.min_capacity===r.max_capacity
                                         ? <span> {r.min_capacity}</span>
                                         : <span> ({r.min_capacity}-{r.max_capacity})</span>} Charges on use</div>
                                     <div>{r.buffs && r.buffs.map((b: string) => <div>{b}</div>)}</div>
