@@ -1,24 +1,50 @@
 import { useSelector } from "react-redux"
 import { getBaseWeaponsResults, getUniqueWeaponsResults, getBaseArmourResults, getUniqueArmourResults, 
-    getBaseJewelleryResults, getUniqueJewelleryResults, getBaseFlasksResults, getUniqueFlasksResults} from "./redux/results-selector"
+    getBaseJewelleryResults, getUniqueJewelleryResults, getBaseFlasksResults, getUniqueFlasksResults, getRareWeaponResults, getRareArmourResults, getRareJewelleryResults, getRareFlasksResults} from "./redux/results-selector"
 import styled from "styled-components"
+import { useEffect, useRef, useState } from "react"
+import { v1 } from "uuid"
 
 export function Results(props:any) {
     let baseWeaponsResults = useSelector(getBaseWeaponsResults)
+    let rareWeaponsResults = useSelector(getRareWeaponResults)
     let uniqueWeaponsResults = useSelector(getUniqueWeaponsResults) 
     let baseArmourResults = useSelector(getBaseArmourResults)
+    let rareArmourResults = useSelector(getRareArmourResults)
     let uniqueArmourResults = useSelector(getUniqueArmourResults) 
     let baseJewelleryResults = useSelector(getBaseJewelleryResults)
+    let rareJewelleryResults = useSelector(getRareJewelleryResults)
     let uniqueJewelleryResults = useSelector(getUniqueJewelleryResults) 
     let baseFlasksResults = useSelector(getBaseFlasksResults)
+    let rareFlasksResults = useSelector(getRareFlasksResults)
     let uniqueFlasksResults = useSelector(getUniqueFlasksResults) 
+
+    const [statDiv, setDivOpen] = useState(false);
+    const divRef = useRef<HTMLButtonElement>(null)
+
+    useEffect(() => {
+        const handler = (e: any) => {
+          if (divRef.current && !divRef.current.contains(e.target)) {
+            //dispatch(props.setShowMenu(false, props.id))
+            setDivOpen(false)
+          }
+        }
+        window.addEventListener("click", handler)
+        return () => {
+          window.removeEventListener("click", handler)
+        }
+    })
+
+    const showMoreStats = () => {
+        setDivOpen(!statDiv)
+    }
 
     return (
         <div>
-            {(baseWeaponsResults.length!==0 || uniqueWeaponsResults.length!==0 
-            || baseArmourResults.length!==0 || uniqueArmourResults.length!==0
-            || baseJewelleryResults.length!==0 || uniqueJewelleryResults.length!==0
-            || baseFlasksResults.length!==0 || uniqueFlasksResults.length!==0) && 
+            {(baseWeaponsResults.length!==0 || rareWeaponsResults.length!==0 || uniqueWeaponsResults.length!==0 
+            || baseArmourResults.length!==0 || rareArmourResults.length!==0 || uniqueArmourResults.length!==0
+            || baseJewelleryResults.length!==0 || rareJewelleryResults.length!==0 || uniqueJewelleryResults.length!==0
+            || baseFlasksResults.length!==0 || rareFlasksResults.length!==0 || uniqueFlasksResults.length!==0) && 
                 <div>
                     <h1>Результаты</h1> 
                     {
@@ -40,6 +66,31 @@ export function Results(props:any) {
                                     </div>
                                     }
                                     {r.implicit && r.implicit.map((i: string) => <div>{i}</div>)}
+                                </ItemDiv>
+                            )
+                        })
+                    }
+                    {
+                        rareWeaponsResults.length!==0 && rareWeaponsResults.map( (r: any) => {
+                            return (
+                                <ItemDiv>
+                                    <div>
+                                        <span>{r.w_type}    </span> 
+                                        {r.w_subtype ? r.w_subtype : null}
+                                    </div>
+                                    <div>
+                                        Stats
+                                        {r.stats.slice(0, 100).map( (stat: any) => {
+                                            return (
+                                                <div>
+                                                    {/* {stat} */}
+                                                    <span>{stat[0]} </span>
+                                                    <span>"{stat[1]}"</span>
+                                                </div>
+                                            )
+                                            
+                                        })}
+                                    </div>
                                 </ItemDiv>
                             )
                         })
@@ -107,6 +158,31 @@ export function Results(props:any) {
                         })
                     }
                     {
+                        rareArmourResults.length!==0 && rareArmourResults.map( (r: any) => {
+                            
+                            return (
+                                <ItemDiv>
+                                    <div>
+                                        <span>{r.a_type}    </span> 
+                                        {r.a_subtype ? r.a_subtype : null}
+                                    </div>
+                                    <div>
+                                        <button onClick={showMoreStats} ref={divRef}>Stats</button> 
+                                        {statDiv && (r.stats.slice(0, 100).map( (stat: any) => {
+                                            return (
+                                                <div>
+                                                    {/* {stat} */}
+                                                    <span>{stat[0]} </span>
+                                                    <span>"{stat[1]}"</span>
+                                                </div>
+                                            )
+                                        }))}
+                                    </div>
+                                </ItemDiv>
+                            )
+                        })
+                    }
+                    {
                         uniqueArmourResults.length!==0 && uniqueArmourResults.map( (r: any) => {
                             return (
                                 <ItemDiv>
@@ -142,6 +218,30 @@ export function Results(props:any) {
                         })
                     }
                     {
+                        rareJewelleryResults.length!==0 && rareJewelleryResults.map( (r: any) => {
+                            return (
+                                <ItemDiv>
+                                    <div>
+                                        <span>{r.j_type}    </span> 
+                                        {r.j_subtype ? r.j_subtype : null}
+                                    </div>
+                                    <div>
+                                        Stats
+                                        {r.stats.slice(0, 100).map( (stat: any) => {
+                                            return (
+                                                <div>
+                                                    {/* {stat} */}
+                                                    <span>{stat[0]} </span>
+                                                    <span>"{stat[1]}"</span>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </ItemDiv>
+                            )
+                        })
+                    }
+                    {
                         uniqueJewelleryResults.length!==0 && uniqueJewelleryResults.map( (r: any) => {
                             return (
                                 <ItemDiv>
@@ -166,6 +266,31 @@ export function Results(props:any) {
                                     <div>{r.buffs && r.buffs.map((b: string) => <div>{b}</div>)}</div>
                                     {r.req_lvl && <div> Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
                                     {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
+                                </ItemDiv>
+                            )
+                        })
+                    }
+                    {
+                        rareFlasksResults.length!==0 && rareFlasksResults.map( (r: any) => {
+                            return (
+                                <ItemDiv>
+                                    <div>
+                                        <span>{r.f_type}    </span> 
+                                        {r.f_subtype ? r.f_subtype : null}
+                                    </div>
+                                    <div>
+                                        Stats
+                                        {r.stats.slice(0, 100).map( (stat: any) => {
+                                            return (
+                                                <div>
+                                                    {/* {stat} */}
+                                                    <span>{stat[0]} </span>
+                                                    <span>"{stat[1]}"</span>
+                                                </div>
+                                            )
+                                            
+                                        })}
+                                    </div>
                                 </ItemDiv>
                             )
                         })

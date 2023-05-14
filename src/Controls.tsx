@@ -37,6 +37,22 @@ export function Controls(props: any) {
 
     const onSearchClickHandler = () => {
         let request = `http://localhost:8080/api/${category}?`
+        if(category==='any') {
+            searchParams = new URLSearchParams(rarity)
+            request += `${searchParams.toString()}&`
+            // searchParams = new URLSearchParams(type)
+            // request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(weaponsFiltersValues)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(armourFiltersValues)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(requirementFiltersValues)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(stat_order)
+            request += `${searchParams.toString()}&`
+            searchParams = new URLSearchParams(name)
+            request += searchParams.toString()
+        } 
         if(category==='weapon') {
             searchParams = new URLSearchParams(rarity)
             request += `${searchParams.toString()}&`

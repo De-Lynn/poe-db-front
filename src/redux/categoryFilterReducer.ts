@@ -67,6 +67,7 @@ let initialState = {
                 {id: v1(), option: 'Normal', category: 'normal', type: 'normal'},
                 // {id: v1(), option: 'Волшебный', category: 'Weapon', type: 'default'},
                 // {id: v1(), option: 'Редкий', category: 'Weapon', type: 'default'},
+                {id: v1(), option: 'Rare', category: 'rare', type: 'rare'},
                 {id: v1(), option: 'Unique', category: 'unique', type: 'unique'},
             ], 
             //state: true, filterValue: 'Any', activeCategory: 'any', activeType: 'any',

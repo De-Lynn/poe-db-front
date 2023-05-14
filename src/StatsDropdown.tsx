@@ -112,7 +112,9 @@ const StatsDropdown = (props: any) => {
           {getOptions().slice(0, 100).map((s: any) => (
             <div onClick={() => onItemClick(s.stat, s.stat_order)} 
               key={s.id} className={`dropdown-item ${isSelected(s.stat) && "selected"}`}>
-              {s.stat}
+                <span>{s.type}  </span>
+                <span>"{s.stat}"</span>
+              
             </div>
           ))}
         </div>
