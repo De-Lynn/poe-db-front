@@ -19,9 +19,9 @@ function RequirementFiltersForm(props: any) {
                             return (
                                 <div key={rf.id}>
                                     <div className='filter-title'>{rf.title}</div>
-                                    <Field className='form-control minmax' type="number" placeholder='мин' component={'input'}
+                                    <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
                                         name={rf.minName} maxLength={4} inputMode='numeric'/>
-                                    <Field className='form-control minmax' type="number" placeholder='макс' component={'input'} 
+                                    <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
                                         name={rf.maxName} maxLength={4} inputMode='numeric'/>
                                 </div>
                                 

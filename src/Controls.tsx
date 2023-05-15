@@ -122,16 +122,16 @@ export function Controls(props: any) {
             <div className='controls-center'>
             <button className='btn search-btn' type='button' 
                 onClick={onSearchClickHandler}>
-                <span>Поиск</span>
+                <span>Search</span>
             </button>
             </div>
             <div className='controls-right'>
             <button className='btn clear-btn' type='button'>
-                <span>Очистить</span>
+                <span>Clear</span>
             </button>
             <button className='btn toggle-search-btn' type='button'>
                 <span className='chevron'></span>
-                <span>Скрыть фильтры</span>
+                <span>Hide Filters</span>
             </button>
             </div>
         </div>

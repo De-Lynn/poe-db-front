@@ -1,0 +1,44 @@
+.search-bar {
+  margin-left: 0;
+  margin-right: 0;
+  /* padding: 8px 8px 0;
+  font-family: sans-serif; */
+  height: 34px;
+  /*float: left;*/
+  padding: 0;
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  width: 100%;
+  min-height: 1px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.search-bar.search-advanced {
+  min-height: 256px;
+  padding: 8px 0 0;
+}
+
+.search-bar .search-advanced-pane {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 10px;
+  width: 50%;
+  float: left;
+  position: relative;
+}
+
+.multiselect {
+  background: #1e2124;
+  padding: 5px 8px;
+  color: #e2e2e2;
+  min-height: 30px;
+  height: 34px;
+  box-sizing: content-box;
+  display: block;
+  position: relative;
+  text-align: left;
+}

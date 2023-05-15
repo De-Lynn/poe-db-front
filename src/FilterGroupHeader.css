@@ -1,0 +1,124 @@
+.filter {
+  display: table;
+  border-collapse: separate;
+  position: relative;
+  width: 100%;
+  margin-bottom: 3px;
+}
+
+.filter-group .filter .input-group-btn:first-child {
+  padding-left: 0;
+  padding-right: 4px;
+}
+
+.input-group-btn:first-child > .btn {
+  margin-right: -1px;
+}
+
+.input-group-btn > .btn {
+  position: relative;
+}
+
+.input-group-btn {
+  position: relative;
+  font-size: 0;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.filter-group .filter-group-header .input-group-btn .btn {
+  border: 0;
+}
+
+.search-bar .toggle-btn {
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 39px;
+  font-size: 12px;
+  border-radius: 0px;
+}
+
+.filter .filter-body {
+  display: table;
+  border-collapse: separate;
+  position: relative;
+}
+
+.filter-group-header .filter-title {
+  border-bottom: 1px solid #465260;
+  text-shadow: 1px 1px 2px #1e2124;
+  padding: 5px 0px;
+}
+
+.filter-title.filter-title-clickable {
+  cursor: pointer;
+}
+
+.filter-title {
+  display: table;
+  table-layout: fixed;
+  float: left;
+  width: 100%;
+  height: 30px;
+  line-height: 18px;
+  color: #fff8e1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.filter-group .filter .input-group-btn {
+  padding-left: 4px;
+}
+.input-group-btn {
+  position: relative;
+  font-size: 0;
+  white-space: nowrap;
+  width: 1%;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.filter-group-header.input-group-btn {
+  border: 0;
+}
+
+.search-bar .remove-btn {
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  width: 39px;
+  font-size: 12px;
+  border-radius: 0px;
+}
+
+.search-bar .btn {
+  color: #e2e2e2;
+}
+
+.input-group-btn:last-child > .btn {
+  z-index: 2;
+  margin-left: -1px;
+}
+
+.input-group-btn > .btn {
+  position: relative;
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  white-space: nowrap;
+}
+
+.filter-group .btn {
+  line-height: 20px;
+  padding: 5px 12px;
+}

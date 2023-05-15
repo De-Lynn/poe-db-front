@@ -6,16 +6,16 @@ const CHANGE_REQUIREMENT_FILTER_VISIBILITY = 'CHANGE-REQUIREMENT-FILTER-VISIBILI
 
 let initialState = {
     requirementFilters: [
-        {id: v1(), title: 'Уровень', minName:"lvlMinValue", maxName:"lvlMaxValue",
+        {id: v1(), title: 'Level', minName:"lvlMinValue", maxName:"lvlMaxValue",
             // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Сила', minName:"strMinValue", maxName:"strMaxValue",
+        {id: v1(), title: 'Strength', minName:"strMinValue", maxName:"strMaxValue",
             // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Ловкость', minName:"dexMinValue", maxName:"dexMaxValue",
+        {id: v1(), title: 'Dexterity', minName:"dexMinValue", maxName:"dexMaxValue",
             // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Интеллект', minName:"intMinValue", maxName:"intMaxValue",
+        {id: v1(), title: 'Intelligence', minName:"intMinValue", maxName:"intMaxValue",
             // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
         

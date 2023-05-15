@@ -19,9 +19,9 @@ function ArmourFiltersForm(props: any) {
                             return (
                                 <div key={af.id}>
                                     <div className='filter-title'>{af.title}</div>
-                                    <Field className='form-control minmax' type="number" placeholder='мин' component={'input'}
+                                    <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
                                         name={af.minName} maxLength={4} inputMode='numeric'/>
-                                    <Field className='form-control minmax' type="number" placeholder='макс' component={'input'} 
+                                    <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
                                         name={af.maxName} maxLength={4} inputMode='numeric'/>
                                 </div>
                                 

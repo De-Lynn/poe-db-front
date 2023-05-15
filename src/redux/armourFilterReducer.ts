@@ -6,16 +6,16 @@ const CHANGE_ARMOUR_FILTER_VISIBILITY = 'CHANGE-ARMOUR-FILTER-VISIBILITY'
 
 let initialState = {
     armourFilters: [
-        {id: v1(), title: 'Броня', minName:"armourMinValue", maxName:"armourMaxValue",
+        {id: v1(), title: 'Armour', minName:"armourMinValue", maxName:"armourMaxValue",
             // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Уклонение', minName:"evasionMinValue", maxName:"evasionMaxValue",
+        {id: v1(), title: 'Evasion', minName:"evasionMinValue", maxName:"evasionMaxValue",
             // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Энергетический щит', minName:"esMinValue", maxName:"esMaxValue",
+        {id: v1(), title: 'Enegry Shield', minName:"esMinValue", maxName:"esMaxValue",
             // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Блок', minName:"blockMinValue", maxName:"blockMaxValue",
+        {id: v1(), title: 'Block', minName:"blockMinValue", maxName:"blockMaxValue",
             // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
         

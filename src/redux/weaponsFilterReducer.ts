@@ -22,16 +22,16 @@ const CHANGE_WEAPONS_FILTER_VISIBILITY = 'CHANGE-WEAPONS-FILTER-VISIBILITY'
 
 let initialState = {
     weaponsFilters: [
-        {id: v1(), title: 'Урон', minName: "damageMinValue", maxName: "damageMaxValue"
+        {id: v1(), title: 'Damage', minName: "damageMinValue", maxName: "damageMaxValue"
             // header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Шанс критического удара', minName: "critMinValue", maxName: "critMaxValue",
+        {id: v1(), title: 'Critical Chance', minName: "critMinValue", maxName: "critMaxValue",
             // header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Атак в секунду', minName: "apsMinValue", maxName: "apsMaxValue",
+        {id: v1(), title: 'Attacks per Second', minName: "apsMinValue", maxName: "apsMaxValue",
             // header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
-        {id: v1(), title: 'Урон в секунду', minName: "dpsMinValue", maxName: "dpsMaxValue",
+        {id: v1(), title: 'Damage per Second', minName: "dpsMinValue", maxName: "dpsMaxValue",
             // header: 'Фильтры оружия', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
         },
     ],
