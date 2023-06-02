@@ -1,10 +1,108 @@
-.search-bar {
+#trade .search-bar {
   margin-left: 0;
   margin-right: 0;
-  /* padding: 8px 8px 0;
-  font-family: sans-serif; */
+  padding: 8px 8px 0;
+  font-family: sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#trade .search-bar .search-left {
   height: 34px;
-  /*float: left;*/
+  float: left;
+  padding: 0;
+  position: relative;
+  display: table;
+  border-collapse: separate;
+  width: 58.3333333333%;
+  min-height: 1px;
+}
+
+.multiselect {
+  color: #e2e2e2;
+  min-height: 30px;
+  height: 34px;
+  box-sizing: content-box;
+  display: block;
+  position: relative;
+  text-align: left;
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+
+#trade .search-bar.search-advanced {
+  min-height: 256px;
+  padding: 8px 0 0;
+}
+
+#trade .search-bar {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#trade .search-bar .search-advanced-pane {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 10px;
+  width: 50%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+}
+
+.multiselect .multiselect__select {
+  height: 34px;
+  right: 0px;
+  top: 0px;
+  padding: 8px 8px;
+}
+
+.multiselect__select {
+  position: absolute;
+  width: 40px;
+  text-align: center;
+  line-height: 16px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* #trade .multiselect .multiselect__tags {
+  transition: border-color ease-in-out .15s,
+    box-shadow ease-in-out .15s,
+    outline-color ease-in-out .15s;
+} */
+
+.multiselect .multiselect__tags {
+  min-height: 30px;
+  height: 100%;
+  padding: 5px 8px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #1e2124;
+  font-size: 1em;
+}
+
+.multiselect__tags {
+  display: block;
+}
+
+.multiselect * {
+  box-sizing: border-box;
+}
+
+/* .search-bar {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 8px 8px 0;
+  font-family: sans-serif;
+  height: 34px;
+  float: left;
   padding: 0;
   position: relative;
   display: table;
@@ -41,4 +139,4 @@
   display: block;
   position: relative;
   text-align: left;
-}
+} */

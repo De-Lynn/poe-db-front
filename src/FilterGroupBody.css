@@ -1,4 +1,219 @@
-.search-bar .blue .filter-group .filter-group-body {
+#trade .search-bar .blue .filter-group .filter-group-body {
+  padding: 0 39px 0 39px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.filter.filter-property.full-span {
+  width: 100%;
+  padding: 0;
+}
+
+.filter.filter-property {
+  float: left;
+}
+
+.filter {
+  display: table;
+  border-collapse: separate;
+  position: relative;
+  margin-bottom: 3px;
+}
+
+.filter .filter-body {
+  display: table;
+  border-collapse: separate;
+  position: relative;
+}
+
+#trade .filter-group .filter-group-body .filter-title {
+  color: #fff8e1;
+  width: 119%;
+  background-color: rgba(45, 49, 54, .3);
+  border-left: 1px solid #634928;
+}
+
+.filter-title {
+  display: table;
+  table-layout: fixed;
+  float: left;
+  width: 100%;
+  height: 30px;
+  padding: 6px 12px 6px 12px;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.filter .sep:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.filter .sep {
+  border: 0;
+  width: 0;
+  padding: 0 3px 0 0;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+#trade .multiselect.filter-select {
+  display: table;
+  table-layout: fixed;
+  position: unset;
+  float: right;
+  width: 80%;
+  height: 30px;
+}
+
+.multiselect {
+  color: #e2e2e2;
+  min-height: 30px;
+  box-sizing: content-box;
+  text-align: left;
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+.multiselect .multiselect__select {
+  height: 34px;
+  right: 0px;
+  top: 0px;
+  padding: 8px 8px;
+}
+
+.multiselect__select {
+  position: absolute;
+  width: 40px;
+  text-align: center;
+  transition: transform .2s ease;
+  line-height: 16px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#trade .multiselect.filter-select .multiselect__tags {
+  border-color: #1e2124;
+  max-height: 30px;
+  padding: 4px 7px;
+}
+
+/* #trade .multiselect .multiselect__tags {
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, 
+              outline-color ease-in-out .15s;
+} */
+
+.multiselect .multiselect__tags {
+  min-height: 30px;
+  height: 100%;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #1e2124;
+  font-size: 1em;
+}
+
+.multiselect__tags {
+  display: block;
+}
+
+.multiselect * {
+  box-sizing: border-box;
+}
+
+/* weapon filters */
+.filter.filter-property {
+  float: left;
+  width: 50%;
+  padding: 0;
+}
+
+.filter {
+  display: table;
+  border-collapse: separate;
+  position: relative;
+  margin-bottom: 3px;
+}
+
+.filter .filter-body {
+  display: table;
+  border-collapse: separate;
+  position: relative;
+}
+
+#trade .search-bar.search-advanced input {
+  text-align: center;
+}
+
+.filter .filter-body > input.form-control.minmax {
+  min-width: 64px;
+}
+
+.filter > span > input.form-control.minmax {
+  min-width: 64px;
+}
+
+.filter .form-control:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.filter .filter-body > input:not(:focus) {
+  border-color: rgba(0, 0, 0, 0);
+}
+
+.filter > span > input:not(:focus) {
+  border-color: rgba(0, 0, 0, 0);
+}
+
+.filter .filter-body > input.form-control {
+  background: #1e2124;
+  padding: 5px;
+}
+
+.filter > span > input.form-control {
+  background: #1e2124;
+  padding: 5px;
+}
+
+.filter input.form-control {
+  height: 30px;
+}
+
+.filter .form-control {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.form-control {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #fff;
+  border: 1px solid #000;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+input {
+  font-family: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+/* .search-bar .blue .filter-group .filter-group-body {
   padding: 0 39px 0 39px;
 }
 
@@ -45,4 +260,4 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-}
+} */

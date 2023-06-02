@@ -46,12 +46,12 @@ export function Results(props:any) {
             || baseArmourResults.length!==0 || rareArmourResults.length!==0 || uniqueArmourResults.length!==0
             || baseJewelleryResults.length!==0 || rareJewelleryResults.length!==0 || uniqueJewelleryResults.length!==0
             || baseFlasksResults.length!==0 || rareFlasksResults.length!==0 || uniqueFlasksResults.length!==0) && 
-                <div>
+                <ResultsDiv>
                     <h1>Results</h1> 
                     {
                         baseWeaponsResults.length!==0 && baseWeaponsResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <BaseItemDiv>
                                     <div>{r.name}</div>
                                     <div>{r.subtype ? r.subtype : r.type}</div>
                                     {r.min_damage && <div>Physical damage: {r.min_damage}-{r.max_damage}</div>}
@@ -67,7 +67,7 @@ export function Results(props:any) {
                                     </div>
                                     }
                                     {r.implicit && r.implicit.map((i: string) => <div>{i}</div>)}
-                                </ItemDiv>
+                                </BaseItemDiv>
                             )
                         })
                     }
@@ -75,7 +75,7 @@ export function Results(props:any) {
                     {
                         uniqueWeaponsResults.length!==0 && uniqueWeaponsResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <UniqueItemDiv>
                                     <div>{r.name} {r.base}</div>
                                     <div>{r.subtype ? r.subtype : r.type}</div>
                                     {r.min_damage &&
@@ -108,14 +108,14 @@ export function Results(props:any) {
                                     {r.implicit && r.implicit.map((i: string) => <div>{i}</div>)}
                                     <hr />
                                     {r.stats && r.stats.map((s: string) => <div>{s}</div>)}
-                                </ItemDiv>
+                                </UniqueItemDiv>
                             )
                         })
                     }
                     {
                         baseArmourResults.length!==0 && baseArmourResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <BaseItemDiv>
                                     <div>{r.name}</div>
                                     {r.min_armour && <div>Armour: {r.min_armour}-{r.max_armour}</div>}
                                     {r.min_evasion && <div>Evasion: {r.min_evasion}-{r.max_evasion}</div>}
@@ -130,7 +130,7 @@ export function Results(props:any) {
                                     </div>
                                     }
                                     {r.implicit && r.implicit.map((i: string) => <div>{i}</div>)}
-                                </ItemDiv>
+                                </BaseItemDiv>
                             )
                         })
                     }
@@ -138,7 +138,7 @@ export function Results(props:any) {
                     {
                         uniqueArmourResults.length!==0 && uniqueArmourResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <UniqueItemDiv>
                                     <div>{r.name} {r.base}</div>
                                     {r.min_armour && <div>Armour: {r.min_armour}-{r.max_armour}</div>}
                                     {r.min_evasion && <div>Evasion: {r.min_evasion}-{r.max_evasion}</div>}
@@ -155,18 +155,18 @@ export function Results(props:any) {
                                     {r.implicit && r.implicit.map((i: string) => <div>{i}</div>)}
                                     <hr />
                                     {r.stats && r.stats.map((s: string) => <div>{s}</div>)}
-                                </ItemDiv>
+                                </UniqueItemDiv>
                             )
                         })
                     }
                     {
                         baseJewelleryResults.length!==0 && baseJewelleryResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <BaseItemDiv>
                                     <div>{r.name}</div>
                                     {r.req_lvl && <div>Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
                                     {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
-                                </ItemDiv>
+                                </BaseItemDiv>
                             )
                         })
                     }
@@ -174,20 +174,20 @@ export function Results(props:any) {
                     {
                         uniqueJewelleryResults.length!==0 && uniqueJewelleryResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <UniqueItemDiv>
                                     <div>{r.name} {r.base}</div>
                                     {r.req_lvl && <div>Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
                                     {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
                                     <hr />
                                     {r.stats && r.stats.map((s: string) => <div>{s}</div>)}
-                                </ItemDiv>
+                                </UniqueItemDiv>
                             )
                         })
                     }
                     {
                         baseFlasksResults.length!==0 && baseFlasksResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <BaseItemDiv>
                                     <div>{r.name}</div>
                                     {r.subtype==='Utility' && <div>Lasts {r.duration} Seconds</div>}
                                     {r.mana_rec && <div>Recovers {r.mana_rec} Mana over {r.duration} Seconds</div>}
@@ -196,7 +196,7 @@ export function Results(props:any) {
                                     <div>{r.buffs && r.buffs.map((b: string) => <div>{b}</div>)}</div>
                                     {r.req_lvl && <div> Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
                                     {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
-                                </ItemDiv>
+                                </BaseItemDiv>
                             )
                         })
                     }
@@ -204,7 +204,7 @@ export function Results(props:any) {
                     {
                         uniqueFlasksResults.length!==0 && uniqueFlasksResults.map( (r: any) => {
                             return (
-                                <ItemDiv>
+                                <UniqueItemDiv>
                                     <div>{r.name} {r.base}</div>
                                     {r.subtype==='Utility' && <div>Lasts 
                                         {r.min_duration===r.max_duration 
@@ -236,19 +236,31 @@ export function Results(props:any) {
                                     {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
                                     <hr />
                                     {r.stats && r.stats.map((s: string) => <div>{s}</div>)}
-                                </ItemDiv>
+                                </UniqueItemDiv>
                             )
                         })
                     }
-                </div>
+                </ResultsDiv>
             }
         </div>
     )
 }
 
-const ItemDiv = styled.div`
+const ResultsDiv = styled.div`
+    margin: 4px;
+    padding: 4px;
+    width: 50%;
+`
+
+const BaseItemDiv = styled.div`
     margin: 4px;
     padding: 4px;
     background: #ccc;
+
+`
+const UniqueItemDiv = styled.div`
+    margin: 4px;
+    padding: 4px;
+    background: #631;
 
 `

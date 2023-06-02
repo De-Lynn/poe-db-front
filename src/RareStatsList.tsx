@@ -116,7 +116,7 @@ const RareStatsList = (props: any) => {
 
   return (
     <>
-      <ItemDiv>
+      <RareItemDiv>
         <div>
             <span>{props.r.i_type}    </span> 
             {props.r.i_subtype ? props.r.i_subtype : null}
@@ -133,7 +133,7 @@ const RareStatsList = (props: any) => {
                 )
             }))}
         </div>
-      </ItemDiv>
+      </RareItemDiv>
       {/* <div className="dropdown-input"
         onClick={handleInputClick} ref={inputRef}>
         <div className="dropdown-selected-value">{getDisplay()}</div>
@@ -168,5 +168,12 @@ const ItemDiv = styled.div`
     margin: 4px;
     padding: 4px;
     background: #ccc;
+
+`
+
+const RareItemDiv = styled.div`
+    margin: 4px;
+    padding: 4px;
+    background: #aa2;
 
 `

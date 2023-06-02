@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 //import { setSearchValue, setSelectedValue, setShowMenu } from "./redux/dropdownReducer";
 import { useDispatch } from "react-redux";
 //import { getShowMenu } from "./redux/categoryFilter-selectors";
-
+//import './NameDropdown';
 
 const Dropdown = (props: any) => {
   // const showMenu = useSelector(getShowMenu)
@@ -95,7 +95,7 @@ const Dropdown = (props: any) => {
   }
 
   return (
-    <>
+    <div>
       <div className="dropdown-input"
         onClick={handleInputClick} ref={inputRef}>
         <div className="dropdown-selected-value">{getDisplay()}</div>
@@ -106,20 +106,35 @@ const Dropdown = (props: any) => {
       {showMenu && (
         <div className="dropdown-menu">
           {props.isSearchable && (
-            <div className="search-box">
-              <input onChange={onSearch} value={searchValue} ref={searchRef}/>
+            // <div className="search-box">
+            <div className="multiselect__tags">
+              {/* <div className="multiselect__spinner"></div> */}
+              <input className="multiselect__input"
+                onChange={onSearch} value={searchValue} ref={searchRef}/>
             </div>
+              
+            // </div>
           )}
-          {getOptions().map((op: any) => (
-            <div onClick={() => onItemClick(op.option, op.type, op.category)} 
-              key={op.id} className={`dropdown-item ${isSelected(op.option) && "selected"}`}>
-              {op.option}
-            </div>
-          ))}
+          <div className="multiselect__content-wrapper">
+            <ul className="multiselect__content">
+              {getOptions().map((op: any) => (
+                // <div onClick={() => onItemClick(op.option, op.type, op.category)} 
+                //   key={op.id} className={`dropdown-item ${isSelected(op.option) && "selected"}`}>
+                //   {op.option}
+                // </div>
+                <li className="multiselect__element" onClick={() => onItemClick(op.option, op.type, op.category)} 
+                  key={op.id}>
+                    <span className="multiselect__option">{op.option}</span>
+                  </li>
+              ))}
+            </ul>
+            
+          </div>
+          
         </div>
       )}
       
-    </>
+    </div>
   )
 }
 

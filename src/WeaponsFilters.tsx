@@ -4,6 +4,8 @@ import { getWeaponsFilters, getWeaponsFiltersValues, getWeaponsFilterVisibility 
 import { useDispatch } from "react-redux";
 import { changeWeaponsFiltersValue, cleanWeaponsFilterValues, changeWeaponsFilterVisibility } from "./redux/weaponsFilterReducer";
 import { ChangeEvent } from "react";
+//import './FilterGroupHeader.css';
+//import './FilterGroupBody.css'
 
 function WeaponsFiltersForm(props: any) {
     let weaponsFilters = useSelector(getWeaponsFilters)
@@ -13,14 +15,16 @@ function WeaponsFiltersForm(props: any) {
     return (
         <form onSubmit={props.handleSubmit}>
             {filterVisibility && 
-                <div className='filter filter-property full-span'>
+                <div className='filter filter-property'>
                     <span className='filter-body'>
                         {weaponsFilters.map((wf: any) => {
                             return (
                                 <div key={wf.id}>
                                     <div className='filter-title'>{wf.title}</div>
+                                    <span className="sep"></span>
                                     <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
                                         name={wf.minName} maxLength={4} inputMode='numeric'/>
+                                    <span className="sep"></span>
                                     <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
                                         name={wf.maxName} maxLength={4} inputMode='numeric'/>
                                 </div>
@@ -64,21 +68,25 @@ export function WeaponsFilters(props: any) {
     }
 
     return (
-        <div>
+        <div className="filter-group expanded">
             <div className='filter-group-header'>
-                <span className='input-group-btn'>
-                    <input type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="weaponsCheckbox"/>
-                </span>
-                <span className='filter-body'>
-                    <span className='filter-title filter-title-clickable'>
-                        {/* <span>{props.filterTitle}</span> */}
-                        <span>Weapon Filters</span>
-                    </span>
+                <div className="filter">
                     <span className='input-group-btn'>
-                        <button className='btn remove-btn' title='Очистить группу фильтра' 
-                            name="weaponsButton" onClick={cleanFiltersValues}>X</button>
+                        <input className="btn toggle-btn"
+                            type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="weaponsCheckbox"/>
                     </span>
-                </span>
+                    <span className='filter-body'>
+                        <span className='filter-title filter-title-clickable'>
+                            {/* <span>{props.filterTitle}</span> */}
+                            <span>Weapon Filters</span>
+                        </span>
+                        <span className='input-group-btn'>
+                            <button className='btn remove-btn' title='Очистить группу фильтра' 
+                                name="weaponsButton" onClick={cleanFiltersValues}>X</button>
+                        </span>
+                    </span>
+                </div>
+                
             </div>
             <WeaponsFiltersReduxForm onSubmit={setWeaponsFiltersValue}/>
         </div>

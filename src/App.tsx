@@ -1,4 +1,4 @@
-import './App.css';
+//import './App.css';
 import SearchPanel from './SearchPanel';
 import { Results } from './Results';
 import logo from './img/Path-of-Exile-Logo.png'
@@ -11,11 +11,22 @@ export type FilterHeadersType = {
 
 function App(props: any) {
   return (
-    <div className="App">
-      <div className='logo'><a href=""><img src={logo} alt="" /></a></div>
-      <div className='SearchPanel'><SearchPanel /></div>
-      <div><Results /></div>
+    <div id='app' className='container-fluid full'>
+      <div className="content">
+        <div className='wrapper'>
+          {/* <div className='logo'><a href=""><img src={logo} alt="" /></a></div> */}
+          <div id='trade'>
+            <div className='top'>
+              <SearchPanel />
+            </div>
+            
+          </div>
+          <div><Results /></div>
+        </div>
+        
+      </div>
     </div>
+    
   );
 }
 

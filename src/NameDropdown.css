@@ -1,0 +1,176 @@
+.multiselect {
+  color: #e2e2e2;
+  min-height: 30px;
+  height: 34px;
+  box-sizing: content-box;
+  display: block;
+  position: relative;
+  text-align: left;
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+
+#trade .search-bar.search-advanced {
+  min-height: 256px;
+  padding: 8px 0 0;
+}
+
+#trade .search-bar {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#trade .search-bar .search-advanced-pane {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 10px;
+  width: 50%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+}
+
+.multiselect .multiselect__select {
+  height: 34px;
+  right: 0px;
+  top: 0px;
+  padding: 8px 8px;
+}
+
+.multiselect__select {
+  position: absolute;
+  width: 40px;
+  text-align: center;
+  line-height: 16px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/*  */
+.multiselect .multiselect__input {
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0);
+  border-radius: 0;
+  margin-bottom: 0px;
+  padding: 1px 4px;
+  text-overflow: clip;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.multiselect__input {
+  position: relative;
+  display: inline-block;
+  min-height: 20px;
+  line-height: 20px;
+  border: none;
+  color: #e2e2e2;
+  width: 100%;
+  transition: border .1s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+input {
+  font-size: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.multiselect__content-wrapper {
+  position: absolute;
+  background: #000;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: none;
+  z-index: 5;
+}
+
+.multiselect * {
+  box-sizing: border-box;
+}
+
+.multiselect .multiselect__content {
+  background-color: #1e2124;
+  border: 1px solid #000;
+  border-radius: 0;
+}
+
+.multiselect__content {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 100%;
+}
+
+ul {
+  position: relative;
+}
+
+.multiselect__element {
+  display: block;
+}
+
+#trade .multiselect__option {
+  padding: 0;
+  height: auto;
+}
+
+.multiselect .multiselect__option {
+  min-height: 30px;
+}
+
+.multiselect__option {
+  display: block;
+  line-height: 16px;
+  text-decoration: none;
+  text-transform: none;
+  position: relative;
+  white-space: nowrap;
+} 
+
+#trade .multiselect.filter-select .multiselect__tags {
+  border-color: #1e2124;
+  max-height: 30px;
+  padding: 4px 7px;
+}
+
+#trade .multiselect .multiselect__tags {
+  transition: border-color ease-in-out .15s,
+    box-shadow ease-in-out .15s,
+    outline-color ease-in-out .15s;
+}
+
+.multiselect .multiselect__tags {
+  min-height: 30px;
+  height: 100%;
+  padding: 5px 8px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #1e2124;
+  font-size: 1em;
+}
+
+.multiselect__tags {
+  display: block;
+}
+
+.multiselect * {
+  box-sizing: border-box;
+}
+
+.multiselect__spinner {
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  width: 48px;
+  height: 35px;
+  background: #e2e2e2;
+}

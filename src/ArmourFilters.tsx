@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { ChangeEvent } from "react";
 import { changeArmourFiltersValue, changeArmourFilterVisibility, cleanArmourFilterValues } from "./redux/armourFilterReducer";
 import { getArmourFilters, getArmourFiltersValues, getArmourFilterVisibility } from "./redux/armourFilter-selectors";
+//import './FilterGroupHeader.css';
+//import './FilterGroupBody.css';
 
 function ArmourFiltersForm(props: any) {
     let armourFilters = useSelector(getArmourFilters)
@@ -13,7 +15,7 @@ function ArmourFiltersForm(props: any) {
     return (
         <form onSubmit={props.handleSubmit}>
             {filterVisibility && 
-                <div className='filter filter-property full-span'>
+                <div className='filter filter-property'>
                     <span className='filter-body'>
                         {armourFilters.map((af: any) => {
                             return (
@@ -21,8 +23,10 @@ function ArmourFiltersForm(props: any) {
                                     <div className='filter-title'>{af.title}</div>
                                     <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
                                         name={af.minName} maxLength={4} inputMode='numeric'/>
+                                    <span className="sep"></span>
                                     <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
                                         name={af.maxName} maxLength={4} inputMode='numeric'/>
+                                    <span className="sep"></span>
                                 </div>
                                 
                             )
@@ -58,20 +62,24 @@ export function ArmourFilters(props: any) {
     // console.log(armourFiltersValues)
 
     return (
-        <div>
+        <div className="filter-group expanded">
             <div className='filter-group-header'>
-                <span className='input-group-btn'>
-                    <input type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="armourCheckbox"/>
-                </span>
-                <span className='filter-body'>
-                    <span className='filter-title filter-title-clickable'>
-                        <span>Armour Filters</span>
-                    </span>
+                <div className="filter">
                     <span className='input-group-btn'>
-                        <button className='btn remove-btn' title='Очистить группу фильтра' 
-                            name="armourButton" onClick={cleanFiltersValues}>X</button>
+                        <input className="btn toggle-btn" 
+                            type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="armourCheckbox"/>
                     </span>
-                </span>
+                    <span className='filter-body'>
+                        <span className='filter-title filter-title-clickable'>
+                            <span>Armour Filters</span>
+                        </span>
+                        <span className='input-group-btn'>
+                            <button className='btn remove-btn' title='Очистить группу фильтра' 
+                                name="armourButton" onClick={cleanFiltersValues}>X</button>
+                        </span>
+                    </span>
+                </div>
+                
             </div>
             <ArmourFiltersReduxForm 
             //onChange={setArmourFiltersValue} 

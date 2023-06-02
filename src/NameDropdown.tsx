@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setNamesPool } from "./redux/searchPanelReducer";
 //import { getShowMenu } from "./redux/categoryFilter-selectors";
+//import './NameDropdown.css';
 
 
 const NameDropdown = (props: any) => {
@@ -95,27 +96,48 @@ const NameDropdown = (props: any) => {
 
   return (
     <>
-      <div className="dropdown-input"
-        onClick={handleInputClick} ref={inputRef}>
-        <div className="dropdown-selected-value">{getDisplay()}</div>
-        <div className="dropdown-tools">
-          <div className="dropdown-tool"></div>
+      
+      {/* <div className="dropdown-input"> */}
+        <div onClick={handleInputClick} ref={inputRef}>
+          {/* <div className="dropdown-selected-value">{getDisplay()}</div> */}
+          <div>{getDisplay()}</div>
+          {/* <div className="dropdown-tools">
+            <div className="dropdown-tool"></div>
+          </div> */}
         </div>
-      </div>
+      {/* </div> */}
       {showMenu && (
-        <div className="dropdown-menu">
+        // <div className="dropdown-menu">
+        <div>
+          {/* <div className='multiselect__select'></div> */}
           {props.isSearchable && (
-            <div className="search-box">
-              <input onChange={onSearch} value={searchValue} ref={searchRef}/>
-            </div>
+            // <div className="search-box">
+            // <div className="multiselect__tags">
+              /* <div className="multiselect__spinner"></div> */
+              <input className="multiselect__input"
+                onChange={onSearch} value={searchValue} ref={searchRef}/>
+            // </div>
+              
+            // </div>
           )}
-          {getOptions().slice(0, 100).map((n: any) => (
-            <div onClick={() => onItemClick(n.name)} 
-              //key={n.id} 
-              className={`dropdown-item ${isSelected(n.name) && "selected"}`}>
-              {n.name}
-            </div>
-          ))}
+          <div className="multiselect__content-wrapper">
+            <ul className="multiselect__content">
+              {getOptions().slice(0, 100).map((n: any) => (
+                // <div onClick={() => onItemClick(n.name)} 
+                //   //key={n.id} 
+                //   className={`dropdown-item ${isSelected(n.name) && "selected"}`}>
+                //   {n.name}
+                // </div>
+                <li className="multiselect__element" onClick={() => onItemClick(n.name)} 
+                  //className={`dropdown-item ${isSelected(n.name) && "selected"}`}
+                >
+                  <span className="multiselect__option ">{n.name}</span>
+                </li>
+              ))}
+            </ul>
+            
+          </div>
+          
         </div>
       )}
       

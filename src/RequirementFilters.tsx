@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { ChangeEvent } from "react";
 import { getRequirementFilterVisibility, getRequirementFilters, getRequirementFiltersValues } from "./redux/requirementFilter-selectors";
 import { changeRequirementFilterVisibility, changeRequirementFiltersValue, cleanRequirementFilterValues } from "./redux/requirementFilterReducer";
+//import './FilterGroupHeader.css';
+//import './FilterGroupBody.css';
 
 function RequirementFiltersForm(props: any) {
     let requirementFilters = useSelector(getRequirementFilters)
@@ -13,7 +15,7 @@ function RequirementFiltersForm(props: any) {
     return (
         <form onSubmit={props.handleSubmit}>
             {filterVisibility && 
-                <div className='filter filter-property full-span'>
+                <div className='filter filter-property'>
                     <span className='filter-body'>
                         {requirementFilters.map((rf: any) => {
                             return (
@@ -21,8 +23,10 @@ function RequirementFiltersForm(props: any) {
                                     <div className='filter-title'>{rf.title}</div>
                                     <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
                                         name={rf.minName} maxLength={4} inputMode='numeric'/>
+                                    <span className="sep"></span>
                                     <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
                                         name={rf.maxName} maxLength={4} inputMode='numeric'/>
+                                    <span className="sep"></span>
                                 </div>
                                 
                             )
@@ -57,20 +61,24 @@ export function RequirementFilters(props: any) {
     }
 
     return (
-        <div>
+        <div className="filter-group expanded">
             <div className='filter-group-header'>
-                <span className='input-group-btn'>
-                    <input type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="requirementCheckbox"/>
-                </span>
-                <span className='filter-body'>
-                    <span className='filter-title filter-title-clickable'>
-                        <span>Requirements</span>
-                    </span>
+                <div className="filter">
                     <span className='input-group-btn'>
-                        <button className='btn remove-btn' title='Очистить группу фильтра' 
-                        name="requirementButton" onClick={cleanFiltersValues}>X</button>
+                        <input className="btn toggle-btn"
+                            type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="requirementCheckbox"/>
                     </span>
-                </span>
+                    <span className='filter-body'>
+                        <span className='filter-title filter-title-clickable'>
+                            <span>Requirements</span>
+                        </span>
+                        <span className='input-group-btn'>
+                            <button className='btn remove-btn' title='Очистить группу фильтра' 
+                            name="requirementButton" onClick={cleanFiltersValues}>X</button>
+                        </span>
+                    </span>
+                </div>
+                
             </div>
             <RequirementFiltersReduxForm onSubmit={setRequirementFiltersValue}/>
         </div>
