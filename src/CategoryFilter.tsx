@@ -4,8 +4,8 @@ import { useSelector } from "react-redux"
 import { getCategoryFiltersVisibility, getCategoryFilters } from "./redux/searchPanel-selector"
 import { useDispatch } from "react-redux"
 import Dropdown from "./Dropdown"
-//import './FilterGroupHeader.css'
-//import './FilterGroupBody.css'
+import './FilterGroupHeader.css'
+import './FilterGroupBody.css'
 
 export function CategoryFilter(props: any) {
   let categoryFilterVisibility = useSelector(getCategoryFiltersVisibility)
@@ -28,7 +28,8 @@ export function CategoryFilter(props: any) {
             {/* <button className="btn toggle-btn"></button> */}
             <input className="btn toggle-btn" 
               type="checkbox" checked={categoryFilterVisibility} name="categoryCheckbox"
-              onChange={onChangeHandler}/>
+              onChange={onChangeHandler} id="categoriesCheckbox"/>
+            <label htmlFor="categoriesCheckbox"></label>
           </span>
           <span className='filter-body'>
             <span className='filter-title filter-title-clickable'>
@@ -36,7 +37,9 @@ export function CategoryFilter(props: any) {
             </span>
             <span className='input-group-btn'>
               <button className='btn remove-btn' title='Clear Filter Group'
-                      onClick={onClickHandler} name="categoryButton">X</button>
+                onClick={onClickHandler} name="categoryButton"
+                id="categoryButton"/>
+              <label htmlFor="categoryButton"></label>
             </span>
           </span>
         </div>
@@ -48,15 +51,15 @@ export function CategoryFilter(props: any) {
               <span className='filter-body'>
                 <div className='filter-title'>{cf.title}</div>
                 <span className="sep"></span>
-                <div className='multiselect filter-select multiselect--above modified'>
-                  <div className="multiselect__select"></div>
-                  <div className="multiselect__tags">
+                {/* <div className='multiselect filter-select multiselect--above modified'> TODO +mofified when type is selected (any except ANY type) */}
+                  {/* <div className="multiselect__select"></div> */}
+                  {/* <div className="multiselect__tags"> */}
                     <Dropdown placeHolder='Any' id={cf.id} options={cf.content} isSearchable={true}
                       setSearchValue={setSearchValue} setShowMenu={setShowMenu} setSelectedValue={setSelectedValue}
                       showMenu={cf.showMenu} selectedValue={cf.selectedValue} searchValue={cf.searchValue}
                     />
-                  </div>
-                </div>
+                  {/* </div> */}
+                {/* </div> */}
               </span>
             </div>
           )})

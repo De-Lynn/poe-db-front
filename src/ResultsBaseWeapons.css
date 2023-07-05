@@ -1,0 +1,189 @@
+#trade .results .resultset:not(.exchange) .row {
+    width: 100%;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #333;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.results .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    opacity: 1;
+    background-color: rgba(10, 10, 10, .8);
+    position: relative;
+    transition: opacity .5s;
+}
+
+.results .row:not(:has(h3)) {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    padding: 8px 16px;
+    opacity: 1;
+    background-color: rgba(10, 10, 10, .8);
+    position: relative;
+    transition: opacity .5s;
+}
+
+#trade .results .itemPopupContainer {
+    text-align: initial;
+    font-size: .85em;
+    font-family: unset;
+    background: none;
+}
+
+.results .row .middle .itemPopupContainer:not(.divinationCard) {
+    max-width: initial;
+}
+
+.results .row .middle .itemPopupContainer{
+    margin: 0 auto;
+    width: 100%;
+}
+
+.results .itemPopupContainer {
+    pointer-events: all;
+}
+
+.results .newItemPopup {
+    z-index: 0;
+}
+
+.newItemPopup {
+    color: #7f7f7f;
+    font-size-adjust: .54;
+    font-weight: normal;
+}
+
+.itemPopupContainer {
+    position: relative;
+    min-width: 260px;
+}
+
+.itemBoxContent {
+    position: relative;
+    background: top right repeat-y;
+    font-size: 110%;
+}
+
+#trade .results .itemPopupContainer .itemHeader {
+    background: none !important;
+    font-size: 1.1em;
+    height: auto !important;
+    margin: 0;
+    padding: 0;
+}
+
+.normalPopup .itemHeader {
+    pointer-events: all;
+}
+
+.newItemPopup .itemHeader {
+    line-height: 1em;
+}
+
+#trade .results .itemPopupContainer .itemName {
+    display: inline-block;
+}
+
+.newItemPopup.normalPopup .itemName {
+    color: #c8c8c8;
+}
+
+#trade .results .itemPopupContainer .itemName .lc {
+    padding: 0 !important;
+}
+
+.lc {
+    display: inline-block;
+}
+
+.newItemPopup .content {
+    padding: .4em 0em .5em 0em;
+}
+
+#trade .results .itemPopupContainer .lc{
+    padding: 0;
+}
+
+.results .row .s {
+    cursor: pointer;
+    position: relative;
+}
+
+.newItemPopup .colourDefault {
+    color: #fff;
+}
+
+#trade .results .itemPopupContainer .separator {
+    background: none;
+    border-bottom: 1px dotted #333;
+    height: 1px;
+}
+
+.newItemPopup .separator {
+    margin: 1px 0px;
+    width: 100%;
+}
+
+.implicitMod {
+    color: #88f;
+}
+
+#trade .results .itemPopupContainer .lc.l {
+    float: right;
+    position: relative;
+    padding: 0 2px;
+}
+
+.newItemPopup .lc.l {
+    left: 0px;
+}
+
+#trade .results .implicitMod > .lc.s {
+    color: #e8dfe2;
+}
+
+#trade .results .itemPopupContainer .lc.r {
+    float: right;
+    position: relative;
+    padding: 0 2px;
+}
+
+.newItemPopup .lc.r {
+    right: 0px;
+}
+
+#trade .results .resultset:not(.exchange) .row .itemPopupAdditional:not(.weapontree) {
+    font-family: inherit;
+    font-size: .9em;
+    margin: 0;
+    position: absolute;
+    right: 64px;
+    text-align: right;
+    top: 18px;
+    background: none;
+    flex-direction: column;
+}
+
+.results .row .middle .itemPopupAdditional {
+    display: flex;
+    z-index: 0;
+    color: #7f7f7f;
+    font-size-adjust: .54;
+    font-weight: normal;
+}
+
+#trade .results .resultset:not(.exchange) .row .itemPopupAdditional:not(.weapontree) .s {
+    display: block;
+    width: fit-content;
+    height: 16px;
+    margin-left: auto;
+}
+
+.results .row .middle .itemPopupAdditional .colourAugmented {
+    color: #88f;
+}

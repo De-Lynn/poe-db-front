@@ -102,18 +102,15 @@ export const categoryFilterReducer = (state: any = initialState, action: any) =>
         // }
         case CLEAN_CATEGORIES_INPUT_VALUE: {
             let stateCopy = {...state}
-            // stateCopy.typeFilters = state.typeFilters.map( (f: { filterValue: any }) => {
-            //     return {...f, filterValue: action.value}
-            // })
             stateCopy.typeFilters = {...state.typeFilters}
-            stateCopy.typeFilters[0] = {...state.typeFilters[0]}
-            stateCopy.typeFilters[0].selectedValue = 'Any'
-            stateCopy.typeFilters[0].selectedType = 'default'
-            stateCopy.typeFilters[0].selectedCategory = 'any'
-            stateCopy.typeFilters[1] = {...state.typeFilters[1]}
-            stateCopy.typeFilters[1].selectedValue = 'Any'
-            stateCopy.typeFilters[1].selectedType = 'any'
-            stateCopy.typeFilters[1].selectedCategory = 'any'
+            stateCopy.typeFilters = [
+                {...state.typeFilters[0], selectedValue: 'Any',
+                    selectedType: 'default', selectedCategory: 'any'
+                },
+                {...state.typeFilters[1], selectedValue: 'Any',
+                    selectedType: 'any', selectedCategory: 'any'
+                }
+            ]
             return stateCopy
         }
         case CHANGE_FILTER_VISIBILITY: {

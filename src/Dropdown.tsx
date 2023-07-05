@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 //import { setSearchValue, setSelectedValue, setShowMenu } from "./redux/dropdownReducer";
 import { useDispatch } from "react-redux";
 //import { getShowMenu } from "./redux/categoryFilter-selectors";
-//import './NameDropdown';
+import './NameDropdown';
+import './Dropdown.css';
 
 const Dropdown = (props: any) => {
   // const showMenu = useSelector(getShowMenu)
@@ -95,27 +96,52 @@ const Dropdown = (props: any) => {
   }
 
   return (
-    <div>
-      <div className="dropdown-input"
+    <div className='multiselect filter-select modified'> {/*multiselect--above */}
+      {/* <div className="dropdown-input"
         onClick={handleInputClick} ref={inputRef}>
         <div className="dropdown-selected-value">{getDisplay()}</div>
         <div className="dropdown-tools">
           <div className="dropdown-tool"></div>
         </div>
+      </div> */}
+      <div className="multiselect__select"></div>
+      <div className="multiselect__tags">
+        {props.isSearchable && (
+          // <div className="search-box">
+          // <div className="multiselect__tags">
+          // <div>
+            // <div className="dropdown-input"
+            //   onClick={handleInputClick} ref={inputRef}>
+            //   <div className="dropdown-selected-value">{getDisplay()}</div>
+            //   <div className="dropdown-tools">
+            //     <div className="dropdown-tool"></div>
+            //   </div>
+            // </div>
+            // <div className="multiselect__spinner"></div>
+            <input className="multiselect__input"
+              onChange={onSearch} value={searchValue} ref={searchRef}
+              placeholder={getDisplay()} onClick={handleInputClick}/>
+          // </div>
+          // </div>
+          // </div>
+        )}
       </div>
       {showMenu && (
-        <div className="dropdown-menu">
-          {props.isSearchable && (
+        <div className="multiselect__content-wrapper">
+          {/* {props.isSearchable && (
             // <div className="search-box">
-            <div className="multiselect__tags">
-              {/* <div className="multiselect__spinner"></div> */}
+            // <div className="multiselect__tags">
+            <div>
+              {/* <div className="multiselect__spinner"></div> }
               <input className="multiselect__input"
                 onChange={onSearch} value={searchValue} ref={searchRef}/>
             </div>
               
             // </div>
-          )}
-          <div className="multiselect__content-wrapper">
+              
+            // </div>
+          )} */}
+          {/* {showMenu && ( */}
             <ul className="multiselect__content">
               {getOptions().map((op: any) => (
                 // <div onClick={() => onItemClick(op.option, op.type, op.category)} 
@@ -124,13 +150,14 @@ const Dropdown = (props: any) => {
                 // </div>
                 <li className="multiselect__element" onClick={() => onItemClick(op.option, op.type, op.category)} 
                   key={op.id}>
-                    <span className="multiselect__option">{op.option}</span>
-                  </li>
+                    <span className="multiselect__option">
+                      <span>{op.option}</span>
+                      <br />
+                    </span>
+                </li>
               ))}
             </ul>
-            
-          </div>
-          
+          {/* )} */}
         </div>
       )}
       

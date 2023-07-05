@@ -117,13 +117,13 @@ const RareStatsList = (props: any) => {
   return (
     <>
       <RareItemDiv>
-        <div>
+        <RareItemName>
             <span>{props.r.i_type}    </span> 
             {props.r.i_subtype ? props.r.i_subtype : null}
-        </div>
+        </RareItemName>
         <div>
             <button onClick={showMoreStats} ref={divRef}>Stats</button> 
-            {statDiv && (props.r.stats.slice(0, 100).map( (stat: any) => {
+            {statDiv && (props.r.stats.slice(0, 100).map( (stat: Array<string>) => {
                 return (
                     <div>
                         {/* {stat} */}
@@ -174,6 +174,13 @@ const ItemDiv = styled.div`
 const RareItemDiv = styled.div`
     margin: 4px;
     padding: 4px;
-    background: #aa2;
+    border: #863 2px solid;
+
+`
+
+const RareItemName = styled.div`
+  background: #863;
+  color: #ee4;
+  text-align: center;
 
 `

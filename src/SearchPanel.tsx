@@ -9,7 +9,7 @@ import { RequirementFilters } from './RequirementFilters';
 import { StatsFilter } from './StatsFilter';
 import NameDropdown from './NameDropdown';
 import { setNameSearchValue, setNameSelectedValue, setNameShowMenu } from './redux/searchPanelReducer';
-//import './SearchPanel.css'
+import './SearchPanel.css'
 
 export type RangeFilterContainerPropsType = {
   id: string
@@ -34,14 +34,14 @@ function SearchPanel(props: any) {
     <div className='search-panel'>
       <div className='search-bar'>
         <div className='search-left'>
-          <div className='multiselect search-select'> {/*tabindex="0" style="width: 100%" */}
-            <div className='multiselect__select'></div>
-            <div className='multiselect__tags'>
+          {/* <div className='multiselect search-select'> tabindex="0" style="width: 100%" */}
+            {/* <div className='multiselect__select'></div>
+            <div className='multiselect__tags'> */}
               <NameDropdown placeHolder='Search Items...' names={namesPool} isSearchable={true}
               setSearchValue={setNameSearchValue} setShowMenu={setNameShowMenu} setSelectedValue={setNameSelectedValue}
               showMenu={nameShowMenu} selectedValue={nameSelectedValu} searchValue={nameSearchValue}/>
-            </div>
-          </div>
+            {/* </div> */}
+          {/* </div> */}
         </div>
       </div>
       <div className='search-bar search-advanced'>
@@ -51,14 +51,14 @@ function SearchPanel(props: any) {
             <WeaponsFilters/>
             <ArmourFilters/>
             <RequirementFilters/>
-            <StatsFilter />
           </div>
-          <div className='search-advanced-pane brown'></div>
+          <div className='search-advanced-pane brown'>
+            <StatsFilter />
+            
+          </div>
         </div>
       </div>
-      <div className='controls'>
-        <Controls />
-      </div>
+      <Controls />
     </div>
   )
 }

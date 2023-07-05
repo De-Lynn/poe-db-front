@@ -10,6 +10,8 @@ import { useEffect } from "react"
 import { getArmourFiltersValues } from "./redux/armourFilter-selectors"
 import { getRequirementFiltersValues } from "./redux/requirementFilter-selectors"
 import { getSelectedStatOrder } from "./redux/statsFilter-selector"
+import './Controls.css'
+import { ControlsRight } from "./ControlsRight"
 
 export function Controls(props: any) {
     let dispatch = useDispatch()
@@ -119,21 +121,14 @@ export function Controls(props: any) {
 
     return (
         <div className='controls'>
+            <div className="controls-left"></div>
             <div className='controls-center'>
-            <button className='btn search-btn' type='button' 
-                onClick={onSearchClickHandler}>
-                <span>Search</span>
-            </button>
+                <button className='btn search-btn' type='button' 
+                    onClick={onSearchClickHandler}>
+                    <span>Search</span>
+                </button>
             </div>
-            <div className='controls-right'>
-            <button className='btn clear-btn' type='button'>
-                <span>Clear</span>
-            </button>
-            <button className='btn toggle-search-btn' type='button'>
-                <span className='chevron'></span>
-                <span>Hide Filters</span>
-            </button>
-            </div>
+            <ControlsRight/>
         </div>
     )
 }

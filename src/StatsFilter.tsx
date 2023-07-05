@@ -9,6 +9,8 @@ import axios from "axios"
 import { changeStatsFilterVisibility, setStats, setSimilarStats, setStatSearchValue, setStatShowMenu, setStatSelectedValue, cleanSelectedStat } from "./redux/statsFilterReducer"
 //import Dropdown from "./Dropdown"
 import StatsDropdown from "./StatsDropdown"
+import './FilterGroupHeader.css';
+import './FilterGroupBody.css'
 
 // type ContentType = {
 //   id: string
@@ -65,76 +67,86 @@ export function StatsFilter(props: any) {
   }
 
   return (
-    <div>
+    <div className="filter-group expanded">
       <div className='filter-group-header'>
-        <span className='input-group-btn'>
-          <input type="checkbox" checked={statsFilterVisibility} name="statsCheckbox"
-                onChange={onChangeHandler}/>
-        </span>
-        <span className='filter-body'>
-          <span className='filter-title filter-title-clickable'>
-            <span>Stat Filters</span>
+        <div className="filter">
+          <span className='input-group-btn'>
+            <input className="btn toggle-btn"
+              type="checkbox" checked={statsFilterVisibility} name="statsCheckbox"
+              onChange={onChangeHandler} id="statsCheckbox"/>
+            <label htmlFor="statsCheckbox"></label>
+          </span>
+          <span className='filter-body'>
+            <span className='filter-title filter-title-clickable'>
+              <span>Stat Filters</span>
+            </span>
           </span>
           <span className='input-group-btn'>
             <button className='btn remove-btn' title='Очистить группу фильтра'
                     onClick={onClickHandler} name="statsButton">X</button>
           </span>
-        </span>
+          {/* <span className="input-group-btn">
+          </span> */}
+        </div>
       </div>
       {statsFilterVisibility && //statsToSelect.map((s: any) => {
         // const onButtonClickHandler = () => {
         //   dispatch(changeCategoriesState(!cf.state, cf.id))
         // }
         //return (
-          <div className='filter filter-property full-span'>
-            <span className='filter-body'>
-              {/* <div className='filter-title'>{cf.filterTitle}</div> */}
-              <div className='multiselect filter-select'>
-                {/* <input className='multiselect_tags' type="text" value={cf.filterValue} 
-                  // value={props.filterValue}
-                /> */}
-                {/* <input className='multiselect_tags' type="text" value={newInputValue} 
-                      onChange={onInputChangeHandler}/> */}
-                {/* <button className='multiselect_select' 
-                      onClick={onButtonClickHandler}>Развернуть</button> */}
-                <div className='multiselect_content-wrapper'>
-                  {/* <select name="" id="">
-                    {
-                      statsToSelect.map( (s: any) => {
-                        const onSelectOptionClickHandler = () => {
-                          //dispatch(setActiveStat(s.stat_order))
-                          axios.get(`http://localhost:8080/api/stats/${s.stat_order}`).then(response => {
-                            dispatch(setSimilarStats(response.data.similarStats))
-                          })
-                        }
-                        return (
-                          <option className='multiselect_element' key={s.id}
-                                  onClick={onSelectOptionClickHandler} 
-                          >
-                            <span className='multiselect_option'>{s.stat}</span>
-                          </option>
-                        )
-                      })
-                    }
-                  </select> */}
-                  <StatsDropdown placeHolder='+ Add Stat Filter' stats={statsToSelect} isSearchable={true}
-                    setSearchValue={setStatSearchValue} setShowMenu={setStatShowMenu} setSelectedValue={setStatSelectedValue}
-                    showMenu={statsState.statShowMenu} selectedValue={statsState.statSelectedValue} searchValue={statsState.statSearchValue}/>
-                  {
-                    // similarStats.length !== 0 && <div>{similarStats.map((s: any) => {
-                    //   return (
-                    //     <div>
-                    //       <span>{s.type}  </span>
-                    //       <span>"{s.stat}"</span>
-                    //     </div>
-                    //   )})}
-                    // </div>
-                  }
+          <div className="filter-group-body">
+            <div className='filter filter-padded'>
+              <span className='filter-body'>
+                {/* <div className='filter-title'>{cf.filterTitle}</div> */}
+                {/* <div className='multiselect filter-select filter-select-mutate'> */}
+                  {/* <input className='multiselect_tags' type="text" value={cf.filterValue} 
+                    // value={props.filterValue}
+                  /> */}
+                  {/* <input className='multiselect_tags' type="text" value={newInputValue} 
+                        onChange={onInputChangeHandler}/> */}
+                  {/* <button className='multiselect_select' 
+                        onClick={onButtonClickHandler}>Развернуть</button> */}
                   
-                </div>
-              </div>
-            </span>
+                  {/* <div className='multiselect__content-wrapper'> */}
+                    {/* <select name="" id="">
+                      {
+                        statsToSelect.map( (s: any) => {
+                          const onSelectOptionClickHandler = () => {
+                            //dispatch(setActiveStat(s.stat_order))
+                            axios.get(`http://localhost:8080/api/stats/${s.stat_order}`).then(response => {
+                              dispatch(setSimilarStats(response.data.similarStats))
+                            })
+                          }
+                          return (
+                            <option className='multiselect_element' key={s.id}
+                                    onClick={onSelectOptionClickHandler} 
+                            >
+                              <span className='multiselect_option'>{s.stat}</span>
+                            </option>
+                          )
+                        })
+                      }
+                    </select> */}
+                    <StatsDropdown placeHolder='+ Add Stat Filter' stats={statsToSelect} isSearchable={true}
+                      setSearchValue={setStatSearchValue} setShowMenu={setStatShowMenu} setSelectedValue={setStatSelectedValue}
+                      showMenu={statsState.statShowMenu} selectedValue={statsState.statSelectedValue} searchValue={statsState.statSearchValue}/>
+                    {
+                      // similarStats.length !== 0 && <div>{similarStats.map((s: any) => {
+                      //   return (
+                      //     <div>
+                      //       <span>{s.type}  </span>
+                      //       <span>"{s.stat}"</span>
+                      //     </div>
+                      //   )})}
+                      // </div>
+                    }
+                    
+                  {/* </div> */}
+                {/* </div> */}
+              </span>
+            </div>
           </div>
+          
         //)
       //})
       }

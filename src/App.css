@@ -1,32 +1,12 @@
-/* .App {
-  margin: 0;
-  padding: 30px;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  color: #a38d6d;
-  background: #000 url('./img/crucible-bg.jpg') no-repeat top center fixed;
-  background-size: contain;
-  height: 100%;
-} */
-
-/* .App > div {
-  margin-right: 50px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 5px;
-  padding-right: 5px;
-  height: 100%;
-  width: 100%;
-  outline: 1px solid #d2691e6d;
-} */
-
 .container-fluid {
   height: 100%;
+}
+
+.container-fluid {
   margin-right: auto;
   margin-left: auto;
   padding-left: 5px;
   padding-right: 5px;
-  box-sizing: border-box;
 }
 
 .container-fluid > .content {
@@ -36,24 +16,11 @@
   min-height: 100%;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 .container-fluid > .content > .wrapper {
   margin: 0;
   position: relative;
   min-width: 512px;
 }
-
-/* .SearchPanel {
-  background-color: #000;
-  font-size: 14px;
-}
-
-.SearchPanel div {
-  position: relative;
-} */
 
 .logo {
   padding: 5px 0 0;
@@ -62,7 +29,8 @@
 .logo a {
   margin: 0 auto;
   display: block;
-  max-width: 256px;
+  /* max-width: 256px; */
+  max-width: 360px;
 }
 
 a {
@@ -81,27 +49,18 @@ img {
 }
 
 #trade {
-  min-height: 200px;
-  position: relative;
-  max-width: 1520px;
+  min-height: 200px; 
+  position: relative; 
+  max-width: 1520px; 
   margin: 0 auto 64px;
 }
 
 #trade .top {
   background-color: #000;
   font-size: 1.1em;
+  outline: 1px solid #d2691e6d;
 }
 
-/* .logo a img {
-  width: 100%;
+.clear {
+  clear: both !important;
 }
-
-.logo img {
-  vertical-align: middle;
-}
-
-.logo > a {
-  margin: 0 auto;
-  display: block;
-  max-width: 360px;
-} */

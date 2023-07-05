@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { ChangeEvent } from "react";
 import { getRequirementFilterVisibility, getRequirementFilters, getRequirementFiltersValues } from "./redux/requirementFilter-selectors";
 import { changeRequirementFilterVisibility, changeRequirementFiltersValue, cleanRequirementFilterValues } from "./redux/requirementFilterReducer";
-//import './FilterGroupHeader.css';
-//import './FilterGroupBody.css';
+import './FilterGroupHeader.css';
+import './FilterGroupBody.css';
 
 function RequirementFiltersForm(props: any) {
     let requirementFilters = useSelector(getRequirementFilters)
@@ -13,27 +13,27 @@ function RequirementFiltersForm(props: any) {
     let dispatch = useDispatch()
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className="filter-group-body">
             {filterVisibility && 
-                <div className='filter filter-property'>
-                    <span className='filter-body'>
-                        {requirementFilters.map((rf: any) => {
-                            return (
-                                <div key={rf.id}>
-                                    <div className='filter-title'>{rf.title}</div>
-                                    <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
-                                        name={rf.minName} maxLength={4} inputMode='numeric'/>
-                                    <span className="sep"></span>
-                                    <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
-                                        name={rf.maxName} maxLength={4} inputMode='numeric'/>
-                                    <span className="sep"></span>
-                                </div>
-                                
-                            )
-                        })}
-                    </span>
-                    <button className='btn remove-btn' title='Принять значения фильтра' name="acceptRequirementButton">Accept</button>
-                </div>
+                requirementFilters.map((rf: any) => {
+                    return (
+                        <div className='filter filter-property'>
+                            <span className='filter-body'>
+                                <div className='filter-title'>{rf.title}</div>
+                                <span className="sep"></span>
+                                <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
+                                    name={rf.minName} maxLength={4} inputMode='numeric'/>
+                                <span className="sep"></span>
+                                <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
+                                    name={rf.maxName} maxLength={4} inputMode='numeric'/>
+                            </span>
+                        </div>
+                    )
+                })
+                
+            }
+            {filterVisibility &&
+                <button className='btn accept-btn' title='Принять значения фильтра' name="acceptRequirementButton">Accept</button>
             }
             
         </form>
@@ -66,7 +66,9 @@ export function RequirementFilters(props: any) {
                 <div className="filter">
                     <span className='input-group-btn'>
                         <input className="btn toggle-btn"
-                            type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="requirementCheckbox"/>
+                            type="checkbox" checked={filterVisibility} onChange={onChangeHandler} 
+                            name="requirementCheckbox" id="requirementCheckbox"/>
+                        <label htmlFor="requirementCheckbox"></label>
                     </span>
                     <span className='filter-body'>
                         <span className='filter-title filter-title-clickable'>
@@ -74,7 +76,9 @@ export function RequirementFilters(props: any) {
                         </span>
                         <span className='input-group-btn'>
                             <button className='btn remove-btn' title='Очистить группу фильтра' 
-                            name="requirementButton" onClick={cleanFiltersValues}>X</button>
+                                name="requirementButton" onClick={cleanFiltersValues}
+                                id="reqButton"/>
+                            <label htmlFor="reqButton"></label>
                         </span>
                     </span>
                 </div>

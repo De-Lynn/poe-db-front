@@ -1,0 +1,45 @@
+.results .row.row-total {
+    text-align: center;
+}
+
+.results .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    margin: 0;
+    opacity: 1;
+    position: relative;
+    transition: opacity .5s;
+}
+
+.results .row h3 {
+    color: #e2e2e2;
+    font-family: sans-serif;
+    font-weight: normal;
+}
+
+h3 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 1.15em;
+    line-height: 1.1;
+}
+
+/* #trade .results .resultset:not(.exchange) {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgba(10, 10, 10, .8);
+} */
+
+#trade .results .resultset {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: rgba(10, 10, 10, .8);
+}
+
+.results .resultset {
+    margin-bottom: 30px;
+}

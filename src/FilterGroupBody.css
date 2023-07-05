@@ -30,7 +30,7 @@
 
 #trade .filter-group .filter-group-body .filter-title {
   color: #fff8e1;
-  width: 119%;
+  /* width: 119%; */
   background-color: rgba(45, 49, 54, .3);
   border-left: 1px solid #634928;
 }
@@ -67,13 +67,17 @@
   display: table-cell;
 }
 
-#trade .multiselect.filter-select {
+/* #trade .multiselect.filter-select {
   display: table;
   table-layout: fixed;
   position: unset;
-  float: right;
-  width: 80%;
+  float: left;
+  width: 271px;
   height: 30px;
+}
+
+.filter.filter-property .modified {
+  outline: 1px solid #a0a0d0;
 }
 
 .multiselect {
@@ -111,10 +115,10 @@
   padding: 4px 7px;
 }
 
-/* #trade .multiselect .multiselect__tags {
+#trade .multiselect .multiselect__tags {
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, 
               outline-color ease-in-out .15s;
-} */
+}
 
 .multiselect .multiselect__tags {
   min-height: 30px;
@@ -131,7 +135,7 @@
 
 .multiselect * {
   box-sizing: border-box;
-}
+} */
 
 /* weapon filters */
 .filter.filter-property {
@@ -151,6 +155,7 @@
   display: table;
   border-collapse: separate;
   position: relative;
+  width: 100%;
 }
 
 #trade .search-bar.search-advanced input {
@@ -211,6 +216,15 @@ input {
   font-family: inherit;
   font: inherit;
   margin: 0;
+}
+
+input[type=number] {
+  appearance:textfield;
+}
+
+.filter.filter-padded {
+  padding-right: 42px;
+  padding-left: 42px;
 }
 
 /* .search-bar .blue .filter-group .filter-group-body {

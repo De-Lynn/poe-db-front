@@ -94,7 +94,7 @@ const StatsDropdown = (props: any) => {
   }
 
   return (
-    <>
+    <div className='multiselect filter-select filter-select-mutate'>
       <div className="dropdown-input"
         onClick={handleInputClick} ref={inputRef}>
         <div className="dropdown-selected-value">{getDisplay()}</div>
@@ -105,22 +105,29 @@ const StatsDropdown = (props: any) => {
       {showMenu && (
         <div className="dropdown-menu">
           {props.isSearchable && (
-            <div className="search-box">
-              <input onChange={onSearch} value={searchValue} ref={searchRef}/>
+            // <div className="search-box">
+            <div className="multiselect__tags">
+              <input className="multiselect__input"
+                onChange={onSearch} value={searchValue} ref={searchRef}/>
             </div>
           )}
-          {getOptions().slice(0, 100).map((s: any) => (
-            <div onClick={() => onItemClick(s.stat, s.stat_order)} 
-              key={s.id} className={`dropdown-item ${isSelected(s.stat) && "selected"}`}>
-                <span>{s.type}  </span>
-                <span>"{s.stat}"</span>
-              
-            </div>
-          ))}
+          <div className="multiselect__content-wrapper">
+            <ul className="multiselect__content">
+             {getOptions().slice(0, 100).map((s: any) => (
+                <li className="multiselect__element" 
+                  onClick={() => onItemClick(s.stat, s.stat_order)} key={s.id}>
+                    <span>{s.type}  </span>
+                    <span>"{s.stat}"</span>
+                  
+                </li>
+              ))}
+            </ul>
+          </div>
+          
         </div>
       )}
       
-    </>
+    </div>
   )
 }
 

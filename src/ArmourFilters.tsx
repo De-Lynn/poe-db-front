@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { ChangeEvent } from "react";
 import { changeArmourFiltersValue, changeArmourFilterVisibility, cleanArmourFilterValues } from "./redux/armourFilterReducer";
 import { getArmourFilters, getArmourFiltersValues, getArmourFilterVisibility } from "./redux/armourFilter-selectors";
-//import './FilterGroupHeader.css';
-//import './FilterGroupBody.css';
+import './FilterGroupHeader.css';
+import './FilterGroupBody.css';
 
 function ArmourFiltersForm(props: any) {
     let armourFilters = useSelector(getArmourFilters)
@@ -13,11 +13,26 @@ function ArmourFiltersForm(props: any) {
     let dispatch = useDispatch()
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} className="filter-group-body">
             {filterVisibility && 
-                <div className='filter filter-property'>
-                    <span className='filter-body'>
-                        {armourFilters.map((af: any) => {
+                armourFilters.map((af: any) => {
+                    return (
+                        <div className='filter filter-property'>
+                            <span className='filter-body'>
+                                <div className='filter-title'>{af.title}</div>
+                                <span className="sep"></span>
+                                <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
+                                    name={af.minName} maxLength={4} inputMode='numeric'/>
+                                <span className="sep"></span>
+                                <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
+                                    name={af.maxName} maxLength={4} inputMode='numeric'/>
+                            </span>
+                        </div>
+                    )
+                })
+                // <div className='filter filter-property'>
+                    // <span className='filter-body'>
+                        /* {armourFilters.map((af: any) => {
                             return (
                                 <div key={af.id}>
                                     <div className='filter-title'>{af.title}</div>
@@ -30,10 +45,13 @@ function ArmourFiltersForm(props: any) {
                                 </div>
                                 
                             )
-                        })}
-                    </span>
-                    <button className='btn remove-btn' title='Принять значения фильтра' name="acceptArmourButton">Accept</button>
-                </div>
+                        })} */
+                    /* </span> */
+                    // <button className='btn remove-btn' title='Принять значения фильтра' name="acceptArmourButton">Accept</button>
+                // </div>
+            }
+            {filterVisibility &&
+                <button className='btn accept-btn' title='Принять значения фильтра' name="acceptArmourButton">Accept</button>
             }
             
         </form>
@@ -67,7 +85,9 @@ export function ArmourFilters(props: any) {
                 <div className="filter">
                     <span className='input-group-btn'>
                         <input className="btn toggle-btn" 
-                            type="checkbox" checked={filterVisibility} onChange={onChangeHandler} name="armourCheckbox"/>
+                            type="checkbox" checked={filterVisibility} onChange={onChangeHandler} 
+                            name="armourCheckbox" id="armourCheckbox"/>
+                        <label htmlFor="armourCheckbox"></label>
                     </span>
                     <span className='filter-body'>
                         <span className='filter-title filter-title-clickable'>
@@ -75,7 +95,9 @@ export function ArmourFilters(props: any) {
                         </span>
                         <span className='input-group-btn'>
                             <button className='btn remove-btn' title='Очистить группу фильтра' 
-                                name="armourButton" onClick={cleanFiltersValues}>X</button>
+                                name="armourButton" onClick={cleanFiltersValues}
+                                id="armourButton"/>
+                            <label htmlFor="armourButton"></label>
                         </span>
                     </span>
                 </div>

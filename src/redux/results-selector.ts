@@ -49,3 +49,11 @@ export const getRareFlasksResults = (state: any) => {
 export const getUniqueFlasksResults = (state: any) => {
     return state.results.uniqueFlasksResults
 }
+
+export const getNameSortAsc = (state: any) => {
+    return state.results.nameSortAsc
+}
+
+// export const changeNameSort = (state: any) => {
+//     return state.results.nameSortAsc
+// }
