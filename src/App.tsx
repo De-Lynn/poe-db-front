@@ -31,6 +31,9 @@ function App(props: any) {
   let haveResults = false
 
   for (let key in results) {
+    if (results[key] == null) {
+      continue
+    }
     if (results[key].length !== 0) {
       haveResults = true
       break

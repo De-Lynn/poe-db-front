@@ -19,6 +19,7 @@ let initialState = {
     baseFlasksResults: [],
     rareFlasksResults: [],
     uniqueFlasksResults: [],
+    resultsCount: null,
     // nameSortAsc: false
 }
 
@@ -59,6 +60,7 @@ export const resultsReducer = (state: any = initialState, action: any) => {
                 baseFlasksResults: action.newResults.baseFlasks ? action.newResults.baseFlasks : [],
                 rareFlasksResults: action.newResults.rareFlasks ? action.newResults.rareFlasks: [],
                 uniqueFlasksResults: action.newResults.uniqueFlasks ? action.newResults.uniqueFlasks : [],
+                resultsCount: action.newResults.resultsCount,
             }
             // return stateCopy
         }

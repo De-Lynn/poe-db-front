@@ -54,6 +54,10 @@ export const getNameSortAsc = (state: any) => {
     return state.results.nameSortAsc
 }
 
+export const getResultsCount = (state: any) => {
+    return state.results.resultsCount
+}
+
 // export const changeNameSort = (state: any) => {
 //     return state.results.nameSortAsc
 // }
