@@ -26,8 +26,6 @@ export function Controls(props: any) {
     let weaponsFiltersValues = useSelector(getWeaponsFiltersValues)
     let armourFiltersValues = useSelector(getArmourFiltersValues)
     let requirementFiltersValues = useSelector(getRequirementFiltersValues)
-    //const navigate = useNavigate()
-    // let request = `http://localhost:8080/api/${category}?`
     let searchParams
 
     // useEffect(() => {
@@ -39,7 +37,7 @@ export function Controls(props: any) {
 
     const onSearchClickHandler = () => {
         let request = `http://localhost:8080/api/${category}?`
-        if(category==='any') {
+        if(category ==='any') {
             searchParams = new URLSearchParams(rarity)
             request += `${searchParams.toString()}&`
             // searchParams = new URLSearchParams(type)
@@ -123,8 +121,8 @@ export function Controls(props: any) {
         <div className='controls'>
             <div className="controls-left"></div>
             <div className='controls-center'>
-                <button className='btn search-btn' type='button' 
-                    onClick={onSearchClickHandler}>
+                <button className='btn search-btn' type="submit"
+                > {/*disabled={props.isSubmitting}  onClick={onSearchClickHandler}*/}
                     <span>Search</span>
                 </button>
             </div>
