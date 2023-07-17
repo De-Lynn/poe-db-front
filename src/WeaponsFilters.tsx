@@ -7,7 +7,7 @@ import { ChangeEvent } from "react";
 import styled from "styled-components";
 import './FilterGroupHeader.css';
 import './FilterGroupBody.css'
-import { Form, Formik, Field} from "formik";
+import { Form, Formik, Field, useFormikContext} from "formik";
 
 // function WeaponsFiltersForm(props: any) {
 //     let weaponsFilters = useSelector(getWeaponsFilters)
@@ -165,10 +165,10 @@ function WeaponsFiltersForm(props: any) {
                                 <div className='filter-title'>{wf.title}</div>
                                 <span className="sep"></span>
                                 <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
-                                    name={wf.minName} maxLength={4} inputMode='numeric'/>
+                                    name={`weaponValues.${wf.minName}`} maxLength={4} inputMode='numeric'/>
                                 <span className="sep"></span>
                                 <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
-                                    name={wf.maxName} maxLength={4} inputMode='numeric'/>
+                                    name={`weaponValues.${wf.maxName}`} maxLength={4} inputMode='numeric'/>
                             </span>
                         </div>
                     )
@@ -205,8 +205,20 @@ export function WeaponsFilters(props: any) {
         dispatch(changeWeaponsFiltersValue(formData))
     }
     const cleanFiltersValues = () => {
-        dispatch(cleanWeaponsFilterValues())
+        //dispatch(cleanWeaponsFilterValues())
         // dispatch(reset('weaponsFilters'))
+        // dispatch(props.cleanValues('weapon'))
+        
+        formik.setFieldValue(`weaponValues.minDamage`, '')
+        formik.setFieldValue(`weaponValues.maxDamage`, '')
+        formik.setFieldValue(`weaponValues.minAps`, '')
+        formik.setFieldValue(`weaponValues.maxAps`, '')
+        formik.setFieldValue(`weaponValues.minDps`, '')
+        formik.setFieldValue(`weaponValues.maxDps`, '')
+        formik.setFieldValue(`weaponValues.minCrit`, '')
+        formik.setFieldValue(`weaponValues.maxCrit`, '')
+        
+
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         //debugger
@@ -219,6 +231,7 @@ export function WeaponsFilters(props: any) {
             setSubmitting(false)
         }, 400)
     }
+    const formik = useFormikContext();
 
     return (
         <div className="filter-group expanded">
@@ -237,8 +250,9 @@ export function WeaponsFilters(props: any) {
                         </span>
                         <span className='input-group-btn'>
                             <button className='btn remove-btn' title='Очистить группу фильтра' 
-                                name="weaponsButton" onClick={cleanFiltersValues}
-                                id="weaponsButton" type="reset"/>
+                                name="weaponsButton" //onClick={cleanFiltersValues}
+                                id="weaponsButton" type="button" onClick={cleanFiltersValues}
+                                />
                             <label htmlFor="weaponsButton"></label>
                         </span>
                     </span>

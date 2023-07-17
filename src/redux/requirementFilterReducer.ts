@@ -6,19 +6,10 @@ const CHANGE_REQUIREMENT_FILTER_VISIBILITY = 'CHANGE-REQUIREMENT-FILTER-VISIBILI
 
 let initialState = {
     requirementFilters: [
-        {id: v1(), title: 'Level', minName:"lvlMinValue", maxName:"lvlMaxValue",
-            // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        {id: v1(), title: 'Strength', minName:"strMinValue", maxName:"strMaxValue",
-            // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        {id: v1(), title: 'Dexterity', minName:"dexMinValue", maxName:"dexMaxValue",
-            // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        {id: v1(), title: 'Intelligence', minName:"intMinValue", maxName:"intMaxValue",
-            // header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        
+        {id: v1(), title: 'Level', minName:"minLvl", maxName:"maxLvl"},
+        {id: v1(), title: 'Strength', minName:"minStr", maxName:"maxStr"},
+        {id: v1(), title: 'Dexterity', minName:"minDex", maxName:"maxDex"},
+        {id: v1(), title: 'Intelligence', minName:"minInt", maxName:"maxInt"},
     ],
     requirementFiltersValues: {
         minLvl: null, maxLvl: null, minStr: null, maxStr: null, minDex: null, maxDex: null, minInt: null, maxInt: null
@@ -43,14 +34,14 @@ export const requirementFilterReducer = (state: any = initialState, action: any)
             let stateCopy = {...state}
             stateCopy.requirementFiltersValues = {...state.requirementFiltersValues}
             stateCopy.requirementFiltersValues = {
-                minLvl: action.values.lvlMinValue ? action.values.lvlMinValue : null, 
-                maxLvl: action.values.lvlMaxValue ? action.values.lvlMaxValue : null, 
-                minStr: action.values.strMinValue ? action.values.strMinValue : null, 
-                maxStr: action.values.strMaxValue ? action.values.strMaxValue : null, 
-                minDex: action.values.dexMinValue ? action.values.dexMinValue : null, 
-                maxDex: action.values.dexMaxValue ? action.values.dexMaxValue : null, 
-                minInt: action.values.intMinValue ? action.values.intMinValue : null, 
-                maxInt: action.values.intMaxValue ? action.values.intMaxValue : null
+                minLvl: action.values.minLvl ? action.values.minLvl : null, 
+                maxLvl: action.values.maxLvl ? action.values.maxLvl : null, 
+                minStr: action.values.minStr ? action.values.minStr : null, 
+                maxStr: action.values.maxStr ? action.values.maxStr : null, 
+                minDex: action.values.minDex ? action.values.minDex : null, 
+                maxDex: action.values.maxDex ? action.values.maxDex : null, 
+                minInt: action.values.minInt ? action.values.minInt : null, 
+                maxInt: action.values.maxInt ? action.values.maxInt : null
             }
             return stateCopy
         }

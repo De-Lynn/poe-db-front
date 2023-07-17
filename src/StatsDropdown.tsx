@@ -1,40 +1,23 @@
-import { useSelector } from "react-redux";
-//import { getSearchValue, getSelectedValue, getShowMenu } from "./redux/dropdown-selectors";
-import { useEffect, useRef } from "react";
-//import { setSearchValue, setSelectedValue, setShowMenu } from "./redux/dropdownReducer";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setStats } from "./redux/statsFilterReducer";
-//import { getShowMenu } from "./redux/categoryFilter-selectors";
+import './NameDropdown.css'
 
 
 const StatsDropdown = (props: any) => {
-  // const showMenu = useSelector(getShowMenu)
-  // const selectedValue = useSelector(getSelectedValue)
-  // const searchValue = useSelector(getSearchValue)
+  const [showMenu, setShowMenu] = useState(false)
   const searchRef = useRef<HTMLInputElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch()
 
-  // const showMenu = props.getShowMenu(props.id)
-  const showMenu = props.showMenu
-  //const showMenu = useSelector(state => props.getShowMenu(state, props.id))
-  // const selectedValue = props.getSelectedValue(props.id)
   const selectedValue = props.selectedValue
-  //const selectedValue = useSelector(state => props.getSelectedValue(state, props.id))
-  // const searchValue = props.getSearchValue(props.id)
   const searchValue = props.searchValue
-  //const searchValue = useSelector(state => props.getSearchValue(state, props.id))
-
-  // const showMenu = props.showMenu
-  // const selectedValue = props.selecterValue
-  // const searchValue = props.searchValue
-
+  
   useEffect(() => {
-    // const handler = () => setShowMenu(false)
     const handler = (e: any) => {
       if (inputRef.current && !inputRef.current.contains(e.target)) {
-        dispatch(props.setShowMenu(false))
+        setShowMenu(false)
       }
     }
     window.addEventListener("click", handler)
@@ -44,7 +27,6 @@ const StatsDropdown = (props: any) => {
   })
 
   useEffect(() => {
-    // dispatch(setSearchValue(''))
     dispatch(props.setSearchValue(''))
     if (showMenu && searchRef.current) {
       searchRef.current.focus()
@@ -53,15 +35,12 @@ const StatsDropdown = (props: any) => {
 
   useEffect(() => {
     axios.get(`http://localhost:8080/api/stats?stat=${searchValue}`).then(response => {
-      // dispatch(setResults(response.data.baseWeapons))
       dispatch(setStats(response.data.stats))
     })
   }, [searchValue])
 
   const handleInputClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    //e.stopPropagation()
-    // dispatch(setShowMenu(!showMenu))
-    dispatch(props.setShowMenu(!showMenu))
+    setShowMenu(!showMenu)
   }
   const getDisplay = () => {
     if (selectedValue) {
@@ -82,7 +61,6 @@ const StatsDropdown = (props: any) => {
   }
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // dispatch(setSearchValue(e.target.value))
     dispatch(props.setSearchValue(e.target.value))
   }
 
@@ -94,39 +72,31 @@ const StatsDropdown = (props: any) => {
   }
 
   return (
-    <div className='multiselect filter-select filter-select-mutate'>
-      <div className="dropdown-input"
-        onClick={handleInputClick} ref={inputRef}>
-        <div className="dropdown-selected-value">{getDisplay()}</div>
-        <div className="dropdown-tools">
-          <div className="dropdown-tool"></div>
-        </div>
+    <div className='multiselect filter-select'> {/* filter-select-mutate */}
+      <div className="multiselect__select"></div>
+      <div className="multiselect__tags" onClick={handleInputClick} ref={inputRef}>
+        {props.isSearchable && (
+          <input className="multiselect__input"
+            onChange={onSearch} value={searchValue} ref={searchRef}
+            onClick={handleInputClick} placeholder={getDisplay()}/>  
+        )}     
       </div>
       {showMenu && (
-        <div className="dropdown-menu">
-          {props.isSearchable && (
-            // <div className="search-box">
-            <div className="multiselect__tags">
-              <input className="multiselect__input"
-                onChange={onSearch} value={searchValue} ref={searchRef}/>
-            </div>
-          )}
-          <div className="multiselect__content-wrapper">
-            <ul className="multiselect__content">
-             {getOptions().slice(0, 100).map((s: any) => (
-                <li className="multiselect__element" 
-                  onClick={() => onItemClick(s.stat, s.stat_order)} key={s.id}>
+        <div className="multiselect__content-wrapper">
+          <ul className="multiselect__content">
+            {getOptions().slice(0, 100).map((s: any) => (
+              <li className="multiselect__element" 
+                onClick={() => onItemClick(s.stat, s.stat_order)} key={s.id}>
+                  <span className="multiselect__option">
                     <span>{s.type}  </span>
                     <span>"{s.stat}"</span>
-                  
-                </li>
-              ))}
-            </ul>
-          </div>
-          
+                    <br />
+                  </span>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
-      
     </div>
   )
 }

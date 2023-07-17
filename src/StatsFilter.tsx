@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux"
 // import { getRequirementFilterVisibility } from "./redux/requirementFilter-selectors"
 import { getSimilarStats, getStatsFiltersVisibility, getStatsState, getStatsToSelect } from "./redux/statsFilter-selector"
 import axios from "axios"
-import { changeStatsFilterVisibility, setStats, setSimilarStats, setStatSearchValue, setStatShowMenu, setStatSelectedValue, cleanSelectedStat } from "./redux/statsFilterReducer"
+import { changeStatsFilterVisibility, setStats, setSimilarStats, setStatSearchValue, setStatSelectedValue, cleanSelectedStat } from "./redux/statsFilterReducer"
 //import Dropdown from "./Dropdown"
 import StatsDropdown from "./StatsDropdown"
 import './FilterGroupHeader.css';
@@ -128,8 +128,8 @@ export function StatsFilter(props: any) {
                       }
                     </select> */}
                     <StatsDropdown placeHolder='+ Add Stat Filter' stats={statsToSelect} isSearchable={true}
-                      setSearchValue={setStatSearchValue} setShowMenu={setStatShowMenu} setSelectedValue={setStatSelectedValue}
-                      showMenu={statsState.statShowMenu} selectedValue={statsState.statSelectedValue} searchValue={statsState.statSearchValue}/>
+                      setSearchValue={setStatSearchValue} setSelectedValue={setStatSelectedValue}
+                      selectedValue={statsState.statSelectedValue} searchValue={statsState.statSearchValue}/>
                     {
                       // similarStats.length !== 0 && <div>{similarStats.map((s: any) => {
                       //   return (

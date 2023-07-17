@@ -105,7 +105,7 @@ const Dropdown = (props: any) => {
         </div>
       </div> */}
       <div className="multiselect__select"></div>
-      <div className="multiselect__tags">
+      <div className="multiselect__tags" onClick={handleInputClick} ref={inputRef}>
         {props.isSearchable && (
           // <div className="search-box">
           // <div className="multiselect__tags">

@@ -30,6 +30,6 @@ export const getNameSearchValue = (state: any) => {
     return state.searchPanel.nameSearchValue
 }
 
-export const getFiltersValue = (state: any) => {
-    return state.searchPanel.filtersValues
-}
+// export const getFiltersValue = (state: any) => {
+//     return state.searchPanel.filtersValues
+// }

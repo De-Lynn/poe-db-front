@@ -6,7 +6,7 @@ import { changeArmourFiltersValue, changeArmourFilterVisibility, cleanArmourFilt
 import { getArmourFilters, getArmourFiltersValues, getArmourFilterVisibility } from "./redux/armourFilter-selectors";
 import './FilterGroupHeader.css';
 import './FilterGroupBody.css';
-import { Form, Formik, Field} from "formik";
+import { Form, Formik, Field, useFormikContext} from "formik";
 
 // function ArmourFiltersForm(props: any) {
 //     let armourFilters = useSelector(getArmourFilters)
@@ -105,10 +105,10 @@ function ArmourFiltersForm(props: any) {
                                 <div className='filter-title'>{af.title}</div>
                                 <span className="sep"></span>
                                 <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
-                                    name={af.minName} maxLength={4} inputMode='numeric'/>
+                                    name={`armourValues.${af.minName}`} maxLength={4} inputMode='numeric'/>
                                 <span className="sep"></span>
                                 <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
-                                    name={af.maxName} maxLength={4} inputMode='numeric'/>
+                                    name={`armourValues.${af.maxName}`} maxLength={4} inputMode='numeric'/>
                             </span>
                         </div>
                     )
@@ -133,8 +133,17 @@ export function ArmourFilters(props: any) {
         dispatch(changeArmourFiltersValue(formData))
     }
     const cleanFiltersValues = () => {
-        dispatch(cleanArmourFilterValues())
+        //dispatch(cleanArmourFilterValues())
         // dispatch(reset('armourFilters'))
+        // dispatch(props.cleanValues('armour'))
+        formik.setFieldValue(`armourValues.minArmour`, '')
+        formik.setFieldValue(`armourValues.maxArmour`, '')
+        formik.setFieldValue(`armourValues.minEvasion`, '')
+        formik.setFieldValue(`armourValues.maxEvasion`, '')
+        formik.setFieldValue(`armourValues.minEs`, '')
+        formik.setFieldValue(`armourValues.maxEs`, '')
+        formik.setFieldValue(`armourValues.minBlock`, '')
+        formik.setFieldValue(`armourValues.maxBlock`, '')
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(changeArmourFilterVisibility(e.currentTarget.checked))
@@ -142,6 +151,7 @@ export function ArmourFilters(props: any) {
     // let armourFiltersValues = useSelector(getArmourFiltersValues)
     // console.log(armourFiltersValues)
 
+    const formik = useFormikContext()
     return (
         <div className="filter-group expanded">
             <div className='filter-group-header'>
@@ -158,7 +168,7 @@ export function ArmourFilters(props: any) {
                         </span>
                         <span className='input-group-btn'>
                             <button className='btn remove-btn' title='Очистить группу фильтра' 
-                                name="armourButton" onClick={cleanFiltersValues}
+                                name="armourButton" onClick={cleanFiltersValues} type="button"
                                 id="armourButton"/>
                             <label htmlFor="armourButton"></label>
                         </span>

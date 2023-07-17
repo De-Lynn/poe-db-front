@@ -9,7 +9,7 @@ const  SET_NAME_SHOW_MENU = 'SET-NAME-SHOW-MENU'
 const  SET_NAME_SELECTED_VALUE = 'SET-NAME-SELECTED-VALUE'
 const  SET_NAME_SEARCH_VALUE = 'SET-NAME-SEARCH-VALUE'
 const SET_NAMES_POOL = 'SET-NAMES-POOL'
-const CHANGE_FILTERS_VALUE = 'CHANGE-FILTERS-VALUE'
+// const CHANGE_FILTERS_VALUE = 'CHANGE-FILTERS-VALUE'
 
 let initialState = {
     // typeFilters: [
@@ -143,37 +143,37 @@ export const searchPanelReducer = (state: any = initialState, action: any) => {
         case SET_NAME_SEARCH_VALUE: {
             return {...state, nameSearchValue: action.newValue}
         }
-        case CHANGE_FILTERS_VALUE: {
-            let stateCopy = {...state}
-            stateCopy.filtersValues = {...state.filtersValues}
-            stateCopy.filtersValues = {
-                minDamage: action.values.damageMinValue ? action.values.damageMinValue : null, 
-                maxDamage: action.values.damageMaxValue ? action.values.damageMaxValue : null, 
-                minCrit: action.values.critMinValue ? action.values.critMinValue : null, 
-                maxCrit: action.values.critMaxValue ? action.values.critMaxValue : null, 
-                minAps: action.values.apsMinValue ? action.values.apsMinValue : null, 
-                maxAps: action.values.apsMaxValue ? action.values.apsMaxValue : null, 
-                minDps: action.values.dpsMinValue ? action.values.dpsMinValue : null, 
-                maxDps: action.values.dpsMaxValue ? action.values.dpsMaxValue : null,
-                minArmour: action.values.armourMinValue ? action.values.armourMinValue : null, 
-                maxArmour: action.values.armourMaxValue ? action.values.armourMaxValue : null, 
-                minEvasion: action.values.evasionMinValue ? action.values.evasionMinValue : null, 
-                maxEvasion: action.values.evasionMaxValue ? action.values.evasionMaxValue : null, 
-                minEs: action.values.esMinValue ? action.values.esMinValue : null, 
-                maxEs: action.values.esMaxValue ? action.values.esMaxValue : null, 
-                minBlock: action.values.blockMinValue ? action.values.blockMinValue : null, 
-                maxBlock: action.values.blockMaxValue ? action.values.blockMaxValue : null,
-                minLvl: action.values.lvlMinValue ? action.values.lvlMinValue : null, 
-                maxLvl: action.values.lvlMaxValue ? action.values.lvlMaxValue : null, 
-                minStr: action.values.strMinValue ? action.values.strMinValue : null, 
-                maxStr: action.values.strMaxValue ? action.values.strMaxValue : null, 
-                minDex: action.values.dexMinValue ? action.values.dexMinValue : null, 
-                maxDex: action.values.dexMaxValue ? action.values.dexMaxValue : null, 
-                minInt: action.values.intMinValue ? action.values.intMinValue : null, 
-                maxInt: action.values.intMaxValue ? action.values.intMaxValue : null
-            }
-            return stateCopy
-        }
+        // case CHANGE_FILTERS_VALUE: {
+        //     let stateCopy = {...state}
+        //     stateCopy.filtersValues = {...state.filtersValues}
+        //     stateCopy.filtersValues = {
+        //         minDamage: action.values.minDamage ? action.values.minDamage : null, 
+        //         maxDamage: action.values.maxDamage ? action.values.maxDamage : null, 
+        //         minCrit: action.values.minCrit ? action.values.minCrit : null, 
+        //         maxCrit: action.values.maxCrit ? action.values.maxCrit : null, 
+        //         minAps: action.values.minAps ? action.values.minAps : null, 
+        //         maxAps: action.values.maxAps ? action.values.maxAps : null, 
+        //         minDps: action.values.minDps ? action.values.minDps : null, 
+        //         maxDps: action.values.maxDps ? action.values.maxDps : null,
+        //         minArmour: action.values.minArmour ? action.values.minArmour : null, 
+        //         maxArmour: action.values.maxArmour ? action.values.maxArmour : null, 
+        //         minEvasion: action.values.minEvasion ? action.values.minEvasion : null, 
+        //         maxEvasion: action.values.maxEvasion ? action.values.maxEvasion : null, 
+        //         minEs: action.values.minEs ? action.values.minEs : null, 
+        //         maxEs: action.values.maxEs ? action.values.maxEs : null, 
+        //         minBlock: action.values.minBlock ? action.values.minBlock : null, 
+        //         maxBlock: action.values.maxBlock ? action.values.maxBlock : null,
+        //         minLvl: action.values.minLvl ? action.values.minLvl : null, 
+        //         maxLvl: action.values.maxLvl ? action.values.maxLvl : null, 
+        //         minStr: action.values.minStr ? action.values.minStr : null, 
+        //         maxStr: action.values.maxStr ? action.values.maxStr : null, 
+        //         minDex: action.values.minDex ? action.values.minDex : null, 
+        //         maxDex: action.values.maxDex ? action.values.maxDex : null, 
+        //         minInt: action.values.minInt ? action.values.minInt : null, 
+        //         maxInt: action.values.maxInt ? action.values.maxInt : null
+        //     }
+        //     return stateCopy
+        // }
         default:
             return state
     }
@@ -189,5 +189,5 @@ export const setNameShowMenu = (newState: boolean) => ({type: SET_NAME_SHOW_MENU
 export const setNameSelectedValue = (newValue: string) => ({type: SET_NAME_SELECTED_VALUE, newValue: newValue})
 export const setNameSearchValue = (newValue: string) => ({type: SET_NAME_SEARCH_VALUE, newValue: newValue})
 export const setNamesPool = (newPool: Array<object>) => ({type: SET_NAMES_POOL, newPool: newPool})
-export const changeFiltersValue = (values: any) => ({type: CHANGE_FILTERS_VALUE, values: values})
+// export const changeFiltersValue = (values: any) => ({type: CHANGE_FILTERS_VALUE, values: values})
 //export const changeFilterVisibility = (visibility: boolean) => ({type: CHANGE_FILTER_VISIBILITY, visibility:visibility})

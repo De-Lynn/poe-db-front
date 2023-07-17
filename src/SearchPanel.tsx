@@ -1,6 +1,6 @@
 import { CategoryFilter } from './CategoryFilter';
 import { FilterHeadersType } from './App';
-import { getNamesPool, getNameShowMenu, getNameSelectedValue, getNameSearchValue, getFiltersValue } from './redux/searchPanel-selector';
+import { getNamesPool, getNameShowMenu, getNameSelectedValue, getNameSearchValue} from './redux/searchPanel-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls } from './Controls';
 import { WeaponsFilters } from './WeaponsFilters';
@@ -8,14 +8,11 @@ import { ArmourFilters } from './ArmourFilters';
 import { RequirementFilters } from './RequirementFilters';
 import { StatsFilter } from './StatsFilter';
 import NameDropdown from './NameDropdown';
-import { changeFiltersValue, setNameSearchValue, setNameSelectedValue, setNameShowMenu } from './redux/searchPanelReducer';
+import { setNameSearchValue, setNameSelectedValue, setNameShowMenu } from './redux/searchPanelReducer';
 import './SearchPanel.css'
-import { Form, Formik } from 'formik';
+import { Form, Formik, useFormik } from 'formik';
 import { getItemName, getItemsCategory, getItemsRarity, getItemsType } from './redux/activeFilters-selector';
 import { getSelectedStatOrder } from './redux/statsFilter-selector';
-import { getWeaponsFiltersValues } from './redux/weaponsFilter-selectors';
-import { getArmourFiltersValues } from './redux/armourFilter-selectors';
-import { getRequirementFiltersValues } from './redux/requirementFilter-selectors';
 import axios from 'axios';
 import { setResults } from './redux/resultsReducer';
 import { changeWeaponsFiltersValue } from './redux/weaponsFilterReducer';
@@ -43,130 +40,95 @@ function SearchPanel(props: any) {
   const nameSelectedValu = useSelector(getNameSelectedValue)
   const nameSearchValue = useSelector(getNameSearchValue)
   
-  const filterValues = useSelector(getFiltersValue)
   let dispatch = useDispatch()
   let category = useSelector(getItemsCategory)
   let type = useSelector(getItemsType)
   let rarity = useSelector(getItemsRarity)
   let stat_order = useSelector(getSelectedStatOrder)
   let name = useSelector(getItemName)
-  let weaponsFiltersValues = useSelector(getWeaponsFiltersValues)
-  let armourFiltersValues = useSelector(getArmourFiltersValues)
-  let requirementFiltersValues = useSelector(getRequirementFiltersValues)
   let searchParams
 
-  const onSearchClickHandler = (values: any, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}) => {
-    // setTimeout(() => {
-    //   alert(JSON.stringify(values, null, 2))
-    //   setSubmitting(false)
-    // }, 400)
-
-    // dispatch(changeWeaponsFiltersValue(values))
-    // dispatch(changeArmourFiltersValue(values))
-    // dispatch(changeRequirementFiltersValue(values))
-    dispatch(changeFiltersValue(values))
+  const onSearchClickHandler = (values: any/*, {setSubmitting}: {setSubmitting: (isSubmitting: boolean) => void}*/) => {
+    
+    dispatch(changeWeaponsFiltersValue(values.weaponValues))
+    dispatch(changeArmourFiltersValue(values.armourValues))
+    dispatch(changeRequirementFiltersValue(values.reqValues))
     alert(JSON.stringify(values, null, 2))
-    setSubmitting(false)
+    // setSubmitting(false)
 
-    doRequest()
+    doRequest(values)
   }
 
-  const doRequest = () => {
+  const doRequest = (values: any) => {
     let request = `http://localhost:8080/api/${category}?`
-      // if(category ==='any') {
+      if(category ==='any') {
           searchParams = new URLSearchParams(rarity)
           request += `${searchParams.toString()}&`
           searchParams = new URLSearchParams(type)
           request += `${searchParams.toString()}&`
-          searchParams = new URLSearchParams(filterValues)
-          request += `${searchParams.toString()}&`
-          // searchParams = new URLSearchParams(weaponsFiltersValues)
-          // request += `${searchParams.toString()}&`
-          // searchParams = new URLSearchParams(armourFiltersValues)
-          // request += `${searchParams.toString()}&`
-          // searchParams = new URLSearchParams(requirementFiltersValues)
-          // request += `${searchParams.toString()}&`
+          request += `${(new URLSearchParams(values.weaponValues)).toString()}&`
+          request += `${(new URLSearchParams(values.armourValues)).toString()}&`
+          request += `${(new URLSearchParams(values.reqValues)).toString()}&`
           searchParams = new URLSearchParams(stat_order)
           request += `${searchParams.toString()}&`
           searchParams = new URLSearchParams(name)
           request += searchParams.toString()
-          // // request += `${$.param(rarity)}`
-          // // request += `${$.param(type)}`
-          // request += `${(new URLSearchParams(values)).toString()}&`
-          // // request += `${$.param(stat_order)}`
-          // // request += `${$.param(name)}`
-          // searchParams = new URLSearchParams(stat_order)
-          // request += `${searchParams.toString()}&`
-          // searchParams = new URLSearchParams(name)
-          // request += searchParams.toString()
-      // } 
-      // if(category==='weapon') {
-      //     searchParams = new URLSearchParams(rarity)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(type)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(weaponsFiltersValues)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(requirementFiltersValues)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(stat_order)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(name)
-      //     request += searchParams.toString()
-      // }
-      // if(category==='armour') {
-      //     searchParams = new URLSearchParams(rarity)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(type)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(armourFiltersValues)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(requirementFiltersValues)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(stat_order)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(name)
-      //     request += searchParams.toString()
-      // }
-      // if(category==='jewellery') {
-      //     searchParams = new URLSearchParams(rarity)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(type)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(requirementFiltersValues)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(stat_order)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(name)
-      //     request += searchParams.toString()
-      // }
-      // if(category==='flask') {
-      //     searchParams = new URLSearchParams(rarity)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(type)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(requirementFiltersValues)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(stat_order)
-      //     request += `${searchParams.toString()}&`
-      //     searchParams = new URLSearchParams(name)
-      //     request += searchParams.toString()
-      // }
+      } 
+      if(category==='weapon') {
+          searchParams = new URLSearchParams(rarity)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(type)
+          request += `${searchParams.toString()}&`
+          request += `${(new URLSearchParams(values.weaponValues)).toString()}&`
+          request += `${(new URLSearchParams(values.reqValues)).toString()}&`
+          searchParams = new URLSearchParams(stat_order)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(name)
+          request += searchParams.toString()
+      }
+      if(category==='armour') {
+          searchParams = new URLSearchParams(rarity)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(type)
+          request += `${searchParams.toString()}&`
+          request += `${(new URLSearchParams(values.armourValues)).toString()}&`
+          request += `${(new URLSearchParams(values.reqValues)).toString()}&`
+          searchParams = new URLSearchParams(stat_order)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(name)
+          request += searchParams.toString()
+      }
+      if(category==='jewellery') {
+          searchParams = new URLSearchParams(rarity)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(type)
+          request += `${searchParams.toString()}&`
+          request += `${(new URLSearchParams(values.reqValues)).toString()}&`
+          searchParams = new URLSearchParams(stat_order)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(name)
+          request += searchParams.toString()
+      }
+      if(category==='flask') {
+          searchParams = new URLSearchParams(rarity)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(type)
+          request += `${searchParams.toString()}&`
+          request += `${(new URLSearchParams(values.reqValues)).toString()}&`
+          searchParams = new URLSearchParams(stat_order)
+          request += `${searchParams.toString()}&`
+          searchParams = new URLSearchParams(name)
+          request += searchParams.toString()
+      }
       alert(request)
       
-      // if (baseWeaponsResults.length !== 0 || uniqueWeaponsResults.length !== 0) {
-      //     dispatch(cleanResults())
-      // }
       axios.get(request).then(response => {
-          // dispatch(setResults(response.data.baseWeapons))
           dispatch(setResults(response.data))
       })
-      //debugger
   }
 
   // useEffect(() => {
   //   doRequest() 
-    
   // }, [filterValues])
 
   return (
@@ -184,20 +146,26 @@ function SearchPanel(props: any) {
         </div>
       </div>
       <Formik
-        initialValues={{
-          damageMinValue: '', damageMaxValue: '',
-          critMinValue: '', critMaxValue: '',
-          apsMinValue: '', apsMaxValue: '',
-          dpsMinValue: '', dpsMaxValue: '',
-          armourMinValue: '', armourMaxValue: '',
-          evasionMinValue: '', evasionMaxValue: '',
-          esMinValue: '', esMaxValue: '',
-          blockMinValue: '', blockMaxValue: '',
-          lvlMinValue: '', lvlMaxValue: '',
-          strMinValue: '', strMaxValue: '',
-          dexMinValue: '', dexMaxValue: '',
-          intMinValue: '', intMaxValue: '',
-      }}
+        initialValues={{ 
+          weaponValues: {
+            minDamage: '', maxDamage: '',
+            minCrit: '', maxCrit: '',
+            minAps: '', maxAps: '',
+            minDps: '', maxDps: '',
+          },
+          armourValues: {
+            minArmour: '', maxArmour: '',
+            minEvasion: '', maxEvasion: '',
+            minEs: '', maxEs: '',
+            minBlock: '', maxBlock: '',
+          },
+          reqValues: {
+            minLvl: '', maxLvl: '',
+            minStr: '', maxStr: '',
+            minDex: '', maxDex: '',
+            minInt: '', maxInt: '',
+          }
+        }}
         // validate={}  
         onSubmit={onSearchClickHandler} 
       >
@@ -216,7 +184,7 @@ function SearchPanel(props: any) {
                 </div>
               </div>
             </div>
-            <Controls/> {/*isSubmitting={isSubmitting}  onSearchClickHandler={onSearchClickHandler}*/}
+            <Controls/> 
           </Form>
         {/* )} */}
       </Formik>

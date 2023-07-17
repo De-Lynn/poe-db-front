@@ -35,87 +35,87 @@ export function Controls(props: any) {
     //     //navigate(`${request}`);
     // }, [weaponsFiltersValues])
 
-    const onSearchClickHandler = () => {
-        let request = `http://localhost:8080/api/${category}?`
-        if(category ==='any') {
-            searchParams = new URLSearchParams(rarity)
-            request += `${searchParams.toString()}&`
-            // searchParams = new URLSearchParams(type)
-            // request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(weaponsFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(armourFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(requirementFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(stat_order)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(name)
-            request += searchParams.toString()
-        } 
-        if(category==='weapon') {
-            searchParams = new URLSearchParams(rarity)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(type)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(weaponsFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(requirementFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(stat_order)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(name)
-            request += searchParams.toString()
-        }
-        if(category==='armour') {
-            searchParams = new URLSearchParams(rarity)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(type)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(armourFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(requirementFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(stat_order)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(name)
-            request += searchParams.toString()
-        }
-        if(category==='jewellery') {
-            searchParams = new URLSearchParams(rarity)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(type)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(requirementFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(stat_order)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(name)
-            request += searchParams.toString()
-        }
-        if(category==='flask') {
-            searchParams = new URLSearchParams(rarity)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(type)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(requirementFiltersValues)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(stat_order)
-            request += `${searchParams.toString()}&`
-            searchParams = new URLSearchParams(name)
-            request += searchParams.toString()
-        }
-        alert(request)
+    // const onSearchClickHandler = () => {
+    //     let request = `http://localhost:8080/api/${category}?`
+    //     if(category ==='any') {
+    //         searchParams = new URLSearchParams(rarity)
+    //         request += `${searchParams.toString()}&`
+    //         // searchParams = new URLSearchParams(type)
+    //         // request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(weaponsFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(armourFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(requirementFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(stat_order)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(name)
+    //         request += searchParams.toString()
+    //     } 
+    //     if(category==='weapon') {
+    //         searchParams = new URLSearchParams(rarity)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(type)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(weaponsFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(requirementFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(stat_order)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(name)
+    //         request += searchParams.toString()
+    //     }
+    //     if(category==='armour') {
+    //         searchParams = new URLSearchParams(rarity)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(type)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(armourFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(requirementFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(stat_order)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(name)
+    //         request += searchParams.toString()
+    //     }
+    //     if(category==='jewellery') {
+    //         searchParams = new URLSearchParams(rarity)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(type)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(requirementFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(stat_order)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(name)
+    //         request += searchParams.toString()
+    //     }
+    //     if(category==='flask') {
+    //         searchParams = new URLSearchParams(rarity)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(type)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(requirementFiltersValues)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(stat_order)
+    //         request += `${searchParams.toString()}&`
+    //         searchParams = new URLSearchParams(name)
+    //         request += searchParams.toString()
+    //     }
+    //     alert(request)
         
-        // if (baseWeaponsResults.length !== 0 || uniqueWeaponsResults.length !== 0) {
-        //     dispatch(cleanResults())
-        // }
-        axios.get(request).then(response => {
-            // dispatch(setResults(response.data.baseWeapons))
-            dispatch(setResults(response.data))
-        })
-        //debugger
-    }
+    //     // if (baseWeaponsResults.length !== 0 || uniqueWeaponsResults.length !== 0) {
+    //     //     dispatch(cleanResults())
+    //     // }
+    //     axios.get(request).then(response => {
+    //         // dispatch(setResults(response.data.baseWeapons))
+    //         dispatch(setResults(response.data))
+    //     })
+    //     //debugger
+    // }
 
     return (
         <div className='controls'>

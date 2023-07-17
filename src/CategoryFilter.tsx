@@ -38,7 +38,7 @@ export function CategoryFilter(props: any) {
             <span className='input-group-btn'>
               <button className='btn remove-btn' title='Clear Filter Group'
                 onClick={onClickHandler} name="categoryButton"
-                id="categoryButton"/>
+                id="categoryButton" type="button"/>
               <label htmlFor="categoryButton"></label>
             </span>
           </span>

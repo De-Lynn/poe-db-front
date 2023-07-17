@@ -6,19 +6,10 @@ const CHANGE_ARMOUR_FILTER_VISIBILITY = 'CHANGE-ARMOUR-FILTER-VISIBILITY'
 
 let initialState = {
     armourFilters: [
-        {id: v1(), title: 'Armour', minName:"armourMinValue", maxName:"armourMaxValue",
-            // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        {id: v1(), title: 'Evasion', minName:"evasionMinValue", maxName:"evasionMaxValue",
-            // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        {id: v1(), title: 'Enegry Shield', minName:"esMinValue", maxName:"esMaxValue",
-            // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        {id: v1(), title: 'Block', minName:"blockMinValue", maxName:"blockMaxValue",
-            // header: 'Фильтры защиты', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', 
-        },
-        
+        {id: v1(), title: 'Armour', minName:"minArmour", maxName:"maxArmour"},
+        {id: v1(), title: 'Evasion', minName:"minEvasion", maxName:"maxEvasion"},
+        {id: v1(), title: 'Enegry Shield', minName:"minEs", maxName:"maxEs"},
+        {id: v1(), title: 'Block', minName:"minBlock", maxName:"maxBlock"},
     ],
     armourFiltersValues: {
         minArmour: null, maxArmour: null, minEvasion: null, maxEvasion: null, minEs: null, maxEs: null, minBlock: null, maxBlock: null
@@ -43,14 +34,14 @@ export const armourFilterReducer = (state: any = initialState, action: any) => {
             let stateCopy = {...state}
             stateCopy.armourFiltersValues = {...state.armourFiltersValues}
             stateCopy.armourFiltersValues = {
-                minArmour: action.values.armourMinValue ? action.values.armourMinValue : null, 
-                maxArmour: action.values.armourMaxValue ? action.values.armourMaxValue : null, 
-                minEvasion: action.values.evasionMinValue ? action.values.evasionMinValue : null, 
-                maxEvasion: action.values.evasionMaxValue ? action.values.evasionMaxValue : null, 
-                minEs: action.values.esMinValue ? action.values.esMinValue : null, 
-                maxEs: action.values.esMaxValue ? action.values.esMaxValue : null, 
-                minBlock: action.values.blockMinValue ? action.values.blockMinValue : null, 
-                maxBlock: action.values.blockMaxValue ? action.values.blockMaxValue : null
+                minArmour: action.values.minArmour ? action.values.minArmour : null, 
+                maxArmour: action.values.maxArmour ? action.values.maxArmour : null, 
+                minEvasion: action.values.minEvasion ? action.values.minEvasion : null, 
+                maxEvasion: action.values.maxEvasion ? action.values.maxEvasion : null, 
+                minEs: action.values.minEs ? action.values.minEs : null, 
+                maxEs: action.values.maxEs ? action.values.maxEs : null, 
+                minBlock: action.values.minBlock ? action.values.minBlock : null, 
+                maxBlock: action.values.maxBlock ? action.values.maxBlock : null
             }
             return stateCopy
         }

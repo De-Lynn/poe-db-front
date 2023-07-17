@@ -6,7 +6,7 @@ import { getRequirementFilterVisibility, getRequirementFilters, getRequirementFi
 import { changeRequirementFilterVisibility, changeRequirementFiltersValue, cleanRequirementFilterValues } from "./redux/requirementFilterReducer";
 import './FilterGroupHeader.css';
 import './FilterGroupBody.css';
-import { Form, Formik, Field} from "formik";
+import { Form, Formik, Field, useFormikContext} from "formik";
 
 // function RequirementFiltersForm(props: any) {
 //     let requirementFilters = useSelector(getRequirementFilters)
@@ -101,10 +101,10 @@ function RequirementFiltersForm(props: any) {
                                 <div className='filter-title'>{rf.title}</div>
                                 <span className="sep"></span>
                                 <Field className='form-control minmax' type="number" placeholder='min' component={'input'}
-                                    name={rf.minName} maxLength={4} inputMode='numeric'/>
+                                    name={`reqValues.${rf.minName}`} maxLength={4} inputMode='numeric'/>
                                 <span className="sep"></span>
                                 <Field className='form-control minmax' type="number" placeholder='max' component={'input'} 
-                                    name={rf.maxName} maxLength={4} inputMode='numeric'/>
+                                    name={`reqValues.${rf.maxName}`} maxLength={4} inputMode='numeric'/>
                             </span>
                         </div>
                     )
@@ -130,13 +130,22 @@ export function RequirementFilters(props: any) {
         dispatch(changeRequirementFiltersValue(formData))
     }
     const cleanFiltersValues = () => {
-        dispatch(cleanRequirementFilterValues())
+        // dispatch(cleanRequirementFilterValues())
         // dispatch(reset('requirementFilters'))
+        formik.setFieldValue(`reqValues.minLvl`, '')
+        formik.setFieldValue(`reqValues.maxLvl`, '')
+        formik.setFieldValue(`reqValues.minStr`, '')
+        formik.setFieldValue(`reqValues.maxStr`, '')
+        formik.setFieldValue(`reqValues.minDex`, '')
+        formik.setFieldValue(`reqValues.maxDex`, '')
+        formik.setFieldValue(`reqValues.minInt`, '')
+        formik.setFieldValue(`reqValues.maxInt`, '')
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         dispatch(changeRequirementFilterVisibility(e.currentTarget.checked))
     }
 
+    const formik = useFormikContext()
     return (
         <div className="filter-group expanded">
             <div className='filter-group-header'>
@@ -153,7 +162,7 @@ export function RequirementFilters(props: any) {
                         </span>
                         <span className='input-group-btn'>
                             <button className='btn remove-btn' title='Очистить группу фильтра' 
-                                name="requirementButton" onClick={cleanFiltersValues}
+                                name="requirementButton" onClick={cleanFiltersValues} type="button"
                                 id="reqButton"/>
                             <label htmlFor="reqButton"></label>
                         </span>
