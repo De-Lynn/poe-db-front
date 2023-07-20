@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setNamesPool } from "./redux/searchPanelReducer";
+import { setNameSelectedValue, setNamesPool } from "./redux/searchPanelReducer";
 import './NameDropdown.css';
 
 
@@ -71,6 +71,10 @@ const NameDropdown = (props: any) => {
     return props.names.filter((name: any) => name.name.toLowerCase().indexOf(searchValue.toLowerCase()) >= 0)
   }
 
+  const onClickHandler = () => {
+    dispatch(setNameSelectedValue(''))
+  }
+
   return (
     <div className='multiselect search-select'>
       <div className="multiselect__select"></div>
@@ -81,6 +85,12 @@ const NameDropdown = (props: any) => {
             onClick={handleInputClick} placeholder={getDisplay()}/>
         )}
       </div>
+      <span className='input-group-btn'>
+        <button className='btn remove-btn' title='Clear Filter Group'
+          onClick={onClickHandler} name="itemNameBtn"
+          id="itemNameBtn" type="button" />
+        <label htmlFor="itemNameBtn"></label>
+      </span>
       {showMenu && (
         <div className="multiselect__content-wrapper">
               <ul className="multiselect__content">

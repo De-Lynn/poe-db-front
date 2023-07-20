@@ -4,7 +4,7 @@ import { v1 } from "uuid"
 // const  CHANGE_CATEGORIES_STATE = 'CHANGE-CATEGORIES-STATE'
 // const  CHANGE_CATEGORIES_INPUT_VALUE = 'CHANGE-CATEGORIES-INPUT-VALUE'
 // const  CLEAN_CATEGORIES_INPUT_VALUE = 'CLEAN-CATEGORIES-INPUT-VALUE'
-// const  CHANGE_FILTER_VISIBILITY = 'CHANGE-FILTER-VISIBILITY'
+const  CHANGE_FILTERS_VISIBILITY = 'CHANGE-FILTERS-VISIBILITY'
 const  SET_NAME_SHOW_MENU = 'SET-NAME-SHOW-MENU'
 const  SET_NAME_SELECTED_VALUE = 'SET-NAME-SELECTED-VALUE'
 const  SET_NAME_SEARCH_VALUE = 'SET-NAME-SEARCH-VALUE'
@@ -84,6 +84,7 @@ let initialState = {
         minArmour: null, maxArmour: null, minEvasion: null, maxEvasion: null, minEs: null, maxEs: null, minBlock: null, maxBlock: null,
         minLvl: null, maxLvl: null, minStr: null, maxStr: null, minDex: null, maxDex: null, minInt: null, maxInt: null
     },
+    filtersVisibility: true
     // nameselectedType: 'default', selectedCategory: 'any', 
 }
 
@@ -125,12 +126,12 @@ export const searchPanelReducer = (state: any = initialState, action: any) => {
         //     stateCopy.typeFilters[1].selectedCategory = 'any'
         //     return stateCopy
         // }
-        // case CHANGE_FILTER_VISIBILITY: {
-        //     let stateCopy = {...state}
-        //     stateCopy.categoryFilterVisibility = {...state.categoryFilterVisibility}
-        //     stateCopy.categoryFilterVisibility = action.visibility
-        //     return stateCopy
-        // }
+        case CHANGE_FILTERS_VISIBILITY: {
+            // let stateCopy = {...state}
+            // stateCopy.filtersVisibility = {...state.filterVisibility}
+            // stateCopy.categoryFilterVisibility = action.visibility
+            return {...state, filtersVisibility: action.visibility}
+        }
         case SET_NAMES_POOL : {
             return {...state, namesPool: action.newPool}
         }
@@ -190,4 +191,4 @@ export const setNameSelectedValue = (newValue: string) => ({type: SET_NAME_SELEC
 export const setNameSearchValue = (newValue: string) => ({type: SET_NAME_SEARCH_VALUE, newValue: newValue})
 export const setNamesPool = (newPool: Array<object>) => ({type: SET_NAMES_POOL, newPool: newPool})
 // export const changeFiltersValue = (values: any) => ({type: CHANGE_FILTERS_VALUE, values: values})
-//export const changeFilterVisibility = (visibility: boolean) => ({type: CHANGE_FILTER_VISIBILITY, visibility:visibility})
+export const changeFiltersVisibility = (visibility: boolean) => ({type: CHANGE_FILTERS_VISIBILITY, visibility:visibility})

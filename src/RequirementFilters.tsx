@@ -7,6 +7,7 @@ import { changeRequirementFilterVisibility, changeRequirementFiltersValue, clean
 import './FilterGroupHeader.css';
 import './FilterGroupBody.css';
 import { Form, Formik, Field, useFormikContext} from "formik";
+import { FilterHeader } from "./FilterHeader";
 
 // function RequirementFiltersForm(props: any) {
 //     let requirementFilters = useSelector(getRequirementFilters)
@@ -148,7 +149,11 @@ export function RequirementFilters(props: any) {
     const formik = useFormikContext()
     return (
         <div className="filter-group expanded">
-            <div className='filter-group-header'>
+            <FilterHeader header="Requirements"
+                checked={filterVisibility} inputId="requirementCheckbox" inputName="requirementCheckbox" onChange={onChangeHandler}
+                onClick={cleanFiltersValues} btnName="requirementButton" btnId="reqButton"
+            />
+            {/* <div className='filter-group-header'>
                 <div className="filter">
                     <span className='input-group-btn'>
                         <input className="btn toggle-btn"
@@ -169,7 +174,7 @@ export function RequirementFilters(props: any) {
                     </span>
                 </div>
                 
-            </div>
+            </div> */}
             <RequirementFiltersForm/>
         </div>
     )           

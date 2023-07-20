@@ -174,3 +174,31 @@ ul {
   height: 35px;
   background: #e2e2e2;
 }
+
+.multiselect .input-group-btn {
+  height: 40px;
+  right: -40px;
+  top: 0px;
+  padding: 8px 8px;
+  position: absolute;
+  width: 40px;
+  text-align: center;
+  line-height: 16px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* .input-group-btn {
+  position: absolute;
+  width: 40px;
+  text-align: center;
+  line-height: 16px;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  text-decoration: none;
+  cursor: pointer;
+} */

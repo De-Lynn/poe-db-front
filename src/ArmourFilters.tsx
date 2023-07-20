@@ -7,6 +7,7 @@ import { getArmourFilters, getArmourFiltersValues, getArmourFilterVisibility } f
 import './FilterGroupHeader.css';
 import './FilterGroupBody.css';
 import { Form, Formik, Field, useFormikContext} from "formik";
+import { FilterHeader } from "./FilterHeader";
 
 // function ArmourFiltersForm(props: any) {
 //     let armourFilters = useSelector(getArmourFilters)
@@ -154,7 +155,11 @@ export function ArmourFilters(props: any) {
     const formik = useFormikContext()
     return (
         <div className="filter-group expanded">
-            <div className='filter-group-header'>
+            <FilterHeader header="Armour Filters"
+                checked={filterVisibility} inputId="armourCheckbox" inputName="armourCheckbox" onChange={onChangeHandler}
+                onClick={cleanFiltersValues} btnName="armourButton" btnId="armourButton"
+            />
+            {/* <div className='filter-group-header'>
                 <div className="filter">
                     <span className='input-group-btn'>
                         <input className="btn toggle-btn" 
@@ -175,7 +180,7 @@ export function ArmourFilters(props: any) {
                     </span>
                 </div>
                 
-            </div>
+            </div> */}
             <ArmourFiltersForm />
         </div>
     )           

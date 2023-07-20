@@ -12,6 +12,7 @@ import { getRequirementFiltersValues } from "./redux/requirementFilter-selectors
 import { getSelectedStatOrder } from "./redux/statsFilter-selector"
 import './Controls.css'
 import { ControlsRight } from "./ControlsRight"
+import { changeFiltersVisibility } from "./redux/searchPanelReducer"
 
 export function Controls(props: any) {
     let dispatch = useDispatch()
@@ -117,11 +118,14 @@ export function Controls(props: any) {
     //     //debugger
     // }
 
+    const onSearchClickHandler = () => {
+        dispatch(changeFiltersVisibility(false))
+    }
     return (
         <div className='controls'>
             <div className="controls-left"></div>
             <div className='controls-center'>
-                <button className='btn search-btn' type="submit"
+                <button className='btn search-btn' type="submit" onClick={onSearchClickHandler}
                 > {/*disabled={props.isSubmitting}  onClick={onSearchClickHandler}*/}
                     <span>Search</span>
                 </button>

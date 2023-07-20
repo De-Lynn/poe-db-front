@@ -1,6 +1,6 @@
 import { CategoryFilter } from './CategoryFilter';
 import { FilterHeadersType } from './App';
-import { getNamesPool, getNameShowMenu, getNameSelectedValue, getNameSearchValue} from './redux/searchPanel-selector';
+import { getNamesPool, getNameShowMenu, getNameSelectedValue, getNameSearchValue, getFiltersVisibility} from './redux/searchPanel-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls } from './Controls';
 import { WeaponsFilters } from './WeaponsFilters';
@@ -39,6 +39,7 @@ function SearchPanel(props: any) {
   const nameShowMenu = useSelector(getNameShowMenu)
   const nameSelectedValu = useSelector(getNameSelectedValue)
   const nameSearchValue = useSelector(getNameSearchValue)
+  const filtersVisibility = useSelector(getFiltersVisibility)
   
   let dispatch = useDispatch()
   let category = useSelector(getItemsCategory)
@@ -60,7 +61,7 @@ function SearchPanel(props: any) {
   }
 
   const doRequest = (values: any) => {
-    let request = `http://localhost:8080/api/${category}?`
+    let request = `http://192.168.1.9:8080/api/${category}?`
       if(category ==='any') {
           searchParams = new URLSearchParams(rarity)
           request += `${searchParams.toString()}&`
@@ -171,19 +172,21 @@ function SearchPanel(props: any) {
       >
         {/* {({isSubmitting}) => ( */}
           <Form>
-            <div className='search-bar search-advanced'>
-              <div className='search-advanced-items'>
-                <div className='search-advanced-pane blue'>
-                  <CategoryFilter/>
-                  <WeaponsFilters/>
-                  <ArmourFilters/>
-                  <RequirementFilters/>
-                </div>
-                <div className='search-advanced-pane brown'>
-                  <StatsFilter />
+            {/* {filtersVisibility &&  */}
+              <div className={filtersVisibility ? 'search-bar search-advanced' : 'search-bar search-advanced search-advanced-hidden'}>
+                <div className='search-advanced-items'>
+                  <div className='search-advanced-pane blue'>
+                    <CategoryFilter/>
+                    <WeaponsFilters/>
+                    <ArmourFilters/>
+                    <RequirementFilters/>
+                  </div>
+                  <div className='search-advanced-pane brown'>
+                    <StatsFilter />
+                  </div>
                 </div>
               </div>
-            </div>
+            {/* } */}
             <Controls/> 
           </Form>
         {/* )} */}

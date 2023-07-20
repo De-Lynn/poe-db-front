@@ -11,6 +11,7 @@ import { changeStatsFilterVisibility, setStats, setSimilarStats, setStatSearchVa
 import StatsDropdown from "./StatsDropdown"
 import './FilterGroupHeader.css';
 import './FilterGroupBody.css'
+import { FilterHeader } from "./FilterHeader"
 
 // type ContentType = {
 //   id: string
@@ -68,7 +69,11 @@ export function StatsFilter(props: any) {
 
   return (
     <div className="filter-group expanded">
-      <div className='filter-group-header'>
+      <FilterHeader header="Stat Filters"
+          checked={statsFilterVisibility} inputId="statsCheckbox" inputName="statsCheckbox" onChange={onChangeHandler}
+          onClick={onClickHandler} btnName="statsButton" btnId="statsButton"
+      />
+      {/* <div className='filter-group-header'>
         <div className="filter">
           <span className='input-group-btn'>
             <input className="btn toggle-btn"
@@ -85,10 +90,8 @@ export function StatsFilter(props: any) {
             <button className='btn remove-btn' title='Очистить группу фильтра'
                     onClick={onClickHandler} name="statsButton">X</button>
           </span>
-          {/* <span className="input-group-btn">
-          </span> */}
         </div>
-      </div>
+      </div> */}
       {statsFilterVisibility && //statsToSelect.map((s: any) => {
         // const onButtonClickHandler = () => {
         //   dispatch(changeCategoriesState(!cf.state, cf.id))

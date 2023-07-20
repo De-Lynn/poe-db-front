@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux"
 import Dropdown from "./Dropdown"
 import './FilterGroupHeader.css'
 import './FilterGroupBody.css'
+import { FilterHeader } from "./FilterHeader"
 
 export function CategoryFilter(props: any) {
   let categoryFilterVisibility = useSelector(getCategoryFiltersVisibility)
@@ -22,10 +23,13 @@ export function CategoryFilter(props: any) {
 
   return (
     <div className='filter-group expanded'>
-      <div className='filter-group-header'>
+      <FilterHeader header="Type Filters"
+        checked={categoryFilterVisibility} inputId="categoriesCheckbox" inputName="categoryCheckbox" onChange={onChangeHandler}
+        onClick={onClickHandler} btnName="categoryButton" btnId="categoryButton"
+      />
+      {/* <div className='filter-group-header'>
         <div className="filter">
           <span className='input-group-btn'>
-            {/* <button className="btn toggle-btn"></button> */}
             <input className="btn toggle-btn" 
               type="checkbox" checked={categoryFilterVisibility} name="categoryCheckbox"
               onChange={onChangeHandler} id="categoriesCheckbox"/>
@@ -43,7 +47,7 @@ export function CategoryFilter(props: any) {
             </span>
           </span>
         </div>
-      </div>
+      </div> */}
       <div className="filter-group-body">
         {categoryFilterVisibility && categoryFilters.map((cf: any) => {
           return (
@@ -68,3 +72,4 @@ export function CategoryFilter(props: any) {
     </div>
   )
 }
+

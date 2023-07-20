@@ -16,7 +16,7 @@
   position: relative;
   display: table;
   border-collapse: separate;
-  width: 58.3333333333%;
+  width: 47.14%;
   min-height: 1px;
 }
 
@@ -33,15 +33,22 @@
 }
 
 #trade .search-bar.search-advanced {
-  /* display: inline-grid; */
-  /* min-height: 256px; */
+  display: inline-grid;
+  min-height: 256px;
   padding: 8px 0 0;
-  /* height: fit-content; */
+  height: fit-content;
 }
 
 #trade .search-bar {
   margin-left: 0;
   margin-right: 0;
+}
+
+#trade .search-bar.search-advanced.search-advanced-hidden {
+  min-height: auto;
+  height: 0;
+  padding-top: 0;
+  overflow: hidden;
 }
 
 #trade .search-bar .search-advanced-pane {
@@ -99,4 +106,7 @@
   float: left;
   position: relative;
   min-height: 1px;  
+}
+* {
+  box-sizing: border-box;
 }
