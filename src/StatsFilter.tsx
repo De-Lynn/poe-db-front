@@ -1,12 +1,12 @@
-import { ChangeEvent, useEffect } from "react"
+import { ChangeEvent, MouseEventHandler, useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 // import { getWeaponsFilterVisibility } from "./redux/weaponsFilter-selectors"
 // import { getArmourFilterVisibility } from "./redux/armourFilter-selectors"
 // import { getRequirementFilterVisibility } from "./redux/requirementFilter-selectors"
-import { getSimilarStats, getStatsFiltersVisibility, getStatsState, getStatsToSelect } from "./redux/statsFilter-selector"
+import { getSelectedStats, getSimilarStats, getStatsFiltersVisibility, getStatsState, getStatsToSelect } from "./redux/statsFilter-selector"
 import axios from "axios"
-import { changeStatsFilterVisibility, setStats, setSimilarStats, setStatSearchValue, setStatSelectedValue, cleanSelectedStat } from "./redux/statsFilterReducer"
+import { changeStatsFilterVisibility, setStats, setSimilarStats, setStatSearchValue, setStatSelectedValue, cleanSelectedStat, changeStatStatus, removeStat } from "./redux/statsFilterReducer"
 //import Dropdown from "./Dropdown"
 import StatsDropdown from "./StatsDropdown"
 import './FilterGroupHeader.css';
@@ -38,6 +38,7 @@ export function StatsFilter(props: any) {
   // let requirementFilterVisibility = useSelector(getRequirementFilterVisibility)
   const statsToSelect = useSelector(getStatsToSelect)
   const statsState = useSelector(getStatsState)
+  let selectedStats = useSelector(getSelectedStats)
   const dispatch = useDispatch()
 
   if (statsToSelect.length === 0) {
@@ -98,6 +99,36 @@ export function StatsFilter(props: any) {
         // }
         //return (
           <div className="filter-group-body">
+            {console.log(selectedStats)}
+            {selectedStats && selectedStats.map((s: any) => {
+              const onStatChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                dispatch(changeStatStatus(e.currentTarget.id))
+              }
+              const onRemoveStatClickHandler = (e: React.MouseEvent<HTMLElement>) => {
+                dispatch(removeStat(e.currentTarget.id))
+              }
+              return (
+                <div className="filter full-span">
+                  <span className="input-group-btn">
+                    <input className="btn toggle-btn" type="checkbox" id={s.checkedId}
+                      onChange={onStatChangeHandler} checked={s.status}></input>
+                    <label htmlFor={s.checkedId}></label>
+                  </span>
+                  <span className="filter-body">
+                    <div className="filter-title filter-title-clickable">
+                      {/* <i className="mutate-type mutate-type-pseudo"></i> */}
+                      <span>{s.stat}</span>
+                    </div>
+                  {/* </span> */}
+                    <span className="input-group-btn">
+                      <button className="btn remove-btn" type="button" id={s.removeId}
+                        onClick={onRemoveStatClickHandler}></button>
+                      <label htmlFor={s.removeId}></label>
+                    </span>
+                  </span>
+                </div>
+              )
+            })}
             <div className='filter filter-padded'>
               <span className='filter-body'>
                 {/* <div className='filter-title'>{cf.filterTitle}</div> */}

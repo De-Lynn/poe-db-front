@@ -124,6 +124,7 @@ function SearchPanel(props: any) {
       alert(request)
       
       axios.get(request).then(response => {
+        //debugger
           dispatch(setResults(response.data))
       })
   }

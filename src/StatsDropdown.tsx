@@ -42,12 +42,12 @@ const StatsDropdown = (props: any) => {
   const handleInputClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setShowMenu(!showMenu)
   }
-  const getDisplay = () => {
-    if (selectedValue) {
-      return selectedValue
-    }
-    return props.placeHolder;
-  }
+  // const getDisplay = () => {
+  //   if (selectedValue) {
+  //     return selectedValue
+  //   }
+  //   return props.placeHolder;
+  // }
 
   const onItemClick = (stat: string, statOrder: number) => {
     dispatch(props.setSelectedValue(stat, statOrder))
@@ -78,7 +78,7 @@ const StatsDropdown = (props: any) => {
         {props.isSearchable && (
           <input className="multiselect__input"
             onChange={onSearch} value={searchValue} ref={searchRef}
-            onClick={handleInputClick} placeholder={getDisplay()}/>  
+            onClick={handleInputClick} placeholder={props.placeHolder}/> /*placeholder={getDisplay()} */
         )}     
       </div>
       {showMenu && (

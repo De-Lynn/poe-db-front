@@ -11,6 +11,8 @@ const SET_SIMILAR_STATS = 'SET-SIMILAR-STATS'
 const  SET_STAT_SHOW_MENU = 'SET-STAT-SHOW-MENU'
 const  SET_STAT_SELECTED_VALUE = 'SET-STAT-SELECTED-VALUE'
 const  SET_STAT_SEARCH_VALUE = 'SET-STAT-SEARCH-VALUE'
+const CHANGE_STAT_STATUS = 'CHANGE-STAT-STATUS'
+const REMOVE_STAT = 'REMOVE-STAT'
 
 let initialState = {
     statsToSelect: [
@@ -18,7 +20,7 @@ let initialState = {
     ],
     similarStats: [],
     statsFilterVisibility: true, //statOrder: null,
-    statShowMenu: false, statSelectedValue: null, statSelectedStatOrder: null, statSearchValue: null
+    statShowMenu: false, statSelectedValue: [], statSearchValue: null
 }
 
 export const statsFilterReducer = (state: any = initialState, action: any) => {
@@ -44,7 +46,7 @@ export const statsFilterReducer = (state: any = initialState, action: any) => {
         //     return stateCopy
         // }
         case CLEAN_SELECTED_STAT: {
-            return {...state, statSelectedValue: null, statSelectedStatOrder: null, similarStats: []}
+            return {...state, statSelectedValue: [], similarStats: []}
         }
         case SET_STATS: {
             return {...state, statsToSelect: action.stats}
@@ -65,10 +67,29 @@ export const statsFilterReducer = (state: any = initialState, action: any) => {
             return {...state, statShowMenu: action.newState}
         }
         case SET_STAT_SELECTED_VALUE: {
-            return {...state, statSelectedValue: action.newValue, statSelectedStatOrder: action.newStatOrder}
+            let stateCopy = {...state}
+            stateCopy.statSelectedValue = [...state.statSelectedValue]
+            stateCopy.statSelectedValue.push({checkedId: `checked${v1()}`, removeId: `remove${v1()}`, stat: action.newValue, statOrder: action.newStatOrder, status: true}) 
+            console.log(stateCopy.statSelectedValue)
+            return {...state, statSelectedValue: stateCopy.statSelectedValue}
         }
         case SET_STAT_SEARCH_VALUE: {
             return {...state, statSearchValue: action.newValue}
+        }
+        case CHANGE_STAT_STATUS: {
+            let stateCopy = {...state}
+            stateCopy.statSelectedValue = state.statSelectedValue.map((s: any) => {
+                if (s.checkedId == action.id) {
+                    return {...s, status: !s.status}
+                }
+                return s
+            })
+            return stateCopy
+        }
+        case REMOVE_STAT: {
+            let stateCopy = {...state}
+            stateCopy.statSelectedValue = state.statSelectedValue.filter((s: any) =>  s.removeId!=action.id)
+            return stateCopy
         }
         default:
             return state
@@ -89,3 +110,5 @@ export const setStatShowMenu = (newState: boolean) => ({type: SET_STAT_SHOW_MENU
 export const setStatSelectedValue = (newValue: string, newStatOrder: number) => (
     {type: SET_STAT_SELECTED_VALUE, newValue: newValue, newStatOrder: newStatOrder})
 export const setStatSearchValue = (newValue: string) => ({type: SET_STAT_SEARCH_VALUE, newValue: newValue})
+export const changeStatStatus = (id: string) => ({type: CHANGE_STAT_STATUS, id: id})
+export const removeStat = (id: string) => ({type: REMOVE_STAT, id: id})

@@ -11,9 +11,16 @@ export const getSimilarStats = (state: any) => {
 }
 
 export const getSelectedStatOrder = (state: any) => {
-    return {stat_order: state.statsFilter.statSelectedStatOrder}
+    let stat_order = state.statsFilter.statSelectedValue.map((s: any) => {
+        return s.statOrder
+    })
+    return {stat_order: stat_order}
 }
 
 export const getStatsState = (state: any) => {
     return state.statsFilter
+}
+
+export const getSelectedStats = (state: any) => {
+    return state.statsFilter.statSelectedValue
 }

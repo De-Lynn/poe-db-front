@@ -123,7 +123,7 @@ const RareStatsList = (props: any) => {
         </RareItemName>
         <div>
             <button onClick={showMoreStats} ref={divRef}>Stats</button> 
-            {statDiv && (props.r.stats.slice(0, 100).map( (stat: Array<string>) => {
+            {statDiv && (props.r.stats.map( (stat: Array<string>) => {
                 return (
                     <div>
                         {/* {stat} */}
