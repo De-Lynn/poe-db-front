@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux"
 import { getBaseWeaponsResults, getUniqueWeaponsResults, getBaseArmourResults, getUniqueArmourResults, 
-    getBaseJewelleryResults, getUniqueJewelleryResults, getBaseFlasksResults, getUniqueFlasksResults, getRareWeaponResults, getRareArmourResults, getRareJewelleryResults, getRareFlasksResults, getNameSortAsc, getResultsCount} from "./redux/results-selector"
+    getBaseJewelleryResults, getUniqueJewelleryResults, getBaseFlasksResults, getUniqueFlasksResults, getRareWeaponResults, 
+    getRareArmourResults, getRareJewelleryResults, getRareFlasksResults, getNameSortAsc, getResultsCount, getResults} from "../redux/results-selector"
 import styled from "styled-components"
 import { useEffect, useRef, useState } from "react"
-import { v1 } from "uuid"
-import RareStatsList from "./RareStatsList"
-import { sortResultsByName, changeNameSort } from "./redux/resultsReducer"
+import RareStatsList from "../RareStatsList"
+import { sortResultsByName, changeNameSort } from "../redux/resultsReducer"
 import { useDispatch } from "react-redux"
 import ResultsBaseWeapons from "./ResultsWeaponsBase"
 import ResultsUniqueWeapons from "./ResultsWeaponsUnique"
@@ -13,18 +13,19 @@ import ResultsBaseArmour from "./ResultsArmourBase"
 import ResultsUniqueArmour from "./ResultsArmourUnique"
 
 export function Results(props:any) {
-    let baseWeaponsResults = useSelector(getBaseWeaponsResults)
-    let rareWeaponsResults = useSelector(getRareWeaponResults)
-    let uniqueWeaponsResults = useSelector(getUniqueWeaponsResults) 
-    let baseArmourResults = useSelector(getBaseArmourResults)
-    let rareArmourResults = useSelector(getRareArmourResults)
-    let uniqueArmourResults = useSelector(getUniqueArmourResults) 
-    let baseJewelleryResults = useSelector(getBaseJewelleryResults)
-    let rareJewelleryResults = useSelector(getRareJewelleryResults)
-    let uniqueJewelleryResults = useSelector(getUniqueJewelleryResults) 
-    let baseFlasksResults = useSelector(getBaseFlasksResults)
-    let rareFlasksResults = useSelector(getRareFlasksResults)
-    let uniqueFlasksResults = useSelector(getUniqueFlasksResults) 
+    let allResults = useSelector(getResults)
+    // let baseWeaponsResults = useSelector(getBaseWeaponsResults)
+    // let rareWeaponsResults = useSelector(getRareWeaponResults)
+    // let uniqueWeaponsResults = useSelector(getUniqueWeaponsResults) 
+    // let baseArmourResults = useSelector(getBaseArmourResults)
+    // let rareArmourResults = useSelector(getRareArmourResults)
+    // let uniqueArmourResults = useSelector(getUniqueArmourResults) 
+    // let baseJewelleryResults = useSelector(getBaseJewelleryResults)
+    // let rareJewelleryResults = useSelector(getRareJewelleryResults)
+    // let uniqueJewelleryResults = useSelector(getUniqueJewelleryResults) 
+    // let baseFlasksResults = useSelector(getBaseFlasksResults)
+    // let rareFlasksResults = useSelector(getRareFlasksResults)
+    // let uniqueFlasksResults = useSelector(getUniqueFlasksResults) 
     let nameSortAsc = useSelector(getNameSortAsc)
     let resultsCount = useSelector(getResultsCount)
     const dispatch = useDispatch()
@@ -32,10 +33,37 @@ export function Results(props:any) {
     const [statDiv, setDivOpen] = useState(false);
     const divRef = useRef<HTMLButtonElement>(null)
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const [fetching, setFetching] = useState(true)
+    const [onPageResults, setResults] = useState<any[]>([])
+
+    const scrollHandler = (e: any) => {
+        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 &&
+        onPageResults.length < resultsCount) {
+            setFetching(true)
+        }
+    }
+  
+    useEffect(() => {
+        if (fetching) {
+            let newResults = allResults.slice(10*currentPage-10, 10*currentPage)
+            setResults([...onPageResults, ...newResults])
+            setCurrentPage(currentPage+1)
+            setFetching(false)
+        }
+    }, [fetching])
+
+    useEffect(() => {
+        document.addEventListener('scroll', scrollHandler)
+  
+        return function () {
+            document.removeEventListener('scroll', scrollHandler)
+        }
+    }, [])
+
     useEffect(() => {
         const handler = (e: any) => {
           if (divRef.current && !divRef.current.contains(e.target)) {
-            //dispatch(props.setShowMenu(false, props.id))
             setDivOpen(false)
           }
         }
@@ -56,11 +84,16 @@ export function Results(props:any) {
     return (
         <div className="results">
             <div className="row row-total">
-                <h3>Showing ... results ({resultsCount} matched)</h3>
+                <h3>{resultsCount} results matched</h3>
             </div>
             {/* <span><button onClick={reverseNameSort}>By Name</button></span> */}
             <div className="resultset">
-                {baseWeaponsResults.length!==0 && baseWeaponsResults.map( (r: any) =>
+                {onPageResults.map((r: any) => {
+                    if (r.rarity==='base') return <ResultsBaseWeapons id={r.id}/>
+                    else if (r.rarity==='rare') return <RareStatsList r={r}/>
+                    else if (r.rarity==='unique') return <ResultsUniqueWeapons id={r.id}/>
+                })}
+                {/* {baseWeaponsResults.length!==0 && baseWeaponsResults.map( (r: any) =>
                     <ResultsBaseWeapons id={r.id}/>
                 )}
                 {rareWeaponsResults.length!==0 && rareWeaponsResults.map( (r: any) => <RareStatsList r={r}/>)}
@@ -154,7 +187,7 @@ export function Results(props:any) {
                             </UniqueItemDiv>
                         )
                     })
-                } 
+                }  */}
             </div>
         </div>
     )

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setNameSelectedValue, setNamesPool } from "./redux/searchPanelReducer";
-import './NameDropdown.css';
+import { setNameSelectedValue, setNamesPool } from "../redux/searchPanelReducer";
+import '../styles/NameDropdown.css';
 
 
 const NameDropdown = (props: any) => {
@@ -34,7 +34,10 @@ const NameDropdown = (props: any) => {
   }, [showMenu])
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/names?name=${searchValue}`).then(response => {
+    // axios.get(`http://192.168.1.9:8080/api/names?name=${searchValue}`).then(response => {
+    //   dispatch(setNamesPool(response.data.names))
+    // })
+    axios.get(`http://192.168.0.44:8080/api/names?name=${searchValue}`).then(response => {
       dispatch(setNamesPool(response.data.names))
     })
   }, [searchValue])

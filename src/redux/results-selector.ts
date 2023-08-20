@@ -1,5 +1,8 @@
+// export const getResults = (state: any) => {
+//     return state.results
+// }
 export const getResults = (state: any) => {
-    return state.results
+    return state.results.results
 }
 
 export const getBaseWeaponsResults = (state: any) => {

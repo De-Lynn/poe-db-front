@@ -1,8 +1,5 @@
 import { v1 } from "uuid"
 
-// const  SET_TYPE_FILTERS = 'SET-TYPE-FILTERS'
-// const  CHANGE_CATEGORIES_STATE = 'CHANGE-CATEGORIES-STATE'
-// const  CHANGE_CATEGORIES_INPUT_VALUE = 'CHANGE-CATEGORIES-INPUT-VALUE'
 const  CLEAN_CATEGORIES_INPUT_VALUE = 'CLEAN-CATEGORIES-INPUT-VALUE'
 const  CHANGE_FILTER_VISIBILITY = 'CHANGE-FILTER-VISIBILITY'
 const  SET_SHOW_MENU = 'SET-SHOW-MENU'
@@ -56,7 +53,6 @@ let initialState = {
 
                 {id: v1(), option: 'Flask', category: 'flask', type: 'default'},
             ], 
-            //state: true, filterValue: 'Any', activeCategory: 'any', activeType: 'default',
             showMenu: false, selectedValue: 'Any', selectedType: 'default', selectedCategory: 'any', 
             searchValue: null
         },
@@ -65,12 +61,9 @@ let initialState = {
             content: [
                 {id: v1(), option: 'Any', category: 'any', type: 'any'},
                 {id: v1(), option: 'Normal', category: 'normal', type: 'normal'},
-                // {id: v1(), option: 'Волшебный', category: 'Weapon', type: 'default'},
-                // {id: v1(), option: 'Редкий', category: 'Weapon', type: 'default'},
                 {id: v1(), option: 'Rare', category: 'rare', type: 'rare'},
                 {id: v1(), option: 'Unique', category: 'unique', type: 'unique'},
             ], 
-            //state: true, filterValue: 'Any', activeCategory: 'any', activeType: 'any',
             showMenu: false, selectedValue: 'Any', selectedType: 'any', selectedCategory: 'any', 
             searchValue: null
         },
@@ -80,26 +73,6 @@ let initialState = {
 
 export const categoryFilterReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
-        // case CHANGE_CATEGORIES_STATE: {
-        //     let stateCopy = {...state}
-        //     stateCopy.typeFilters = state.typeFilters.map( (f: { id: any }) => {
-        //         if (f.id === action.filterId) {
-        //             return {...f, state: action.newState}
-        //         }
-        //         return f
-        //     })
-        //     return stateCopy
-        // }
-        // case CHANGE_CATEGORIES_INPUT_VALUE: {
-        //     let stateCopy = {...state}
-        //     stateCopy.typeFilters = state.typeFilters.map( (f: { id: any }) => {
-        //         if (f.id === action.filterId) {
-        //             return {...f, filterValue: action.value, activeCategory: action.category, activeType: action.optionType}
-        //         }
-        //         return f
-        //     })
-        //     return stateCopy
-        // }
         case CLEAN_CATEGORIES_INPUT_VALUE: {
             let stateCopy = {...state}
             stateCopy.typeFilters = {...state.typeFilters}
@@ -154,11 +127,6 @@ export const categoryFilterReducer = (state: any = initialState, action: any) =>
     }
 }
 
-// export const setTypeFilters = (newTypeFilters: any) => ({type: SET_TYPE_FILTERS, newTypeFilters: newTypeFilters})
-// export const changeCategoriesState = (newState: boolean, filterId: string) => 
-//     ({type: CHANGE_CATEGORIES_STATE, newState: newState, filterId: filterId})
-// export const changeCategoriesInputValue = (value: string, filterId: string, category: string, optionType: string) => 
-//     ({type: CHANGE_CATEGORIES_INPUT_VALUE, value: value, filterId: filterId, category: category, optionType: optionType})
 export const cleanCategoriesInputValue = (value: string) => ({type: CLEAN_CATEGORIES_INPUT_VALUE, value: value})
 export const setShowMenu = (newState: boolean, id: string) => ({type: SET_SHOW_MENU, newState: newState, id: id})
 export const setSelectedValue = (newValue: string, id: string, newType: string, newCategory: string) => (

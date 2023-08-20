@@ -33,6 +33,3 @@ export const getNameSearchValue = (state: any) => {
 export const getFiltersVisibility = (state: any) => {
     return state.searchPanel.filtersVisibility
 }
-// export const getFiltersValue = (state: any) => {
-//     return state.searchPanel.filtersValues
-// }

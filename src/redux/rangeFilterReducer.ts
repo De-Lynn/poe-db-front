@@ -22,11 +22,6 @@ let initialState = {
         {id: v1(), title: 'Ловкость', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"dexMinValue", maxName:"dexMinValue"},
         {id: v1(), title: 'Интеллект', header: 'Требования', minValue: '', maxValue: '', newMinInputValue: '', newMaxInputValue: '', minName:"intMinValue", maxName:"intMinValue"},
     ],
-    // activeRangeFilters: {
-    //     minDamage: '', maxDamage: '', minCrit: '', maxCrit: '', minAps: '', maxAps: '', minDps: '', maxDps: '',
-    //     minArmour: '', maxArmour: '', minEvasion: '', maxEvasion: '', minEs: '', maxEs: '', minBlock: '', maxBlock: '',
-    //     minLvl: '', maxLvl: '', minStr: '', maxStr: '', minDex: '', maxDex: '', minInt: '', maxInt: '', 
-    // }
 }
 
 export const rangeFilterReducer = (state: any = initialState, action: any) => {

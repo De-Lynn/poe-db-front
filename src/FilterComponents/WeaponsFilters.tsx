@@ -1,19 +1,16 @@
 import { useSelector } from "react-redux";
-// import { Field, reduxForm, reset } from "redux-form";
-import { getWeaponsFilters, getWeaponsFiltersValues, getWeaponsFilterVisibility } from "./redux/weaponsFilter-selectors";
+import { getWeaponsFilters, getWeaponsFilterVisibility } from "../redux/weaponsFilter-selectors";
 import { useDispatch } from "react-redux";
-import { changeWeaponsFiltersValue, cleanWeaponsFilterValues, changeWeaponsFilterVisibility } from "./redux/weaponsFilterReducer";
+import { changeWeaponsFilterVisibility } from "../redux/weaponsFilterReducer";
 import { ChangeEvent } from "react";
-import styled from "styled-components";
-import './FilterGroupHeader.css';
-import './FilterGroupBody.css'
-import { Form, Formik, Field, useFormikContext} from "formik";
+import '../styles/FilterGroupHeader.css';
+import '../styles/FilterGroupBody.css'
+import { Field, useFormikContext} from "formik";
 import { FilterHeader } from "./FilterHeader";
 
 function WeaponsFiltersForm(props: any) {
     let weaponsFilters = useSelector(getWeaponsFilters)
     let filterVisibility = useSelector(getWeaponsFilterVisibility)
-    let dispatch = useDispatch()
 
     return (
         <div className="filter-group-body">
@@ -38,18 +35,9 @@ function WeaponsFiltersForm(props: any) {
     )
 }
 
-const weaponsFiltersFormValidate = (values: any) => {
-    const errors = {}
-    return errors
-}
-
 export function WeaponsFilters(props: any) {
     let dispatch = useDispatch()
     let filterVisibility = useSelector(getWeaponsFilterVisibility)
-
-    const setWeaponsFiltersValue = (formData: any) => {
-        dispatch(changeWeaponsFiltersValue(formData))
-    }
 
     const cleanFiltersValues = () => {
         formik.setFieldValue(`weaponValues.minDamage`, '')
@@ -67,12 +55,6 @@ export function WeaponsFilters(props: any) {
         dispatch(changeWeaponsFilterVisibility(e.currentTarget.checked))
     }
 
-    const submit = (values: any, {setSubmitting}:any) => {
-        setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-        }, 400)
-    }
     const formik = useFormikContext();
 
     return (

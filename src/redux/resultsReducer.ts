@@ -1,24 +1,21 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { v1 } from "uuid"
-
-const  SET_RESULTS = 'SET-RESULTS'
-const  CLEAN_RESULTS = 'CLEAN-RESULTS'
+const SET_RESULTS = 'SET-RESULTS'
 const CHANGE_NAME_SORT = 'CHANGE-NAME-SORT'
 const SORT_RESULTS_BY_NAME = 'SORT-RESULTS-BY-NAME'
 
 let initialState = {
-    baseWeaponsResults: [],
-    rareWeaponsResult: [],
-    uniqueWeaponsResults: [],
-    baseArmourResults: [],
-    rareArmourResults: [],
-    uniqueArmourResults: [],
-    baseJewelleryResults: [],
-    rareJewelleryResults: [],
-    uniqueJewelleryResults: [],
-    baseFlasksResults: [],
-    rareFlasksResults: [],
-    uniqueFlasksResults: [],
+    // baseWeaponsResults: [],
+    // rareWeaponsResult: [],
+    // uniqueWeaponsResults: [],
+    // baseArmourResults: [],
+    // rareArmourResults: [],
+    // uniqueArmourResults: [],
+    // baseJewelleryResults: [],
+    // rareJewelleryResults: [],
+    // uniqueJewelleryResults: [],
+    // baseFlasksResults: [],
+    // rareFlasksResults: [],
+    // uniqueFlasksResults: [],
+    results: [],
     resultsCount: null,
     // nameSortAsc: false
 }
@@ -26,43 +23,33 @@ let initialState = {
 export const resultsReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
         case SET_RESULTS: {
-            // let stateCopy = {...state}
-            // if(action.newResults.baseWeapons) {
-            //     stateCopy.baseWeaponsResults = action.newResults.baseWeaponsResults
-            // } else if(action.newResults.uniqueWeapons) {
-            //     stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeaponsResults
-            // }
-            // let stateCopy = {...state}
-            // stateCopy.baseWeaponsResults = {...state.baseWeaponsResults}
-            // if(action.newResults.baseWeapons) {
-            //     stateCopy.baseWeaponsResults = action.newResults.baseWeapons
-            // }
-            // if(action.newResults.uniqueWeapons) {
-            //     stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeapons
-            // }
-            // if(action.newResults.baseWeapons) {
-            //     stateCopy.baseWeaponsResults = action.newResults.baseWeapons
-            // }
-            // if(action.newResults.uniqueWeapons) {
-            //     stateCopy.uniqueWeaponsResults = action.newResults.uniqueWeapons
-            // }
-            return {
+            if(action.newResults.baseWeapons) {
+                let results = action.newResults.baseWeapons
+                results = results.concat(action.newResults.rareWeapons)
+                results = results.concat(action.newResults.uniqueWeapons)
+                console.log(results)
+                return {
+                    ...state,
+                    results: results,
+                    resultsCount: action.newResults.resultsCount,
+                }
+            } else return {
                 ...state, 
-                baseWeaponsResults: action.newResults.baseWeapons ? action.newResults.baseWeapons : [],
-                rareWeaponsResult: action.newResults.rareWeapons ? action.newResults.rareWeapons: [],
-                uniqueWeaponsResults: action.newResults.uniqueWeapons ? action.newResults.uniqueWeapons : [],
-                baseArmourResults: action.newResults.baseArmour ? action.newResults.baseArmour : [],
-                rareArmourResults: action.newResults.rareArmour ? action.newResults.rareArmour: [],
-                uniqueArmourResults: action.newResults.uniqueArmour ? action.newResults.uniqueArmour : [],
-                baseJewelleryResults: action.newResults.baseJewellery ? action.newResults.baseJewellery : [],
-                rareJewelleryResults: action.newResults.rareJewellery ? action.newResults.rareJewellery: [],
-                uniqueJewelleryResults: action.newResults.uniqueJewellery ? action.newResults.uniqueJewellery : [],
-                baseFlasksResults: action.newResults.baseFlasks ? action.newResults.baseFlasks : [],
-                rareFlasksResults: action.newResults.rareFlasks ? action.newResults.rareFlasks: [],
-                uniqueFlasksResults: action.newResults.uniqueFlasks ? action.newResults.uniqueFlasks : [],
+                // baseWeaponsResults: action.newResults.baseWeapons ? action.newResults.baseWeapons : [],
+                // rareWeaponsResult: action.newResults.rareWeapons ? action.newResults.rareWeapons: [],
+                // uniqueWeaponsResults: action.newResults.uniqueWeapons ? action.newResults.uniqueWeapons : [],
+                // baseArmourResults: action.newResults.baseArmour ? action.newResults.baseArmour : [],
+                // rareArmourResults: action.newResults.rareArmour ? action.newResults.rareArmour: [],
+                // uniqueArmourResults: action.newResults.uniqueArmour ? action.newResults.uniqueArmour : [],
+                // baseJewelleryResults: action.newResults.baseJewellery ? action.newResults.baseJewellery : [],
+                // rareJewelleryResults: action.newResults.rareJewellery ? action.newResults.rareJewellery: [],
+                // uniqueJewelleryResults: action.newResults.uniqueJewellery ? action.newResults.uniqueJewellery : [],
+                // baseFlasksResults: action.newResults.baseFlasks ? action.newResults.baseFlasks : [],
+                // rareFlasksResults: action.newResults.rareFlasks ? action.newResults.rareFlasks: [],
+                // uniqueFlasksResults: action.newResults.uniqueFlasks ? action.newResults.uniqueFlasks : [],
+                results: action.newResults.results,
                 resultsCount: action.newResults.resultsCount,
             }
-            // return stateCopy
         }
         case CHANGE_NAME_SORT: {
             return {...state, nameSortAsc: !state.nameSortAsc}
@@ -123,16 +110,6 @@ export const resultsReducer = (state: any = initialState, action: any) => {
                 uniqueFlasksResults: uniqueFlasksResults,
             }
         }
-        // case CLEAN_RESULTS: {
-        //     // let stateCopy = {...state}
-        //     // stateCopy.baseWeaponsResults=[]
-        //     // stateCopy.uniqueWeaponsResults=[]
-        //     return {
-        //         ...state, baseWeaponsResults: [], uniqueWeaponsResults: [], 
-        //         baseArmourResults: [], uniqueArmourResults: [],
-        //         baseJewelleryResults: [], uniqueJewelleryResults: [],
-        //     }
-        // }
         default:
             return state
     }
@@ -141,4 +118,3 @@ export const resultsReducer = (state: any = initialState, action: any) => {
 export const setResults = (newResults: any) => ({type: SET_RESULTS, newResults: newResults})
 export const changeNameSort = () => ({type: CHANGE_NAME_SORT})
 export const sortResultsByName = () => ({type: SORT_RESULTS_BY_NAME})
-//export const cleanResults = () => ({type: CLEAN_RESULTS})

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setStats } from "./redux/statsFilterReducer";
-import './NameDropdown.css'
+import { setStats } from "../redux/statsFilterReducer";
+import '../styles/NameDropdown.css'
 
 
 const StatsDropdown = (props: any) => {
@@ -34,7 +34,10 @@ const StatsDropdown = (props: any) => {
   }, [showMenu])
 
   useEffect(() => {
-    axios.get(`http://192.168.1.9:8080/api/stats?stat=${searchValue}`).then(response => {
+    // axios.get(`http://192.168.1.9:8080/api/stats?stat=${searchValue}`).then(response => {
+    //   dispatch(setStats(response.data.stats))
+    // })
+    axios.get(`http://192.168.0.44:8080/api/stats?stat=${searchValue}`).then(response => {
       dispatch(setStats(response.data.stats))
     })
   }, [searchValue])
@@ -42,22 +45,9 @@ const StatsDropdown = (props: any) => {
   const handleInputClick = (e: React.MouseEvent<HTMLDivElement>) => {
     setShowMenu(!showMenu)
   }
-  // const getDisplay = () => {
-  //   if (selectedValue) {
-  //     return selectedValue
-  //   }
-  //   return props.placeHolder;
-  // }
 
   const onItemClick = (stat: string, statOrder: number) => {
     dispatch(props.setSelectedValue(stat, statOrder))
-  }
-
-  const isSelected = (stat: string) => {
-    if (!selectedValue) {
-      return false
-    }
-    return selectedValue === stat
   }
 
   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +68,7 @@ const StatsDropdown = (props: any) => {
         {props.isSearchable && (
           <input className="multiselect__input"
             onChange={onSearch} value={searchValue} ref={searchRef}
-            onClick={handleInputClick} placeholder={props.placeHolder}/> /*placeholder={getDisplay()} */
+            onClick={handleInputClick} placeholder={props.placeHolder}/>
         )}     
       </div>
       {showMenu && (

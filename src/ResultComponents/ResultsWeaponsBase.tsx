@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { getBaseWeaponsResults } from "./redux/results-selector";
-import './ResultSet.css';
+import { getBaseWeaponsResults, getResults } from "../redux/results-selector";
+import '../styles/ResultSet.css';
 
 const ResultsBaseWeapons = (props: any) => {
-  const result = useSelector(getBaseWeaponsResults).filter((f: any) => f.id===props.id)
-  
+  // const result = useSelector(getBaseWeaponsResults).filter((f: any) => f.id===props.id)
+  const result = useSelector(getResults).filter((f: any) => f.id===props.id)
   return (
     <div className="row">
       <div className="middle">
@@ -96,45 +96,9 @@ const ResultsBaseWeapons = (props: any) => {
             </span>
           }
         </div>
-          {/* <BaseItemName>{r.name}</BaseItemName> */}
-          {/* <div>{r.subtype ? r.subtype : r.type}</div> */}
-          {/* {r.min_damage && <div>Physical damage: {r.min_damage}-{r.max_damage}</div>} */}
-          {/* {r.crit && <div>Critical strike chance: {r.crit}</div>} */}
-          {/* {r.aps && <div>Attacks per second: {r.aps}</div>} */}
-          {/* {(r.req_lvl || r.req_str || r.req_dex || r.req_int) &&
-              <div>
-                  Requires 
-                  {r.req_lvl && <span> Level {r.req_lvl},</span>}
-                  {r.req_str && <span> {r.req_str} Str,</span>}
-                  {r.req_dex && <span> {r.req_dex} Dex,</span>}
-                  {r.req_int && <span> {r.req_int} Int</span>}
-              </div>
-          } */}
-          {/* {r.implicit && r.implicit.map((i: string) => <div>{i}</div>)} */}
       </div>
     </div>
   )
 }
 
 export default ResultsBaseWeapons
-
-// const ItemDiv = styled.div`
-//     margin: 4px;
-//     padding: 4px;
-//     background: #ccc;
-
-// `
-
-// const RareItemDiv = styled.div`
-//     margin: 4px;
-//     padding: 4px;
-//     border: #863 2px solid;
-
-// `
-
-// const RareItemName = styled.div`
-//   background: #863;
-//   color: #ee4;
-//   text-align: center;
-
-// `

@@ -4,17 +4,6 @@ const CLEAN_WEAPONS_FILTER_VALUES = 'CLEAN-WEAPONS-FILTER-VALUES'
 const CHANGE_WEAPONS_FILTERS_VALUE = 'CHANGE-WEAPONS-FILTERS-VALUE'
 const CHANGE_WEAPONS_FILTER_VISIBILITY = 'CHANGE-WEAPONS-FILTER-VISIBILITY'
 
-// export type FilterValuesType = {
-//     minDamage: null | string, 
-//     maxDamage: null | string, 
-//     minCrit: null | string, 
-//     maxCrit: null | string, 
-//     minAps: null | string, 
-//     maxAps: null | string, 
-//     minDps: null | string, 
-//     maxDps: null | string
-// } 
-
 let initialState = {
     weaponsFilters: [
         {id: v1(), title: 'Damage', minName: "minDamage", maxName: "maxDamage"},

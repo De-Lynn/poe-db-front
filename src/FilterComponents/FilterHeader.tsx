@@ -1,5 +1,6 @@
+import { memo } from "react";
 
-export function FilterHeader(props: any) {
+export const FilterHeader = memo((props: any) => {
   return (
     <div className='filter-group-header'>
       <div className="filter">
@@ -23,4 +24,4 @@ export function FilterHeader(props: any) {
       </div>
     </div>
   );
-}
+})

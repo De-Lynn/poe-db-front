@@ -1,6 +1,3 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { v1 } from "uuid"
-
 const  SET_TYPE_FILTERS = 'SET-TYPE-FILTERS'
 const  CHANGE_CATEGORIES_STATE = 'CHANGE-CATEGORIES-STATE'
 const  CHANGE_CATEGORIES_INPUT_VALUE = 'CHANGE-CATEGORIES-INPUT-VALUE'
@@ -12,10 +9,6 @@ let initialState = {
 
 export const activeFiltersReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
-        // case SET_TYPE_FILTERS: {
-        //     state.typeFilters = action.newTypeFilters
-        //     break
-        // }
         case CHANGE_CATEGORIES_STATE: {
             let stateCopy = {...state}
             stateCopy.typeFilters = state.typeFilters.map( (f: { id: any }) => {
