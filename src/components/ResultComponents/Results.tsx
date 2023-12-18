@@ -1,37 +1,21 @@
 import { useSelector } from "react-redux"
-import { getBaseWeaponsResults, getUniqueWeaponsResults, getBaseArmourResults, getUniqueArmourResults, 
-    getBaseJewelleryResults, getUniqueJewelleryResults, getBaseFlasksResults, getUniqueFlasksResults, getRareWeaponResults, 
-    getRareArmourResults, getRareJewelleryResults, getRareFlasksResults, getNameSortAsc, getResultsCount, getResults} from "../redux/results-selector"
+import { getNameSortAsc, getResultsCount, getResults} from "../../redux/results-selector"
 import styled from "styled-components"
 import { useEffect, useRef, useState } from "react"
 import RareStatsList from "../RareStatsList"
-import { sortResultsByName, changeNameSort } from "../redux/resultsReducer"
+import { sortResultsByName, changeNameSort } from "../../redux/resultsReducer"
 import { useDispatch } from "react-redux"
-import ResultsBaseWeapons from "./ResultsWeaponsBase"
 import ResultsUniqueWeapons from "./ResultsWeaponsUnique"
-import ResultsBaseArmour from "./ResultsArmourBase"
-import ResultsUniqueArmour from "./ResultsArmourUnique"
+import ResultsBaseItem from "./ResultsBaseItem"
 
 export function Results(props:any) {
-    let allResults = useSelector(getResults)
-    // let baseWeaponsResults = useSelector(getBaseWeaponsResults)
-    // let rareWeaponsResults = useSelector(getRareWeaponResults)
-    // let uniqueWeaponsResults = useSelector(getUniqueWeaponsResults) 
-    // let baseArmourResults = useSelector(getBaseArmourResults)
-    // let rareArmourResults = useSelector(getRareArmourResults)
-    // let uniqueArmourResults = useSelector(getUniqueArmourResults) 
-    // let baseJewelleryResults = useSelector(getBaseJewelleryResults)
-    // let rareJewelleryResults = useSelector(getRareJewelleryResults)
-    // let uniqueJewelleryResults = useSelector(getUniqueJewelleryResults) 
-    // let baseFlasksResults = useSelector(getBaseFlasksResults)
-    // let rareFlasksResults = useSelector(getRareFlasksResults)
-    // let uniqueFlasksResults = useSelector(getUniqueFlasksResults) 
+    const allResults = useSelector(getResults)
     let nameSortAsc = useSelector(getNameSortAsc)
     let resultsCount = useSelector(getResultsCount)
     const dispatch = useDispatch()
 
-    const [statDiv, setDivOpen] = useState(false);
-    const divRef = useRef<HTMLButtonElement>(null)
+    // const [statDiv, setDivOpen] = useState(false);
+    // const divRef = useRef<HTMLButtonElement>(null)
 
     const [currentPage, setCurrentPage] = useState(1)
     const [fetching, setFetching] = useState(true)
@@ -61,35 +45,38 @@ export function Results(props:any) {
         }
     }, [])
 
-    useEffect(() => {
-        const handler = (e: any) => {
-          if (divRef.current && !divRef.current.contains(e.target)) {
-            setDivOpen(false)
-          }
-        }
-        window.addEventListener("click", handler)
-        return () => {
-          window.removeEventListener("click", handler)
-        }
-    })
+    // useEffect(() => {
+    //     const handler = (e: any) => {
+    //       if (divRef.current && !divRef.current.contains(e.target)) {
+    //         setDivOpen(false)
+    //       }
+    //     }
+    //     window.addEventListener("click", handler)
+    //     return () => {
+    //       window.removeEventListener("click", handler)
+    //     }
+    // })
 
-    const showMoreStats = () => {
-        setDivOpen(!statDiv)
-    }
+    // const showMoreStats = () => {
+    //     setDivOpen(!statDiv)
+    // }
 
     const reverseNameSort = () => {
         dispatch(changeNameSort())
         dispatch(sortResultsByName())
     }
+    // console.log('All '+allResults)
+    // console.log('On page '+onPageResults)
     return (
         <div className="results">
             <div className="row row-total">
                 <h3>{resultsCount} results matched</h3>
-            </div>
+            </div> 
             {/* <span><button onClick={reverseNameSort}>By Name</button></span> */}
             <div className="resultset">
                 {onPageResults.map((r: any) => {
-                    if (r.rarity==='base') return <ResultsBaseWeapons id={r.id}/>
+                    // console.log(r)
+                    if (r.rarity==='normal') return <ResultsBaseItem r={r}/>
                     else if (r.rarity==='rare') return <RareStatsList r={r}/>
                     else if (r.rarity==='unique') return <ResultsUniqueWeapons id={r.id}/>
                 })}

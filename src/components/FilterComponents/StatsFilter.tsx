@@ -1,15 +1,18 @@
-import { ChangeEvent, } from "react"
+import { ChangeEvent, useCallback, } from "react"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { getSelectedStats, getSimilarStats, getStatsFiltersVisibility, getStatsState, getStatsToSelect } from "../redux/statsFilter-selector"
+import { getSelectedStats, getSimilarStats, getStatsFiltersVisibility, getStatsState, getStatsToSelect } from "../../redux/statsFilter-selector"
 import axios from "axios"
-import { changeStatsFilterVisibility, setStats, setStatSearchValue, setStatSelectedValue, cleanSelectedStat, changeStatStatus, removeStat } from "../redux/statsFilterReducer"
+import { changeStatsFilterVisibility, setStats, setStatSearchValue, setStatSelectedValue, cleanSelectedStat, changeStatStatus, removeStat 
+  } from "../../redux/statsFilterReducer"
 import StatsDropdown from "../Dropdowns/StatsDropdown"
-import '../styles/FilterGroupHeader.css';
-import '../styles/FilterGroupBody.css'
+// import '../../styles/FilterGroupHeader.css';
+// import '../../styles/FilterGroupBody.css'
 import { FilterHeader } from "./FilterHeader"
+import React from "react"
 
-export function StatsFilter(props: any) {
+export const StatsFilter = React.memo((props: any) => {
+
   let statsFilterVisibility = useSelector(getStatsFiltersVisibility)
   let similarStats = useSelector(getSimilarStats)
   const statsToSelect = useSelector(getStatsToSelect)
@@ -18,21 +21,21 @@ export function StatsFilter(props: any) {
   const dispatch = useDispatch()
 
   if (statsToSelect.length === 0) {
-    // axios.get('http://192.168.1.9:8080/api/stats').then(response => {
-    //   dispatch(setStats(response.data.stats))
-    // })
-    axios.get('http://192.168.0.44:8080/api/stats').then(response => {
+    axios.get('http://192.168.1.6:8080/api/stats').then(response => {
       dispatch(setStats(response.data.stats))
     })
+    // axios.get('http://192.168.0.44:8080/api/stats').then(response => {
+    //   dispatch(setStats(response.data.stats))
+    // })
   }
   
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     dispatch(changeStatsFilterVisibility(e.currentTarget.checked))
-  }
+  }, [])
 
-  const onClickHandler = () => {
+  const onClickHandler = useCallback(() => {
     dispatch(cleanSelectedStat())
-  }
+  }, [])
 
   return (
     <div className="filter-group expanded">
@@ -83,4 +86,4 @@ export function StatsFilter(props: any) {
       }
     </div>
   )
-}
+})

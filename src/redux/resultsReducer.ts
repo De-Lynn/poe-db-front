@@ -1,3 +1,5 @@
+import { v1 } from "uuid"
+
 const SET_RESULTS = 'SET-RESULTS'
 const CHANGE_NAME_SORT = 'CHANGE-NAME-SORT'
 const SORT_RESULTS_BY_NAME = 'SORT-RESULTS-BY-NAME'
@@ -23,33 +25,50 @@ let initialState = {
 export const resultsReducer = (state: any = initialState, action: any) => {
     switch (action.type) {
         case SET_RESULTS: {
+            let newResults = []
+            console.log(action.newResults)
             if(action.newResults.baseWeapons) {
-                let results = action.newResults.baseWeapons
-                results = results.concat(action.newResults.rareWeapons)
-                results = results.concat(action.newResults.uniqueWeapons)
-                console.log(results)
-                return {
-                    ...state,
-                    results: results,
-                    resultsCount: action.newResults.resultsCount,
-                }
-            } else return {
-                ...state, 
-                // baseWeaponsResults: action.newResults.baseWeapons ? action.newResults.baseWeapons : [],
-                // rareWeaponsResult: action.newResults.rareWeapons ? action.newResults.rareWeapons: [],
-                // uniqueWeaponsResults: action.newResults.uniqueWeapons ? action.newResults.uniqueWeapons : [],
-                // baseArmourResults: action.newResults.baseArmour ? action.newResults.baseArmour : [],
-                // rareArmourResults: action.newResults.rareArmour ? action.newResults.rareArmour: [],
-                // uniqueArmourResults: action.newResults.uniqueArmour ? action.newResults.uniqueArmour : [],
-                // baseJewelleryResults: action.newResults.baseJewellery ? action.newResults.baseJewellery : [],
-                // rareJewelleryResults: action.newResults.rareJewellery ? action.newResults.rareJewellery: [],
-                // uniqueJewelleryResults: action.newResults.uniqueJewellery ? action.newResults.uniqueJewellery : [],
-                // baseFlasksResults: action.newResults.baseFlasks ? action.newResults.baseFlasks : [],
-                // rareFlasksResults: action.newResults.rareFlasks ? action.newResults.rareFlasks: [],
-                // uniqueFlasksResults: action.newResults.uniqueFlasks ? action.newResults.uniqueFlasks : [],
-                results: action.newResults.results,
-                resultsCount: action.newResults.resultsCount,
+                newResults = action.newResults.baseWeapons.map((r: any) => ({...r, id: v1()}))
+                newResults = newResults.concat(action.newResults.rareWeapons?.map((r: any) => ({...r, id: v1()})))
+                newResults = newResults.concat(action.newResults.uniqueWeapons?.map((r: any) => ({...r, id: v1()})))
+                console.log(newResults)
+                // return {
+                //     ...state,
+                //     results: results,
+                //     resultsCount: action.newResults.resultsCount,
+                // }
             }
+            if(action.newResults.baseArmour) {
+                newResults = newResults.concat(action.newResults.baseArmour.map((r: any) => ({...r, id: v1()})))
+                // if (action.newResults.rareArmour) 
+                newResults = newResults.concat(action.newResults.rareArmour?.map((r: any) => ({...r, id: v1()})))
+                // if (action.newResults.uniqueArmour) 
+                newResults = newResults.concat(action.newResults.uniqueArmour?.map((r: any) => ({...r, id: v1()})))
+                console.log(newResults)
+                // return {
+                //     ...state,
+                //     results: results,
+                //     resultsCount: action.newResults.resultsCount,
+                // }
+            } 
+            // else return {
+            //     ...state, 
+            //     // baseWeaponsResults: action.newResults.baseWeapons ? action.newResults.baseWeapons : [],
+            //     // rareWeaponsResult: action.newResults.rareWeapons ? action.newResults.rareWeapons: [],
+            //     // uniqueWeaponsResults: action.newResults.uniqueWeapons ? action.newResults.uniqueWeapons : [],
+            //     // baseArmourResults: action.newResults.baseArmour ? action.newResults.baseArmour : [],
+            //     // rareArmourResults: action.newResults.rareArmour ? action.newResults.rareArmour: [],
+            //     // uniqueArmourResults: action.newResults.uniqueArmour ? action.newResults.uniqueArmour : [],
+            //     // baseJewelleryResults: action.newResults.baseJewellery ? action.newResults.baseJewellery : [],
+            //     // rareJewelleryResults: action.newResults.rareJewellery ? action.newResults.rareJewellery: [],
+            //     // uniqueJewelleryResults: action.newResults.uniqueJewellery ? action.newResults.uniqueJewellery : [],
+            //     // baseFlasksResults: action.newResults.baseFlasks ? action.newResults.baseFlasks : [],
+            //     // rareFlasksResults: action.newResults.rareFlasks ? action.newResults.rareFlasks: [],
+            //     // uniqueFlasksResults: action.newResults.uniqueFlasks ? action.newResults.uniqueFlasks : [],
+            //     results: action.newResults.results,
+            //     resultsCount: action.newResults.resultsCount,
+            // }
+            return {...state, results: newResults ? newResults : action.newResults.results, resultsCount: action.newResults.resultsCount}    
         }
         case CHANGE_NAME_SORT: {
             return {...state, nameSortAsc: !state.nameSortAsc}

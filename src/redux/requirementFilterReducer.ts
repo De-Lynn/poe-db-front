@@ -6,10 +6,10 @@ const CHANGE_REQUIREMENT_FILTER_VISIBILITY = 'CHANGE-REQUIREMENT-FILTER-VISIBILI
 
 let initialState = {
     requirementFilters: [
-        {id: v1(), title: 'Level', minName:"minLvl", maxName:"maxLvl"},
-        {id: v1(), title: 'Strength', minName:"minStr", maxName:"maxStr"},
-        {id: v1(), title: 'Dexterity', minName:"minDex", maxName:"maxDex"},
-        {id: v1(), title: 'Intelligence', minName:"minInt", maxName:"maxInt"},
+        {id: v1(), title: 'Level', fieldName: 'reqValues', reqValues: {minName:"minLvl", maxName:"maxLvl"}},
+        {id: v1(), title: 'Strength', fieldName: 'reqValues', reqValues: {minName:"minStr", maxName:"maxStr"}},
+        {id: v1(), title: 'Dexterity', fieldName: 'reqValues', reqValues: {minName:"minDex", maxName:"maxDex"}},
+        {id: v1(), title: 'Intelligence', fieldName: 'reqValues', reqValues: {minName:"minInt", maxName:"maxInt"}},
     ],
     requirementFiltersValues: {
         minLvl: null, maxLvl: null, minStr: null, maxStr: null, minDex: null, maxDex: null, minInt: null, maxInt: null

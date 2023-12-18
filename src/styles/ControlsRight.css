@@ -1,7 +1,9 @@
 #trade .controls .controls-right {
-    text-align: right;
-    width: 25%;
-    float: left;
+    display: flex;
+    justify-content: center;
+    /* text-align: right; */
+    width: 50%;
+    /* float: left; */
     position: relative;
     min-height: 1px;
     padding-left: 5px;

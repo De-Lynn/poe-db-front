@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setNameSelectedValue, setNamesPool } from "../redux/searchPanelReducer";
-import '../styles/NameDropdown.css';
+import { setNameSelectedValue, setNamesPool } from "../../redux/searchPanelReducer";
+// import '../../styles/NameDropdown.css';
 
 
 const NameDropdown = (props: any) => {
@@ -34,12 +34,12 @@ const NameDropdown = (props: any) => {
   }, [showMenu])
 
   useEffect(() => {
-    // axios.get(`http://192.168.1.9:8080/api/names?name=${searchValue}`).then(response => {
-    //   dispatch(setNamesPool(response.data.names))
-    // })
-    axios.get(`http://192.168.0.44:8080/api/names?name=${searchValue}`).then(response => {
+    axios.get(`http://192.168.1.6:8080/api/names?name=${searchValue}`).then(response => {
       dispatch(setNamesPool(response.data.names))
     })
+    // axios.get(`http://192.168.0.44:8080/api/names?name=${searchValue}`).then(response => {
+    //   dispatch(setNamesPool(response.data.names))
+    // })
   }, [searchValue])
 
   const handleInputClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -82,11 +82,12 @@ const NameDropdown = (props: any) => {
     <div className='multiselect search-select'>
       <div className="multiselect__select"></div>
       <div className="multiselect__tags" onClick={handleInputClick} ref={inputRef}>
-        {props.isSearchable && (
+        {props.isSearchable && 
           <input className="multiselect__input"
             onChange={onSearch} value={searchValue} ref={searchRef}
-            onClick={handleInputClick} placeholder={getDisplay()}/>
-        )}
+            onClick={handleInputClick} placeholder={getDisplay()}
+          />
+        }
       </div>
       <span className='input-group-btn'>
         <button className='btn remove-btn' title='Clear Filter Group'
@@ -94,22 +95,22 @@ const NameDropdown = (props: any) => {
           id="itemNameBtn" type="button" />
         <label htmlFor="itemNameBtn"></label>
       </span>
-      {showMenu && (
+      {showMenu && 
         <div className="multiselect__content-wrapper">
-              <ul className="multiselect__content">
-                {getOptions().slice(0, 100).map((n: any) => (
-                  <li className="multiselect__element" 
-                    onClick={() => onItemClick(n.name)} 
-                  >
-                    <span className="multiselect__option ">
-                      <span>{n.name}</span>
-                      <br />
-                    </span>
-                  </li>
-                ))}
-              </ul>
-          </div>
-      )}
+          <ul className="multiselect__content">
+            {getOptions().slice(0, 100).map((n: any) => (
+              <li className="multiselect__element" 
+                onClick={() => onItemClick(n.name)} 
+              >
+                <span className="multiselect__option ">
+                  <span>{n.name}</span>
+                  <br />
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      }
     </div>
   )
 }

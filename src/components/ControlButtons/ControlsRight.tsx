@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux'
-import '../styles/ControlsRight.css'
-import { changeFiltersVisibility, setNameSelectedValue } from '../redux/searchPanelReducer'
-import { cleanSelectedStat } from '../redux/statsFilterReducer'
-import { cleanCategoriesInputValue } from '../redux/categoryFilterReducer'
+import '../../styles/ControlsRight.css'
+import { changeFiltersVisibility, setNameSelectedValue } from '../../redux/searchPanelReducer'
+import { cleanSelectedStat } from '../../redux/statsFilterReducer'
+import { cleanCategoriesInputValue } from '../../redux/categoryFilterReducer'
 import { useSelector } from 'react-redux'
-import { getFiltersVisibility } from '../redux/searchPanel-selector'
+import { getFiltersVisibility } from '../../redux/searchPanel-selector'
 
 export function ControlsRight(props: any) {
     const dispatch = useDispatch()

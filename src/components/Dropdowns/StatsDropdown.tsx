@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { setStats } from "../redux/statsFilterReducer";
-import '../styles/NameDropdown.css'
+import { setStats } from "../../redux/statsFilterReducer";
+// import '../../styles/NameDropdown.css'
 
 
 const StatsDropdown = (props: any) => {
@@ -34,12 +34,12 @@ const StatsDropdown = (props: any) => {
   }, [showMenu])
 
   useEffect(() => {
-    // axios.get(`http://192.168.1.9:8080/api/stats?stat=${searchValue}`).then(response => {
-    //   dispatch(setStats(response.data.stats))
-    // })
-    axios.get(`http://192.168.0.44:8080/api/stats?stat=${searchValue}`).then(response => {
+    axios.get(`http://192.168.1.6:8080/api/stats?stat=${searchValue}`).then(response => {
       dispatch(setStats(response.data.stats))
     })
+    // axios.get(`http://192.168.0.44:8080/api/stats?stat=${searchValue}`).then(response => {
+    //   dispatch(setStats(response.data.stats))
+    // })
   }, [searchValue])
 
   const handleInputClick = (e: React.MouseEvent<HTMLDivElement>) => {

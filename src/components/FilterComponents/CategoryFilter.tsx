@@ -1,25 +1,25 @@
-import { ChangeEvent} from "react"
-import { changeFilterVisibility, cleanCategoriesInputValue, setSearchValue, setSelectedValue, setShowMenu } from "../redux/categoryFilterReducer"
+import React, { ChangeEvent, useCallback} from "react"
+import { changeFilterVisibility, cleanCategoriesInputValue, setSearchValue, setSelectedValue, setShowMenu } from "../../redux/categoryFilterReducer"
 import { useSelector } from "react-redux"
-import { getCategoryFiltersVisibility, getCategoryFilters } from "../redux/searchPanel-selector"
+import { getCategoryFiltersVisibility, getCategoryFilters } from "../../redux/searchPanel-selector"
 import { useDispatch } from "react-redux"
 import Dropdown from "../Dropdowns/Dropdown"
-import '../styles/FilterGroupHeader.css'
-import '../styles/FilterGroupBody.css'
+// import '../../styles/FilterGroupHeader.css'
+// import '../../styles/FilterGroupBody.css'
 import { FilterHeader } from "./FilterHeader"
 
-export const CategoryFilter = (props: any) => {
+export const CategoryFilter = React.memo((props: any) => {
   let categoryFilterVisibility = useSelector(getCategoryFiltersVisibility)
   const categoryFilters = useSelector(getCategoryFilters)
   const dispatch = useDispatch()
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     dispatch(changeFilterVisibility(e.currentTarget.checked))
-  }
+  }, [])
 
-  const onClickHandler = () => {
+  const onClickHandler = useCallback(() => {
     dispatch(cleanCategoriesInputValue('Any'))
-  }
+  }, [])
 
   return (
     <div className='filter-group expanded'>
@@ -45,5 +45,5 @@ export const CategoryFilter = (props: any) => {
       </div>
     </div>
   )
-}
+})
 

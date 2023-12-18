@@ -6,10 +6,10 @@ const CHANGE_ARMOUR_FILTER_VISIBILITY = 'CHANGE-ARMOUR-FILTER-VISIBILITY'
 
 let initialState = {
     armourFilters: [
-        {id: v1(), title: 'Armour', minName:"minArmour", maxName:"maxArmour"},
-        {id: v1(), title: 'Evasion', minName:"minEvasion", maxName:"maxEvasion"},
-        {id: v1(), title: 'Enegry Shield', minName:"minEs", maxName:"maxEs"},
-        {id: v1(), title: 'Block', minName:"minBlock", maxName:"maxBlock"},
+        {id: v1(), title: 'Armour', fieldName: 'armourValues', armourValues: {minName:"minArmour", maxName:"maxArmour"}},
+        {id: v1(), title: 'Evasion', fieldName: 'armourValues', armourValues: {minName:"minEvasion", maxName:"maxEvasion"}},
+        {id: v1(), title: 'Enegry Shield', fieldName: 'armourValues', armourValues: {minName:"minEs", maxName:"maxEs"}},
+        {id: v1(), title: 'Block', fieldName: 'armourValues', armourValues: {minName:"minBlock", maxName:"maxBlock"}},
     ],
     armourFiltersValues: {
         minArmour: null, maxArmour: null, minEvasion: null, maxEvasion: null, minEs: null, maxEs: null, minBlock: null, maxBlock: null

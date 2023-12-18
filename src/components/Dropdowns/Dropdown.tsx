@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import '../styles/NameDropdown.css';
-import '../styles/Dropdown.css';
+import '../../styles/NameDropdown.css';
+import '../../styles/Dropdown.css';
 
 const Dropdown = memo((props: any) => {
   const [showMenu, setShowMenu] = useState(false)

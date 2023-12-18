@@ -1,6 +1,9 @@
 #trade .controls {
     padding: 8px 3px;
     font-family: sans-serif;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
 }
 
 #trade .controls .controls-center {

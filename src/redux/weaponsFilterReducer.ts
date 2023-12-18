@@ -6,10 +6,10 @@ const CHANGE_WEAPONS_FILTER_VISIBILITY = 'CHANGE-WEAPONS-FILTER-VISIBILITY'
 
 let initialState = {
     weaponsFilters: [
-        {id: v1(), title: 'Damage', minName: "minDamage", maxName: "maxDamage"},
-        {id: v1(), title: 'Critical Chance', minName: "minCrit", maxName: "maxCrit",},
-        {id: v1(), title: 'Attacks per Second', minName: "minAps", maxName: "maxAps",},
-        {id: v1(), title: 'Damage per Second', minName: "minDps", maxName: "maxDps",},
+        {id: v1(), title: 'Damage', fieldName: 'weaponValues', weaponValues: {minName: "minDamage", maxName: "maxDamage"}},
+        {id: v1(), title: 'Critical Chance', fieldName: 'weaponValues', weaponValues: {minName: "minCrit", maxName: "maxCrit"}},
+        {id: v1(), title: 'Attacks per Second', fieldName: 'weaponValues', weaponValues: {minName: "minAps", maxName: "maxAps"}},
+        {id: v1(), title: 'Damage per Second', fieldName: 'weaponValues', weaponValues: {minName: "minDps", maxName: "maxDps"}},
     ],
     weaponsFiltersValues: {
         minDamage: null, maxDamage: null, minCrit: null, maxCrit: null, minAps: null, maxAps: null, minDps: null, maxDps: null

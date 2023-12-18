@@ -50,15 +50,19 @@ img {
 
 #trade {
   min-height: 200px; 
+  display: flex;
+  flex-direction: column;
   position: relative; 
   max-width: 1520px; 
   margin: 0 auto 64px;
+
 }
 
 #trade .top {
+  flex-grow: 1;
   background-color: #000;
   font-size: 1.1em;
-  outline: 1px solid #d2691e6d;
+  border-top: 1px solid #d2691e6d;
 }
 
 .clear {

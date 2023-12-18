@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux"
-import '../styles/Controls.css'
+import '../../styles/Controls.css'
 import { ControlsRight } from "./ControlsRight"
-import { changeFiltersVisibility } from "../redux/searchPanelReducer"
+import { changeFiltersVisibility } from "../../redux/searchPanelReducer"
 
 export function Controls(props: any) {
     let dispatch = useDispatch()
@@ -11,7 +11,7 @@ export function Controls(props: any) {
     }
     return (
         <div className='controls'>
-            <div className="controls-left"></div>
+            {/* <div className="controls-left"></div> */}
             <div className='controls-center'>
                 <button className='btn search-btn' type="submit" onClick={onSearchClickHandler}> 
                     <span>Search</span>

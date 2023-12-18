@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
-import { getUniqueWeaponsResults } from "../redux/results-selector";
-import '../styles/ResultSet.css';
+import { getUniqueArmourResults } from "../../redux/results-selector";
+import '../../styles/ResultSet.css';
 
-const ResultsUniqueWeapons = (props: any) => {
-  const result = useSelector(getUniqueWeaponsResults).filter((f: any) => f.id===props.id)
-  {console.log(result[0])}
+const ResultsUniqueArmour = (props: any) => {
+  const result = useSelector(getUniqueArmourResults).filter((f: any) => f.id===props.id)
   
   return (
     <div className="row">
@@ -22,45 +21,32 @@ const ResultsUniqueWeapons = (props: any) => {
               <span className="r"></span>
             </div>
             <div className="content">
-              <div className="property">
+              {/* <div className="property">
                 <span className="lc">
                   <span>{result[0].subtype ? result[0].subtype : result[0].type}</span>
                 </span>
-              </div>
-              {result[0].min_damage && 
+              </div> */}
+              {result[0].min_armour && 
                 <div className="property">
                   <span className="lc s">
-                    <span>Physical damage: </span>
-                    {result[0].min_damage === result[0].max_min_damage
-                      ? <span className="colourDefault">
-                        {result[0].min_damage}-{result[0].max_damage}
-                        </span>
-                      : <span className="colourDefault">
-                        ({result[0].min_damage}-{result[0].max_min_damage}) TO ({result[0].min_max_damage}-{result[0].max_damage})
-                        </span>
-                    }
+                    <span>Armour: </span>
+                    <span className="colourDefault">{result[0].min_armour}-{result[0].max_armour}</span>
                   </span>
                 </div>
               }
-              {result[0].min_crit && 
+              {result[0].min_evasion && 
                 <div className="property">
                   <span className="lc s">
-                    <span>Critical strike chance: </span>
-                    {result[0].min_crit === result[0].max_crit
-                      ? <span className="colourDefault">{result[0].min_crit}</span> 
-                      : <span className="colourDefault">{result[0].min_crit}-{result[0].max_crit}</span>
-                    }
+                    <span>Evasion: </span>
+                    <span className="colourDefault">{result[0].min_evasion}-{result[0].max_evasion}</span> 
                   </span>
                 </div>
               }
-              {result[0].min_aps && 
+              {result[0].min_es && 
                 <div className="property">
                   <span className="lc s">
-                    <span>Attacks per second: </span>
-                    {result[0].min_aps === result[0].max_aps
-                      ? <span className="colourDefault">{result[0].min_aps}</span>
-                      : <span className="colourDefault">{result[0].min_aps}-{result[0].max_aps}</span>
-                    }
+                    <span>Energy Shield: </span>
+                    <span className="colourDefault">{result[0].min_es}-{result[0].max_es}</span>
                   </span>
                 </div>
               }
@@ -111,7 +97,7 @@ const ResultsUniqueWeapons = (props: any) => {
             </div>
           </div>
         </div>
-        <div className="itemPopupAdditional">
+        {/* <div className="itemPopupAdditional">
           {result[0].dps &&
             <span className="lc s aug">
               DPS:&nbsp;
@@ -120,10 +106,10 @@ const ResultsUniqueWeapons = (props: any) => {
               </span>
             </span>
           }
-        </div>
+        </div> */}
       </div>
     </div>
   )
 }
 
-export default ResultsUniqueWeapons
+export default ResultsUniqueArmour

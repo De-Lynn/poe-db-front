@@ -1,9 +1,9 @@
 import './App.css';
-import SearchPanel from './SearchPanel';
-import { Results } from './ResultComponents/Results'
+import SearchPanel from './components/SearchPanel';
+import { Results } from './components/ResultComponents/Results'
 import logo from "./img/Path-of-Exile-Logo.png"
 import { useSelector } from "react-redux"
-import { getResults,} from "./redux/results-selector"
+import { getResultsCount } from "./redux/results-selector"
 
 export type FilterHeadersType = {
   id: string;
@@ -12,19 +12,10 @@ export type FilterHeadersType = {
 }
 
 function App(props: any) {
-  const results = useSelector(getResults)
+  const resultsCount = useSelector(getResultsCount)
   let haveResults = false
 
-  // for (let key in results) {
-  //   if (results[key] == null) {
-  //     continue
-  //   }
-  //   if (results[key].length !== 0) {
-  //     haveResults = true
-  //     break
-  //   }
-  // }
-  if (results.length !== 0) {
+  if (resultsCount) {
     haveResults = true
   }
 
@@ -32,7 +23,11 @@ function App(props: any) {
     <div id='app' className='container-fluid full'>
       <div className="content">
         <div className='wrapper'>
-          <div className='logo'><a href=""><img src={logo} alt="" /></a></div>
+          <div className='logo'>
+            <a href="">
+              <img src={logo} alt="" />
+            </a>
+          </div>
           <div id='trade'>
             <div className='top'>
               <SearchPanel />

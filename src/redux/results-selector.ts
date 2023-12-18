@@ -2,6 +2,7 @@
 //     return state.results
 // }
 export const getResults = (state: any) => {
+    //console.log(state.results.results)
     return state.results.results
 }
 

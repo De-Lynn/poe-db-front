@@ -1,24 +1,26 @@
 import { CategoryFilter } from './FilterComponents/CategoryFilter';
-import { FilterHeadersType } from './App';
-import { getNamesPool, getNameShowMenu, getNameSelectedValue, getNameSearchValue, getFiltersVisibility} from './redux/searchPanel-selector';
+import { FilterHeadersType } from '../App';
+import { getNamesPool, getNameShowMenu, getNameSelectedValue, getNameSearchValue, getFiltersVisibility} from '../redux/searchPanel-selector';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controls } from './ControlButtons/Controls';
-import { WeaponsFilters } from './FilterComponents/WeaponsFilters';
-import { ArmourFilters } from './FilterComponents/ArmourFilters';
-import { RequirementFilters } from './FilterComponents/RequirementFilters';
 import { StatsFilter } from './FilterComponents/StatsFilter';
 import NameDropdown from './Dropdowns/NameDropdown';
-import { setNameSearchValue, setNameSelectedValue, setNameShowMenu } from './redux/searchPanelReducer';
-import './SearchPanel.css'
+import { setNameSearchValue, setNameSelectedValue, setNameShowMenu } from '../redux/searchPanelReducer';
+import '../styles/SearchPanel.css'
 import { Form, Formik} from 'formik';
-import { getItemName, getItemsCategory, getItemsRarity, getItemsType } from './redux/activeFilters-selector';
-import { getSelectedStatOrder } from './redux/statsFilter-selector';
+import { getItemName, getItemsCategory, getItemsRarity, getItemsType } from '../redux/activeFilters-selector';
+import { getSelectedStatOrder } from '../redux/statsFilter-selector';
 import axios from 'axios';
-import { setResults } from './redux/resultsReducer';
-import { changeWeaponsFiltersValue } from './redux/weaponsFilterReducer';
-import { changeArmourFiltersValue } from './redux/armourFilterReducer';
-import { changeRequirementFiltersValue } from './redux/requirementFilterReducer';
-import { useEffect } from 'react';
+import { setResults } from '../redux/resultsReducer';
+import { changeWeaponsFilterVisibility, changeWeaponsFiltersValue } from '../redux/weaponsFilterReducer';
+import { changeArmourFilterVisibility, changeArmourFiltersValue } from '../redux/armourFilterReducer';
+import { changeRequirementFilterVisibility, changeRequirementFiltersValue } from '../redux/requirementFilterReducer';
+import { useCallback } from 'react';
+import React from 'react';
+import Filter from './FilterComponents/Filter';
+import { getWeaponsFilterVisibility, getWeaponsFilters } from '../redux/weaponsFilter-selectors';
+import { getArmourFilterVisibility, getArmourFilters } from '../redux/armourFilter-selectors';
+import { getRequirementFilterVisibility, getRequirementFilters } from '../redux/requirementFilter-selectors';
 
 export type RangeFilterContainerPropsType = {
   id: string
@@ -34,13 +36,22 @@ export type SearchPanelPropsType = {
   filterHeader: Array<FilterHeadersType>
 }
 
-function SearchPanel(props: any) {
+const SearchPanel = React.memo((props: any) => {
+
+  const weaponsFilters = useSelector(getWeaponsFilters) 
+  const armourFilters = useSelector(getArmourFilters)
+  const requirementFilters = useSelector(getRequirementFilters)
+
+  const weaponsFilterVisibility = useSelector(getWeaponsFilterVisibility)
+  const armourFilterVisibility = useSelector(getArmourFilterVisibility)
+  const requirementFilterVisibility = useSelector(getRequirementFilterVisibility)
+
   const namesPool = useSelector(getNamesPool)
   const nameShowMenu = useSelector(getNameShowMenu)
   const nameSelectedValu = useSelector(getNameSelectedValue)
   const nameSearchValue = useSelector(getNameSearchValue)
   const filtersVisibility = useSelector(getFiltersVisibility)
-  
+
   let dispatch = useDispatch()
   let category = useSelector(getItemsCategory)
   let type = useSelector(getItemsType)
@@ -60,8 +71,8 @@ function SearchPanel(props: any) {
   }
 
   const doRequest = (values: any) => {
-    // let request = `http://192.168.1.9:8080/api/${category}?`
-    let request = `http://192.168.0.44:8080/api/${category}?`
+    let request = `http://192.168.1.6:8080/api/${category}?`
+    // let request = `http://192.168.0.44:8080/api/${category}?`
     if(category ==='any') {
       searchParams = new URLSearchParams(rarity)
       request += `${searchParams.toString()}&`
@@ -156,18 +167,25 @@ function SearchPanel(props: any) {
             minStr: '', maxStr: '',
             minDex: '', maxDex: '',
             minInt: '', maxInt: '',
-          }
+          },
         }}
         onSubmit={onSearchClickHandler} 
       >
         <Form>
-          <div className={filtersVisibility ? 'search-bar search-advanced' : 'search-bar search-advanced search-advanced-hidden'}>
+          <div className={`search-bar search-advanced ${!filtersVisibility ? 'search-advanced-hidden' : ''}`}>
             <div className='search-advanced-items'>
               <div className='search-advanced-pane blue'>
                 <CategoryFilter/>
-                <WeaponsFilters/>
-                <ArmourFilters/>
-                <RequirementFilters/>
+
+                <Filter header="Weapon Filters" keyWord='weapons' filters={weaponsFilters}
+                  filterVisibility={weaponsFilterVisibility} changeFilterVisibility={changeWeaponsFilterVisibility}
+                />
+                <Filter header="Armour Filters" keyWord='armour' filters={armourFilters}
+                  filterVisibility={armourFilterVisibility} changeFilterVisibility={changeArmourFilterVisibility}
+                />
+                <Filter header="Requirements" keyWord='requirement' filters={requirementFilters}
+                  filterVisibility={requirementFilterVisibility} changeFilterVisibility={changeRequirementFilterVisibility}
+                />
               </div>
               <div className='search-advanced-pane brown'>
                 <StatsFilter />
@@ -179,6 +197,6 @@ function SearchPanel(props: any) {
       </Formik>
     </div>
   )
-}
+})
 
 export default SearchPanel;

@@ -16,7 +16,7 @@
 }
 
 .input-group-btn {
-  position: relative;
+  /* position: relative; */
   font-size: 0;
   white-space: nowrap;
   width: 1%;
@@ -174,10 +174,10 @@ input {
 }
 
 #trade .search-bar .remove-btn {
-  height: 30px;
+  height: 34px;
   background-color: rgba(0, 0, 0, 0);
-  width: 39px;
-  font-size: 12px;
+  width: 40px;
+  /* font-size: 12px; */
   border-radius: 0px;
 }
 

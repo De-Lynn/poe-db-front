@@ -1,6 +1,7 @@
 import { memo } from "react";
 
 export const FilterHeader = memo((props: any) => {
+
   return (
     <div className='filter-group-header'>
       <div className="filter">
