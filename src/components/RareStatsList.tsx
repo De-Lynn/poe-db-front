@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-
 const RareStatsList = (props: any) => {
   
   const [statDiv, setDivOpen] = useState(false);

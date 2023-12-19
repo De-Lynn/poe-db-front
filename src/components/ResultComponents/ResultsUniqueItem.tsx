@@ -1,32 +1,32 @@
-import ResultsBaseWeapons from "./ResultsWeaponsBase";
-import ResultsBaseArmour from "./ResultsArmourBase";
-import ResultsBaseFlask from "./ResultsFlaskBase";
+import ResultsUniqueWeapons from "./ResultsWeaponsUnique";
+import ResultsUniqueArmour from "./ResultsArmourUnique";
+import ResultsUniqueFlask from "./ResultsFlaskUnique";
 
-const ResultsBaseItem = (props: any) => {
+const ResultsUniqueItem = (props: any) => {
   return (
     <div className="row">
       <div className="middle">
-        <div className="itemPopupContainer newItemPopup normalPopup">
+        <div className="itemPopupContainer newItemPopup uniquePopup">
           <div className="itemBoxContent">
-            <div className="itemHeader">
+            <div className="itemHeader doubleLine">
               <span className="l"></span>
+              <div className="itemName">
+                <span className="lc">{props.r.name}&nbsp;</span>
+              </div>
               <div className="itemName typeLine">
-                <span className="lc">{props.r.name}</span>
+                <span className="lc">{props.r.base}</span>
               </div>
               <span className="r"></span>
             </div>
             <div className="content">
-              {props.r.dps && <ResultsBaseWeapons result={props.r}/>}
+              {props.r.min_damage && <ResultsUniqueWeapons result={props.r}/>}
               {(props.r.min_armour || props.r.min_evasion || props.r.min_es) &&
-                <ResultsBaseArmour result={props.r}/>
+                <ResultsUniqueArmour result={props.r}/>
               }
-              {props.r.type === 'Flask' && <ResultsBaseFlask result={props.r}/>}
-
-            
+              {props.r.min_usage && <ResultsUniqueFlask result={props.r}/>}
+              
+              <div className="separator"></div>
               {(props.r.req_lvl || props.r.req_str || props.r.req_dex || props.r.req_int) &&
-                <div className="separator"></div>
-              }
-              {(props.r.req_lvl || props.r.req_str || props.r.req_dex || props.r.req_int) && 
                 <div className="requirements">
                   <span className="lc">
                     Requires&nbsp;
@@ -67,15 +67,26 @@ const ResultsBaseItem = (props: any) => {
                   <span className="lc r"></span>
                 </div>
               )}
+              {props.r.stats[0]!==null && <div className="separator"></div>}
+              {props.r.stats[0]!==null && props.r.stats.map((i: string) => 
+                <div className="implicit-mod">
+                  <span className="lc l"></span>
+                  <span className="lc s">{i}</span>
+                  <span className="lc r"></span>
+                </div>
+              )}
             </div>
           </div>
         </div>
         <div className="itemPopupAdditional">
-          {props.r.dps &&
+          {props.r.min_dps &&
             <span className="lc s aug">
               DPS:&nbsp;
               <span className="colourAugmented">
-                {props.r.dps}
+                {props.r.min_dps === props.r.max_dps
+                  ? props.r.min_dps
+                  : <span>{props.r.min_dps}-{props.r.max_dps}</span>
+                }
               </span>
             </span>
           }
@@ -85,4 +96,4 @@ const ResultsBaseItem = (props: any) => {
   )
 }
 
-export default ResultsBaseItem
+export default ResultsUniqueItem

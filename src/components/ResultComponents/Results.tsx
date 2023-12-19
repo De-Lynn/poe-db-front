@@ -5,8 +5,9 @@ import { useEffect, useRef, useState } from "react"
 import RareStatsList from "../RareStatsList"
 import { sortResultsByName, changeNameSort } from "../../redux/resultsReducer"
 import { useDispatch } from "react-redux"
-import ResultsUniqueWeapons from "./ResultsWeaponsUnique"
 import ResultsBaseItem from "./ResultsBaseItem"
+import ResultsUniqueItem from "./ResultsUniqueItem"
+import '../../styles/ResultSet.css';
 
 export function Results(props:any) {
     const allResults = useSelector(getResults)
@@ -27,7 +28,16 @@ export function Results(props:any) {
             setFetching(true)
         }
     }
+    // console.log(allResults)
   
+    useEffect(() => {
+        setCurrentPage(1)
+        let newResults = allResults.slice(10*currentPage-10, 10*currentPage)
+        setResults(newResults)
+        setCurrentPage(currentPage+1)
+        setFetching(false)
+    }, [allResults])
+
     useEffect(() => {
         if (fetching) {
             let newResults = allResults.slice(10*currentPage-10, 10*currentPage)
@@ -78,103 +88,8 @@ export function Results(props:any) {
                     // console.log(r)
                     if (r.rarity==='normal') return <ResultsBaseItem r={r}/>
                     else if (r.rarity==='rare') return <RareStatsList r={r}/>
-                    else if (r.rarity==='unique') return <ResultsUniqueWeapons id={r.id}/>
+                    else if (r.rarity==='unique') return <ResultsUniqueItem r={r}/>
                 })}
-                {/* {baseWeaponsResults.length!==0 && baseWeaponsResults.map( (r: any) =>
-                    <ResultsBaseWeapons id={r.id}/>
-                )}
-                {rareWeaponsResults.length!==0 && rareWeaponsResults.map( (r: any) => <RareStatsList r={r}/>)}
-                {uniqueWeaponsResults.length!==0 && uniqueWeaponsResults.map( (r: any) => 
-                    <ResultsUniqueWeapons id={r.id}/>
-                )}
-                {baseArmourResults.length!==0 && baseArmourResults.map( (r: any) => 
-                    <ResultsBaseArmour id={r.id}/>
-                )}
-                {rareArmourResults.length!==0 && rareArmourResults.map( (r: any) => <RareStatsList r={r}/>)}
-                {uniqueArmourResults.length!==0 && uniqueArmourResults.map( (r: any) => 
-                    <ResultsUniqueArmour id={r.id}/>
-                )}
-                {
-                    baseJewelleryResults.length!==0 && baseJewelleryResults.map( (r: any) => {
-                        return (
-                            <BaseItemDiv>
-                                <BaseItemName>{r.name}</BaseItemName>
-                                {r.req_lvl && <div>Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
-                                {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
-                            </BaseItemDiv>
-                        )
-                    })
-                }
-                {rareJewelleryResults.length!==0 && rareJewelleryResults.map( (r: any) => <RareStatsList r={r}/>)}
-                {
-                    uniqueJewelleryResults.length!==0 && uniqueJewelleryResults.map( (r: any) => {
-                        return (
-                            <UniqueItemDiv>
-                                <UniqueItemName>{r.name} {r.base}</UniqueItemName>
-                                {r.req_lvl && <div>Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
-                                {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
-                                <hr />
-                                {r.stats && r.stats.map((s: string) => <div>{s}</div>)}
-                            </UniqueItemDiv>
-                        )
-                    })
-                }
-                {
-                    baseFlasksResults.length!==0 && baseFlasksResults.map( (r: any) => {
-                        return (
-                            <BaseItemDiv>
-                                <BaseItemName>{r.name}</BaseItemName>
-                                {r.subtype==='Utility' && <div>Lasts {r.duration} Seconds</div>}
-                                {r.mana_rec && <div>Recovers {r.mana_rec} Mana over {r.duration} Seconds</div>}
-                                {r.life_rec && <div>Recovers {r.life_rec} Life over {r.duration} Seconds</div>}
-                                <div>Consumes {r.charges_used} of {r.charges_max} Charges on use</div>
-                                <div>{r.buffs && r.buffs.map((b: string) => <div>{b}</div>)}</div>
-                                {r.req_lvl && <div> Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
-                                {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
-                            </BaseItemDiv>
-                        )
-                    })
-                }
-                {rareFlasksResults.length!==0 && rareFlasksResults.map( (r: any) => <RareStatsList r={r}/>)}
-                {
-                    uniqueFlasksResults.length!==0 && uniqueFlasksResults.map( (r: any) => {
-                        return (
-                            <UniqueItemDiv>
-                                <UniqueItemName>{r.name} {r.base}</UniqueItemName>
-                                {r.subtype==='Utility' && <div>Lasts 
-                                    {r.min_duration===r.max_duration 
-                                    ? <span> {r.min_duration}</span>
-                                    : <span> ({r.min_duration}-{r.max_duration})</span>} Seconds</div>}
-                                {r.min_mana_rec && <div>Recovers 
-                                    {r.min_mana_rec===r.max_mana_rec
-                                    ? <span> {r.min_mana_rec}</span>
-                                    : <span> ({r.min_mana_rec}-{r.max_mana_rec})</span>} Mana over 
-                                    {r.min_duration===r.max_duration 
-                                    ? <span> {r.min_duration}</span>
-                                    : <span> ({r.min_duration}-{r.max_duration})</span>} Seconds</div>}
-                                {r.min_life_rec && <div>Recovers 
-                                    {r.min_life_rec===r.max_life_rec
-                                    ? <span> {r.min_life_rec}</span>
-                                    : <span> ({r.min_life_rec}-{r.max_life_rec})</span>} Life over 
-                                    {r.min_duration===r.max_duration 
-                                    ? <span> {r.min_duration}</span>
-                                    : <span> ({r.min_duration}-{r.max_duration})</span>} Seconds</div>}
-                                <div>Consumes 
-                                    {r.min_usage===r.max_usage
-                                    ? <span> {r.min_usage}</span>
-                                    :<span> ({r.min_usage}-{r.max_usage})</span>} of 
-                                    {r.min_capacity===r.max_capacity
-                                    ? <span> {r.min_capacity}</span>
-                                    : <span> ({r.min_capacity}-{r.max_capacity})</span>} Charges on use</div>
-                                <div>{r.buffs && r.buffs.map((b: string) => <div>{b}</div>)}</div>
-                                {r.req_lvl && <div>Requires {r.req_lvl && <span> Level {r.req_lvl}</span>}</div>}
-                                {r.implicit && <div>{r.implicit.map((i: string) => <div>{i}</div>)}</div>}
-                                <hr />
-                                {r.stats && r.stats.map((s: string) => <div>{s}</div>)}
-                            </UniqueItemDiv>
-                        )
-                    })
-                }  */}
             </div>
         </div>
     )
